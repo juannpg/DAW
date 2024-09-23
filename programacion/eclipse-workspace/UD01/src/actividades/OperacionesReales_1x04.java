@@ -1,7 +1,7 @@
-package Actividad4paquete;
+package actividades;
 import java.util.Scanner;
 
-public class OperacionesReales {
+public class OperacionesReales_1x04 {
 	public static void main (String[] args) {
 		Scanner input = new Scanner(System.in);
 		
