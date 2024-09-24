@@ -4,12 +4,13 @@ import java.util.Scanner;
 public class OperacionesReales_1x04 {
 	public static void main (String[] args) {
 		Scanner input = new Scanner(System.in);
+		final float NUMERO_A, NUMERO_B;
 		
 		System.out.print("¿Número real A? ");
-		final float NUMERO_A = input.nextFloat();
+		NUMERO_A = input.nextFloat();
 			
 		System.out.print("¿Número real B? ");
-		final float NUMERO_B = input.nextFloat();
+		NUMERO_B = input.nextFloat();
 			
 		input.close();
 			

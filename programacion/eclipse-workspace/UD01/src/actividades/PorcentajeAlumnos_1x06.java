@@ -5,6 +5,22 @@ public class PorcentajeAlumnos_1x06 {
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
 		
-		int alumnos, alumnas;
+		double numAlumnos, numAlumnas, totalAlumnos;
+		double porcentajeAlumnos, porcentajeAlumnas;
+		
+		System.out.print("Número de alumnos? ");
+		numAlumnos = teclado.nextInt();
+		
+		System.out.print("Número de alumnas? ");
+		numAlumnas = teclado.nextInt();
+		teclado.close();
+		
+		totalAlumnos = numAlumnos + numAlumnas;
+		
+		porcentajeAlumnos = numAlumnos / totalAlumnos * 100;
+		porcentajeAlumnas = numAlumnas / totalAlumnos * 100;
+		
+		System.out.printf("Porcentaje chicos: %.2f%%", porcentajeAlumnos);
+		System.out.printf("\nPorcentaje chicas: %.2f%%", porcentajeAlumnas);
 	}
 }
