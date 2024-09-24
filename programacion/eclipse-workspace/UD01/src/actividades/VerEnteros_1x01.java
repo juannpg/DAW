@@ -1,6 +1,10 @@
 package actividades;
 import java.util.Scanner;
 
+/*
+ * Este programa pide por teclado tres numeros
+ * enteros y los imprime por consola
+ */
 public class VerEnteros_1x01 {
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);

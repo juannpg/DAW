@@ -1,6 +1,11 @@
 package actividades;
 import java.util.Scanner;
 
+/*
+ * Este programa pide tres numeros enteros
+ * y los imprime alineados a la derecha
+ * y a la izquierda
+ */
 public class AlinearEnteros_1x02 {
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
@@ -16,23 +21,17 @@ public class AlinearEnteros_1x02 {
 		teclado.close();
 		
 		System.out.println("NUMEROS ALINEADOS POR LA DERECHA:");
-		System.out.print("A = ");
-		System.out.printf("%5d", numero1);
+		System.out.printf("A = %5d", numero1);
 
-		System.out.print("\nB = ");
-		System.out.printf("%5d", numero2);
+		System.out.printf("\nB = %5d", numero2);
 		
-		System.out.print("\nC = ");
-		System.out.printf("%5d", numero3);
+		System.out.printf("\nC = %5d", numero3);
 		
 		System.out.println("\nNUMEROS ALINEADOS POR LA IZQUIERDA:");
-		System.out.print("A = ");
-		System.out.printf("%-5d", numero1);
+		System.out.printf("A = %-5d", numero1);
 
-		System.out.print("\nB = ");
-		System.out.printf("%-5d", numero2);
+		System.out.printf("\nB = %-5d", numero2);
 		
-		System.out.print("\nC = ");
-		System.out.printf("%-5d", numero3);
+		System.out.printf("\nC = %-5d", numero3);
 	}
 }

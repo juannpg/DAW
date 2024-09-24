@@ -1,6 +1,11 @@
 package actividades;
 import java.util.Scanner;
 
+/*
+ * Este programa pide por teclado dos numeros enteros
+ * los imprime por pantalla, y luego intercambia
+ * sus valores para volver a imprimirlos
+ */
 public class IntercambioVariables_1x03 {
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
