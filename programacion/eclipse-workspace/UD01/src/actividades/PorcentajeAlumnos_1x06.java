@@ -1,6 +1,11 @@
 package actividades;
 import java.util.Scanner;
 
+/*
+ * Este programa solicita por teclado el numero
+ * de alumnos y alumnas de un centro, y muestra por pantalla
+ * el porcentaje de alumnos y alumnas en el centro
+ */
 public class PorcentajeAlumnos_1x06 {
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);

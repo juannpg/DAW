@@ -1,6 +1,11 @@
 package actividades;
 import java.util.Scanner;
 
+/*
+ * Este programa pide por teclado dos numeros
+ * reales y los imprime por pantalla con 2 decimales,
+ * 1 decimal, y ninguno
+ */
 public class VerReales_1x05 {
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
