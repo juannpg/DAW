@@ -12,7 +12,8 @@ public class AreaCirculo {
 		final double PI = 3.141592;
 		double resultado = PI * radio * radio;
 		
-		System.out.print("El área de tu círculo es: " + resultado + " centímteros cuadrados.");
+		System.out.printf("El área de tu círculo es: %.2f", resultado);
+		System.out.print(" centímetros cuadrados.");
 	}
 }
 
