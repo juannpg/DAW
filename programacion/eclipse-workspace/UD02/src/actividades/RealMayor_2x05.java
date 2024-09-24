@@ -18,8 +18,8 @@ public class RealMayor_2x05 {
 		teclado.close();
 		
 		double[] numeros = {num1, num2, num3};
-		double mayor = numeros[0];
 		
+		double mayor = numeros[0];
 		for (int i = 1; i < numeros.length; i++) {
 			if (numeros[i] > mayor) {
 				mayor = numeros[i];
