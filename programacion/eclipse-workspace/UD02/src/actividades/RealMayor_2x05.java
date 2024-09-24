@@ -11,7 +11,7 @@ public class RealMayor_2x05 {
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
 		
-		System.out.print("Tres números reales distintos:\n");
+		System.out.println("Tres números reales distintos:");
 		double num1 = teclado.nextDouble();
 		double num2 = teclado.nextDouble();
 		double num3 = teclado.nextDouble();
