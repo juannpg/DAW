@@ -1,6 +1,12 @@
 package actividades;
 import java.util.Scanner;
 
+/*
+ * este programa pide por teclado el precio
+ * de una compra, y dependiendo de la franja de
+ * dinero en la que este, le aplica un descuento
+ * u otro
+ */
 public class Descuento_2x08 {
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
@@ -20,6 +26,15 @@ public class Descuento_2x08 {
 		} else if (200 <= importe && importe <= 800) {
 			double descuento = importe / 10;
 			double importeDescuento = importe - descuento;
+			
+			System.out.printf("El descuento es de: %.2f euros\n", descuento);
+			System.out.printf("Importe con descuento: %.2f euros", importeDescuento);
+		} else if (800 < importe) {
+			double descuento = importe * 15 / 100;
+			double importeDescuento = importe - descuento;
+			
+			System.out.printf("El descuento es de: %.2f euros\n", descuento);
+			System.out.printf("El importe con descuento: %.2f euros", importeDescuento);
 		}
 	}
 }
