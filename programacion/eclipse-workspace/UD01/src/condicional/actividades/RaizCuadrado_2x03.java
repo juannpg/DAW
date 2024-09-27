@@ -1,4 +1,4 @@
-package actividades;
+package condicional.actividades;
 import java.util.Scanner;
 
 /*
@@ -6,7 +6,7 @@ import java.util.Scanner;
  * teclado e imprime, si es posible, su cuadrado
  * y su raiz cuadrada
  */
-public class CuadradoRaiz_2x03 {
+public class RaizCuadrado_2x03 {
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
 		

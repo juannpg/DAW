@@ -1,4 +1,4 @@
-package actividades;
+package secuencial.actividades;
 import java.util.Scanner;
 
 /*

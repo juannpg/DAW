@@ -1,4 +1,4 @@
-package ejemplos;
+package secuencial.ejemplos;
 
 public class Conversiones {
 	
