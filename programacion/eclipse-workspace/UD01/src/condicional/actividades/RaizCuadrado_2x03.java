@@ -16,13 +16,12 @@ public class RaizCuadrado_2x03 {
 		
 		if (num < 0) {
 			System.out.print("El número real debe ser cero o positivo");
-			return;
+		} else {
+			double cuadrado = num * num;
+			double raizCuadrada = Math.sqrt(num);
+		
+			System.out.printf("Cuadrado de %f = %f", num, cuadrado);
+			System.out.printf("\nRaíz cuadrada de %f = %f", num, raizCuadrada);
 		}
-		
-		double cuadrado = num * num;
-		double raizCuadrada = Math.sqrt(num);
-		
-		System.out.printf("Cuadrado de %f = %f", num, cuadrado);
-		System.out.printf("\nRaíz cuadrada de %f = %f", num, raizCuadrada);
 	}
 }
