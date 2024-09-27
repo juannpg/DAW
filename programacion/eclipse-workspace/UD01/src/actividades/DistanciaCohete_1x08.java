@@ -23,7 +23,7 @@ public class DistanciaCohete_1x08 {
 		tiempoVuelo = teclado.nextDouble();
 		teclado.close();
 		
-		distancia = velocidad * tiempoVuelo + (aceleracion * tiempoVuelo * tiempoVuelo)/2;
+		distancia = velocidad * tiempoVuelo + (aceleracion * tiempoVuelo * tiempoVuelo) / 2;
 		
 		System.out.printf("Distancia recorrida: %.3f metros", distancia);
 	}
