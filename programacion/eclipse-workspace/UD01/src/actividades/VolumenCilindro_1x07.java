@@ -1,6 +1,11 @@
 package actividades;
 import java.util.Scanner;
 
+/*
+ * este programa pide por teclado datos 
+ * de un cilindro e imprime por pantalla
+ * su volumen
+ */
 public class VolumenCilindro_1x07 {
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
