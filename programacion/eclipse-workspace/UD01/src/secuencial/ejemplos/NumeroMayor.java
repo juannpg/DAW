@@ -1,4 +1,4 @@
-package ejemplos;
+package secuencial.ejemplos;
 import java.util.Scanner;
 
 public class NumeroMayor {
