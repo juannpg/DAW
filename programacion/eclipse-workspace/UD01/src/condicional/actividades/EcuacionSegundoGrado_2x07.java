@@ -11,7 +11,7 @@ public class EcuacionSegundoGrado_2x07 {
 		Scanner teclado = new Scanner(System.in);
 		
 		double a, b, c;
-		double sol, sol1, sol2;
+		double sol1, sol2, sol;
 		double discriminante;
 		
 		System.out.print("Coeficiente A: ");
