@@ -45,7 +45,7 @@ public class EcuacionSegundoGrado_2x07 {
 			} else {
 				System.out.print("La ecuación no tiene soluciones");
 			}
-
 		}
+		
 	}
 }
