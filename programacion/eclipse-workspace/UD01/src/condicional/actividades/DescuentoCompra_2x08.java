@@ -30,7 +30,7 @@ public class DescuentoCompra_2x08 {
 				importe = importe - descuento;
 			}
 			
-			System.out.printf("Rebaja: %19.2f euros\n", descuento);
+			System.out.printf("Rebaja: %21.2f euros\n", descuento);
 			System.out.printf("Importe con Descuento: %.2f euros", importe);
 		}
 	}
