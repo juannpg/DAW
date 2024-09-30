@@ -23,13 +23,15 @@ public class DescuentoCompra_2x08 {
 			if (importe < 200) {
 				descuento = 0;
 			} else if (importe <= 800) {
+				// aplicamos 10% de descuento
 				descuento = importe / 10;
-				importe = importe - descuento;
 			} else {
+				// aplicamos 15% de descuento
 				descuento = importe * 15 / 100;
-				importe = importe - descuento;
 			}
+			importe = importe - descuento;
 			
+			// saca por consola los mensajes
 			System.out.printf("Rebaja: %21.2f euros\n", descuento);
 			System.out.printf("Importe con Descuento: %.2f euros", importe);
 		}
