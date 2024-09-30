@@ -1,0 +1,12 @@
+body {
+  background-color: blanchedalmond;
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
