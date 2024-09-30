@@ -9,8 +9,11 @@
   <title>Formulario</title>
 </head>
 <body>
+  <!-- Formulario -->
   <form method="POST" encType="text/plain" name="formulario">
     <h1>Formulario</h1>
+
+    <!-- datos de usuario con inputs text y date -->
     <div class="datos">
       <h2>Datos de usuario:</h2>
       <label>Usuario:</label><input type="text" name="nombre" placeholder="Nombre" /><br/>
@@ -19,7 +22,7 @@
       <hr>
     </div>
 
-
+    <!-- datos de estudios con inputs datalist, checkbox, y file -->
     <div>
       <h2>Datos escolares:</h2>
       <label>Cúal es tu turno?</label>
@@ -42,10 +45,12 @@
       <hr>
     </div>
 
+    <!-- comentarios extra -->
     <br/>
     <h3>Comentarios:</h3>
     <textarea name="comentario" placeholder="Comentario"></textarea><br/>
 
+    <!-- boton para hacer submit -->
     <button type="submit">Enviar</button>
   </form>
 </body>
