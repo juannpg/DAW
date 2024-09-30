@@ -13,27 +13,24 @@ public class DescuentoCompra_2x08 {
 		
 		double importe, descuento;
 		
-		System.out.print("Importe: ");
+		System.out.print("¿Importe de la Compra? ");
 		importe = teclado.nextDouble();
 		teclado.close();
-		
-		if (importe < 200 && importe > 0) {
-			System.out.println("No hay descuento");
-			System.out.printf("Importe: %.2f euros", importe);
-		} else if (200 <= importe && importe <= 800) {
-			descuento = importe / 10;
-			importe = importe - descuento;
-			
-			System.out.printf("El descuento es de: %.2f euros\n", descuento);
-			System.out.printf("Importe con descuento: %.2f euros", importe);
-		} else if (800 < importe) {
-			descuento = importe * 15 / 100;
-			importe = importe - descuento;
-			
-			System.out.printf("El descuento es de: %.2f euros\n", descuento);
-			System.out.printf("El importe con descuento: %.2f euros", importe);
-		} else {
+		if (importe <= 0 ){
 			System.out.print("El importe debe ser superior a 0 euros");
+		} else {
+			if (importe < 200) {
+				descuento = 0;
+			} else if (importe <= 800) {
+				descuento = importe / 10;
+				importe = importe - descuento;
+			} else {
+				descuento = importe * 15 / 100;
+				importe = importe - descuento;
+			}
+			System.out.printf("Rebaja: %.2f euros\n", descuento);
+			System.out.printf("El importe con Descuento: %.2f euros", importe);
+			
 		}
 	}
 }
