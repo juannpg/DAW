@@ -43,6 +43,7 @@ public class HorasTurno_2x09 {
 			} else {
 				salario = horasOrdinarias * 8 + horasExtra * 11;
 			}
+			
 			System.out.printf("Salario Mensual %.2f euros", salario);
 		}		
 		
