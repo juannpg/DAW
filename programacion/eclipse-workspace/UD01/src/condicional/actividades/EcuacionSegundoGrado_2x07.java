@@ -17,29 +17,35 @@ public class EcuacionSegundoGrado_2x07 {
 		System.out.print("Coeficiente A: ");
 		a = teclado.nextDouble();
 		
-		System.out.print("Coeficiente B: ");
-		b = teclado.nextDouble();
-		
-		System.out.print("Coeficiente C: ");
-		c = teclado.nextDouble();
-		teclado.close();
-		
-		discriminante = b * b - 4 * a * c;
-		
-		if (discriminante > 0) {
-			System.out.println("La ecuación tiene dos soluciones reales:");
-			
-			sol1 = (-b + Math.sqrt(discriminante)) / 2 * a;
-			sol2 = (-b - Math.sqrt(discriminante)) / 2 * a;
-			
-			System.out.printf("X1 = %f \nX2 = %f", sol1, sol2);
-		} else if (discriminante == 0 ) {
-			System.out.println("La ecuación tiene una solucioón real:");
-			sol = (-b) / 2 * a;
-			
-			System.out.printf("X = %f", sol);
+		if (a == 0) {
+			System.out.print("El número a debe ser distinto de 0");
+			teclado.close();
 		} else {
-			System.out.print("La ecuación no tiene soluciones");
+			System.out.print("Coeficiente B: ");
+			b = teclado.nextDouble();
+			
+			System.out.print("Coeficiente C: ");
+			c = teclado.nextDouble();
+			teclado.close();
+			
+			discriminante = b * b - 4 * a * c;
+			
+			if (discriminante > 0) {
+				System.out.println("La ecuación tiene dos soluciones reales:");
+			
+				sol1 = (-b + Math.sqrt(discriminante)) / 2 * a;
+				sol2 = (-b - Math.sqrt(discriminante)) / 2 * a;
+			
+				System.out.printf("X1 = %f \nX2 = %f", sol1, sol2);
+			} else if (discriminante == 0 ) {
+				System.out.println("La ecuación tiene una solucioón real:");
+				sol = (-b) / 2 * a;
+			
+				System.out.printf("X = %f", sol);
+			} else {
+				System.out.print("La ecuación no tiene soluciones");
+			}
+
 		}
 	}
 }
