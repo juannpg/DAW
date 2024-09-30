@@ -11,7 +11,7 @@ public class DescuentoCompra_2x08 {
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
 		
-		double importe, descuento, importeDescuento;
+		double importe, descuento;
 		
 		System.out.print("Importe: ");
 		importe = teclado.nextDouble();
@@ -22,16 +22,16 @@ public class DescuentoCompra_2x08 {
 			System.out.printf("Importe: %.2f euros", importe);
 		} else if (200 <= importe && importe <= 800) {
 			descuento = importe / 10;
-			importeDescuento = importe - descuento;
+			importe = importe - descuento;
 			
 			System.out.printf("El descuento es de: %.2f euros\n", descuento);
-			System.out.printf("Importe con descuento: %.2f euros", importeDescuento);
+			System.out.printf("Importe con descuento: %.2f euros", importe);
 		} else if (800 < importe) {
 			descuento = importe * 15 / 100;
-			importeDescuento = importe - descuento;
+			importe = importe - descuento;
 			
 			System.out.printf("El descuento es de: %.2f euros\n", descuento);
-			System.out.printf("El importe con descuento: %.2f euros", importeDescuento);
+			System.out.printf("El importe con descuento: %.2f euros", importe);
 		} else {
 			System.out.print("El importe debe ser superior a 0 euros");
 		}
