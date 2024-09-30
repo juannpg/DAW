@@ -14,22 +14,45 @@ public class DiaSemana_2x10 {
 		int dia = teclado.nextInt();
 		teclado.close();
 		
-		if (dia < 1 || dia > 7) {
-			System.out.print("El día de la semana debe estar comprendido entre 1 y 7");
-		} else if (dia == 1) {
-			System.out.print("Lunes");
-		} else if (dia == 2) {
-			System.out.print("Martes");
-		} else if (dia == 3) {
-			System.out.print("Miércoles");
-		} else if (dia == 4) {
-			System.out.print("Jueves");
-		} else if (dia == 5) {
-			System.out.print("Viernes");
-		} else if (dia == 6) {
-			System.out.print("Sábado");
-		} else {
-			System.out.print("Domingo");
+		switch (dia) {
+			case 1: {
+				System.out.print("Lunes");
+				break;
+			}
+			
+			case 2: {
+				System.out.print("Martes");
+				break;
+			}
+			
+			case 3: {
+				System.out.print("Miércoles");
+				break;
+			}
+			
+			case 4: {
+				System.out.print("Jueves");
+				break;
+			}
+			
+			case 5: {
+				System.out.print("Viernes");
+				break;
+			}
+			
+			case 6: {
+				System.out.print("Sábado");
+				break;
+			}
+			
+			case 7: {
+				System.out.print("Domingo");
+				break;
+			}
+			
+			default: {
+				System.out.print("El día de la semana debe estar comprendido entre 1 y 7");
+			}
 		}
 		
 	}
