@@ -15,44 +15,36 @@ public class DiaSemana_2x10 {
 		teclado.close();
 		
 		switch (dia) {
-			case 1: {
+			case 1:
 				System.out.print("Lunes");
 				break;
-			}
 			
-			case 2: {
+			case 2:
 				System.out.print("Martes");
 				break;
-			}
 			
-			case 3: {
+			case 3:
 				System.out.print("Miércoles");
 				break;
-			}
 			
-			case 4: {
+			case 4:
 				System.out.print("Jueves");
 				break;
-			}
 			
-			case 5: {
+			case 5:
 				System.out.print("Viernes");
 				break;
-			}
 			
-			case 6: {
+			case 6:
 				System.out.print("Sábado");
 				break;
-			}
 			
-			case 7: {
+			case 7:
 				System.out.print("Domingo");
 				break;
-			}
 			
-			default: {
+			default:
 				System.out.print("El día de la semana debe estar comprendido entre 1 y 7");
-			}
 		}
 		
 	}
