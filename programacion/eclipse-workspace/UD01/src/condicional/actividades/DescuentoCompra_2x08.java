@@ -16,7 +16,7 @@ public class DescuentoCompra_2x08 {
 		System.out.print("¿Importe de la Compra? ");
 		importe = teclado.nextDouble();
 		teclado.close();
-		if (importe <= 0 ){
+		if (importe <= 0 ) {
 			System.out.print("El importe debe ser superior a 0 euros");
 		} else {
 			if (importe < 200) {
