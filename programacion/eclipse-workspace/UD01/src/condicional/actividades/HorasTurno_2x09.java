@@ -12,7 +12,7 @@ public class HorasTurno_2x09 {
 		
 		int turno, horasOrdinarias, horasExtra;
 		double salario;
-		boolean correcto = true;
+		boolean error = false;
 		
 		System.out.print("¿Turno de Trabajo (1-diurno, 2-vespertino)? ");
 		turno = teclado.nextInt();
@@ -24,20 +24,20 @@ public class HorasTurno_2x09 {
 
 		if (turno != 1 && turno != 2) {
 			System.out.println("El turno de trabajo debe estar comprendido entre 1 y 2");
-			correcto = false;
+			error = true;
 		} 
 		
 		if (horasOrdinarias < 20 || horasOrdinarias > 40) {
 			System.out.println("El número de horas ordinarias debe estar comprendido entre 20 y 40");	
-			correcto = false;
+			error = true;
 		} 
 		
 		if (horasExtra < 0 || horasExtra > 5) {
 			System.out.println("El número de horas extraordinarias debe estar comprendido entre 0 y 5");
-			correcto = false;
+			error = true;
 		}
 		
-		if (correcto) {
+		if (!error) {
 			if (turno == 1) {
 				salario = horasOrdinarias * 5 + horasExtra * 7;				
 			} else {
