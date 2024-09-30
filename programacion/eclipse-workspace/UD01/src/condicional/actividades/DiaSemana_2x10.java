@@ -32,7 +32,9 @@ public class DiaSemana_2x10 {
 			System.out.print("Domingo");
 		}
 		
-		/*
+	}
+}
+/*
 		if (dia < 1 || dia > 7) {
 			System.out.print("El día de la semana debe estar comprendido entre 1 y 7");
 			return;
@@ -42,6 +44,4 @@ public class DiaSemana_2x10 {
 				"Viernes", "Sábado", "Domingo"};
 		
 		System.out.print(dias[dia-1]);
-		*/
-	}
-}
+ */

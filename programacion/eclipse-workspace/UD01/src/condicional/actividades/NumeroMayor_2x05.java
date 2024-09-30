@@ -24,7 +24,9 @@ public class NumeroMayor_2x05 {
 			System.out.printf("El número %f es el mayor.", num3);
 		}
 		
-		/*
+	}
+}
+/*
 		double[] numeros = {num1, num2, num3};
 		double mayor = numeros[0];
 		
@@ -35,6 +37,4 @@ public class NumeroMayor_2x05 {
 		}
 		
 		System.out.printf("El número %f es el mayor.", mayor);
-		*/
-	}
-}
+ */
