@@ -29,9 +29,9 @@ public class DescuentoCompra_2x08 {
 				descuento = importe * 15 / 100;
 				importe = importe - descuento;
 			}
+			
 			System.out.printf("Rebaja: %.2f euros\n", descuento);
 			System.out.printf("El importe con Descuento: %.2f euros", importe);
-			
 		}
 	}
 }
