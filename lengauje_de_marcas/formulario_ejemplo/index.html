@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="css/styles.css">
+
+  <title>Formulario</title>
+</head>
+<body>
+  <form method="POST" encType="text/plain" name="formulario">
+    <h1>Formulario</h1>
+    <div class="datos">
+      <h2>Datos de usuario:</h2>
+      <label>Usuario:</label><input type="text" name="nombre" placeholder="Nombre" /><br/>
+      <label>Contraseña:</label><input type="password" name="apellido" placeholder="Contraseña" /><br/>
+      <label>Fecha de nacimiento</label><input placeholder="dd/mm/aaaa" type="date" name="fecha_nacimiento" /><br/>
+      <hr>
+    </div>
+
+
+    <div>
+      <h2>Datos escolares:</h2>
+      <label>Cúal es tu turno?</label>
+      <input placeholder="Turno" list="turno">
+      <datalist id="turno">
+        <option value="Diurno">
+        <option value="Vespertino">
+      </datalist><br/>
+    
+      <br/>
+      <label>Cuáles son los módulos que cursas?</label><br/>
+      <input type="checkbox" name="programacion"><label>Programación</label><br/>
+      <input type="checkbox" name="bases"><label>Bases de datos</label><br/>
+      <input type="checkbox" name="sistemas"><label>Sistemas informáticos</label><br/>
+      <input type="checkbox" name="ingles"><label>Inglés</label><br/>
+
+      <br/>
+      <label>Foto del DNI</label>
+      <input type="file" name="DNI">
+      <hr>
+    </div>
+
+    <br/>
+    <h3>Comentarios:</h3>
+    <textarea name="comentario" placeholder="Comentario"></textarea><br/>
+
+    <button type="submit">Enviar</button>
+  </form>
+</body>
+</html>
