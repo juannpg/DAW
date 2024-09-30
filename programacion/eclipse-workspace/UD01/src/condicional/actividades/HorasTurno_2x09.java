@@ -12,6 +12,7 @@ public class HorasTurno_2x09 {
 		
 		int turno, horasOrdinarias, horasExtra;
 		double salario;
+		boolean correcto = true;
 		
 		System.out.print("¿Turno de Trabajo (1-diurno, 2-vespertino)? ");
 		turno = teclado.nextInt();
@@ -22,19 +23,28 @@ public class HorasTurno_2x09 {
 		teclado.close();
 
 		if (turno != 1 && turno != 2) {
-			System.out.print("El turno de trabajo debe estar comprendido entre 1 y 2");
-		} else if (horasOrdinarias < 20 || horasOrdinarias > 40) {
-			System.out.print("El número de horas ordinarias debe estar comprendido entre 20 y 40");	
-		} else if (horasExtra < 0 || horasExtra > 5) {
-			System.out.print("El número de horas extraordinarias debe estar comprendido entre 0 y 5");
-		} else {
+			System.out.println("El turno de trabajo debe estar comprendido entre 1 y 2");
+			correcto = false;
+		} 
+		
+		if (horasOrdinarias < 20 || horasOrdinarias > 40) {
+			System.out.println("El número de horas ordinarias debe estar comprendido entre 20 y 40");	
+			correcto = false;
+		} 
+		
+		if (horasExtra < 0 || horasExtra > 5) {
+			System.out.println("El número de horas extraordinarias debe estar comprendido entre 0 y 5");
+			correcto = false;
+		}
+		
+		if (correcto) {
 			if (turno == 1) {
-				salario = horasOrdinarias * 5 + horasExtra * 7;
+				salario = horasOrdinarias * 5 + horasExtra * 7;				
 			} else {
 				salario = horasOrdinarias * 8 + horasExtra * 11;
 			}
-			
 			System.out.printf("Salario Mensual %.2f euros", salario);
-		}
+		}		
+		
 	}
 }
