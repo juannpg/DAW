@@ -43,19 +43,19 @@ public class SumarSegundo_3x03 {
 		if (!error) {
 			System.out.printf("%dh %dm %ds + 1s = ", horas, mins, segs);
 						
-			// tiempo total en segundos, y le sumo 1
-			tiempoTotal = horas * 60 * 60 + mins * 60 + segs;
-			tiempoTotal++;
-			
-			// horas a imprimir
-			horas = tiempoTotal / 60 / 60;
-		
-			// minutos a imprimir (primero los minutos totales, y luego el modulo de ello)
-			mins = tiempoTotal / 60;
-			mins = mins % 60;
-			
-			// segundos a imprimir
-			segs = tiempoTotal % 60;
+			segs++;
+			if (segs == 60) {
+				segs = 0;
+				mins++;
+				if (mins == 60) {
+					mins = 0;
+					horas++;
+					if (horas == 24) {
+						horas = 0;
+						System.out.print("1 día ");
+					}
+				}
+			}
 			
 			if (horas >= 24) {
 				horas = 0;
