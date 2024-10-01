@@ -47,18 +47,19 @@ public class RestarSegundo_3x04 {
 		}
 		
 		if (!error) {
-			int minsOut, horasOut, segsOut;
+			System.out.printf("%dh %dm %ds - 1s = ", horas, mins, segs);
 			
-			tiempoTotal -= 1;
+			segs--;
+			if (segs < 0) {
+				segs = 59;
+				mins--;
+				if (mins < 0) {
+					mins = 59;
+					horas--;
+				}
+			}
 			
-			minsOut = tiempoTotal / 60;
-			horasOut = minsOut / 60;
-		
-			minsOut = minsOut % 60;
-			segsOut = tiempoTotal % 60;
-
-			System.out.printf("%dh %dm %ds - 1s = %dh %dm %ds", horas, mins, segs, horasOut, minsOut, segsOut);
-			
+			System.out.printf("%dh %dm %ds", horas, mins, segs);
 		}
 	}
 }
