@@ -17,47 +17,27 @@ public class DiasMes_3x02 {
 		int mes = teclado.nextInt();
 		teclado.close();
 		
-		if (mes < 1 || mes > 12) {
-			System.out.print("El mes debe estar comprendido entre 1 y 12.");
-		} else {
-			switch (mes) {
-				case 1:
-					System.out.print("31 días");
-					break;
-				case 2:
-					System.out.print("28 días");
-					break;
-				case 3:
-					System.out.print("31 días");
-					break;
-				case 4:
-					System.out.print("30 días");
-					break;
-				case 5:
-					System.out.print("31 días");
-					break;
-				case 6:
-					System.out.print("30 días");
-					break;
-				case 7:
-					System.out.print("31 días");
-					break;
-				case 8:
-					System.out.print("30 días");
-					break;
-				case 9:
-					System.out.print("31 días");
-					break;
-				case 10:
-					System.out.print("30 días");
-					break;
-				case 11:
-					System.out.print("31 días");
-					break;
-				case 12:
-					System.out.print("30 días");
-					break;
-			}
+		switch (mes) {
+			case 1:
+			case 3:
+			case 5:
+			case 7:
+			case 9:
+			case 11:
+				System.out.print("31 días");
+				break;
+			case 2:
+				System.out.print("28 días");
+				break;
+			case 4:
+			case 6:
+			case 8:
+			case 10:
+			case 12:
+				System.out.print("30 días");
+				break;
+			default:
+				System.out.print("El mes debe estar comprendido entre 1 y 12.");			
 		}
 	}
 }
