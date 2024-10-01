@@ -1,4 +1,4 @@
-package estructurasselectivas.actividades;
+package estructurasselectivasanidadas.actividades;
 import java.util.Scanner;
 
 /*

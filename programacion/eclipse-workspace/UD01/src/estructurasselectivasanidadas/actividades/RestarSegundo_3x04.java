@@ -1,4 +1,4 @@
-package estructurasselectivas.actividades;
+package estructurasselectivasanidadas.actividades;
 import java.util.Scanner;
 
 /*
@@ -8,7 +8,7 @@ import java.util.Scanner;
  * les resta un segundo e imprime por consola
  * el resultado
  */
-public class RestarSegundo_2x04 {
+public class RestarSegundo_3x04 {
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
 		
