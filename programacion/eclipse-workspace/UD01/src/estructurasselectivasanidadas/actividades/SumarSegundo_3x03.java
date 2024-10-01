@@ -12,14 +12,15 @@ public class SumarSegundo_3x03 {
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
 		
+		int horas, mins, segs;
 		int tiempoTotal;
 		
 		System.out.print("¿Horas? ");
-		int horas = teclado.nextInt();
+		horas = teclado.nextInt();
 		System.out.print("¿Minutos? ");
-		int mins = teclado.nextInt();
+		mins = teclado.nextInt();
 		System.out.print("¿Segundos? ");
-		int segs = teclado.nextInt();
+		segs = teclado.nextInt();
 		teclado.close();
 		
 		boolean error = false;
@@ -40,22 +41,27 @@ public class SumarSegundo_3x03 {
 		}
 		
 		if (!error) {
-			int minsOut, horasOut, segsOut, dia;
-			
+			System.out.printf("%dh %dm %ds + 1s = ", horas, mins, segs);
+						
+			// tiempo total en segundos, y le sumo 1
 			tiempoTotal = horas * 60 * 60 + mins * 60 + segs;
-			tiempoTotal += 1;
+			tiempoTotal++;
 			
-			minsOut = tiempoTotal / 60;
-			horasOut = minsOut / 60;
+			// horas a imprimir
+			horas = tiempoTotal / 60 / 60;
 		
-			minsOut = minsOut % 60;
-			segsOut = tiempoTotal % 60;
+			// minutos a imprimir (primero los minutos totales, y luego el modulo de ello)
+			mins = tiempoTotal / 60;
+			mins = mins % 60;
 			
-			if (horasOut >= 24) {
+			// segundos a imprimir
+			segs = tiempoTotal % 60;
+			
+			if (horas >= 24) {
 				horas = 0;
-				System.out.printf("%dh %dm %ds + 1s = %d días %dh %dm %ds", horas, mins, segs, 1, horasOut, minsOut, segsOut);
+				System.out.printf("%d día %dh %dm %ds", 1, horas, mins, segs);
 			} else {
-				System.out.printf("%dh %dm %ds + 1s = %dh %dm %ds", horas, mins, segs, horasOut, minsOut, segsOut);
+				System.out.printf("%dh %dm %ds", horas, mins, segs);
 			}
 			
 		}
