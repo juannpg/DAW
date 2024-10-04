@@ -14,26 +14,24 @@ public class NotaFinal_3x07 {
 		float nota = teclado.nextFloat();
 		teclado.close();
 		
-		if (nota < 0 || nota > 12) {
+		if (nota < 0 || nota > 10) {
 			System.out.print("La nota debe estar comprendida entre 0 y 10");
+		} else if (nota < 1.5) {
+			System.out.print("Muy Deficiente");
+		} else if (nota < 3.5) {
+			System.out.print("Deficiente");
+		} else if (nota < 5) {
+			System.out.print("Insuficiente");
+		} else if (nota < 6.5) {
+			System.out.print("Suficiente");
+		} else if (nota < 6.5) {
+			System.out.print("Bien");
+		} else if (nota < 8.5) {
+			System.out.print("Notable");
+		} else if (nota < 10) {
+			System.out.print("Sobresaliente");
 		} else {
-			if (nota < 1.5) {
-				System.out.print("Muy Deficiente");
-			} else if (nota < 3.5) {
-				System.out.print("Deficiente");
-			} else if (nota < 5) {
-				System.out.print("Insuficiente");
-			} else if (nota < 6.5) {
-				System.out.print("Suficiente");
-			} else if (nota < 6.5) {
-				System.out.print("Bien");
-			} else if (nota < 8.5) {
-				System.out.print("Notable");
-			} else if (nota < 10) {
-				System.out.print("Sobresaliente");
-			} else if (nota == 10) {
-				System.out.print("Matrícula de honor");
-			}
+			System.out.print("Matrícula de honor");
 		}
 	}
 }
