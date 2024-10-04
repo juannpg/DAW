@@ -16,22 +16,31 @@ public class MaximoMinimo_3x09 {
 		float num3 = teclado.nextFloat();
 		teclado.close();
 		
-		float mayor;
+		float mayor, menor;
 		if (num1 > num2 && num1 > num3) {
 			mayor = num1;
+			
+			if (num2 < num3) {
+				menor = num2;
+			} else {
+				menor = num3;
+			}
 		} else if (num2 > num1 && num2 > num3) {
 			mayor = num2;
+			
+			if (num1 < num3) {
+				menor = num1;
+			} else {
+				menor = num3;
+			}
 		} else {
 			mayor = num3;
-		}
-		
-		float menor;
-		if (num1 < num2 && num1 < num3) {
-			menor = num1;
-		} else if (num2 < num1 && num2 < num3) {
-			menor = num2;
-		} else {
-			menor = num3;
+			
+			if (num1 < num2) {
+				menor = num1;
+			} else {
+				menor = num2;
+			}
 		}
 		
 		System.out.printf("Mínimo: %.2f\nMáximo: %.2f", mayor, menor);
