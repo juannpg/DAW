@@ -16,31 +16,37 @@ public class OrdenarReales_3x10 {
 		float num3 = teclado.nextFloat();
 		teclado.close();
 		
-		float mayor;
+		float mayor, menor, medio;
 		if (num1 > num2 && num1 > num3) {
 			mayor = num1;
+			
+			if (num2 < num3) {
+				menor = num2;
+				medio = num3;
+			} else {
+				menor = num3;
+				medio = num2;
+			}
 		} else if (num2 > num1 && num2 > num3) {
 			mayor = num2;
+			
+			if (num1 < num3) {
+				menor = num1;
+				medio = num3;
+			} else {
+				menor = num3;
+				medio = num2;
+			}
 		} else {
 			mayor = num3;
-		}
-		
-		float menor;
-		if (num1 < num2 && num1 < num3) {
-			menor = num1;
-		} else if (num2 < num1 && num2 < num3) {
-			menor = num2;
-		} else {
-			menor = num3;
-		}
-		
-		float medio;
-		if (menor != num3 && mayor != num3) {
-			medio = num3;
-		} else if (menor != num1 && mayor != num1) {
-			medio = num1;
-		} else {
-			medio = num2;
+			
+			if (num1 < num2) {
+				menor = num1;
+				medio = num2;
+			} else {
+				menor = num2;
+				medio = num1;
+			}
 		}
 		
 		System.out.printf("%.2f < %.2f < %.2f", menor, medio, mayor);
