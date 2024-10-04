@@ -22,7 +22,7 @@ public class NotaFinal_3x07 {
 			System.out.print("Deficiente");
 		} else if (nota < 5) {
 			System.out.print("Insuficiente");
-		} else if (nota < 6.5) {
+		} else if (nota < 5.5) {
 			System.out.print("Suficiente");
 		} else if (nota < 6.5) {
 			System.out.print("Bien");
