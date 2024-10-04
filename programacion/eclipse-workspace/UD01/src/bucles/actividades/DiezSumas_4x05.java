@@ -7,7 +7,7 @@ public class DiezSumas_4x05 {
 		int contador = 1, suma = 0, num;
 		
 		while (contador <= 10) {
-			System.out.print("¿Número entero? ");
+			System.out.printf("¿Número entero %d? ", contador);
 			num = teclado.nextInt();
 			suma += num;
 			contador++;
