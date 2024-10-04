@@ -13,6 +13,14 @@ public class DiezSumas_4x05 {
 			contador++;
 		}
 		
+		/*
+		for (int i = 1; i <= 10; i++) {
+			System.out.printf("¿Número entero %d? ", i);
+			num = teclado.nextInt();
+			suma += num;
+		}
+		*/
+		
 		teclado.close();
 		System.out.printf("Suma: %d", suma);
 	}
