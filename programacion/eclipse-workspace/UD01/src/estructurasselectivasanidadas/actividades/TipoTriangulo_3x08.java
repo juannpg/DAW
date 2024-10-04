@@ -18,13 +18,16 @@ public class TipoTriangulo_3x08 {
 		float ladoC = teclado.nextFloat();
 		teclado.close();
 		
-		if (ladoA + ladoB <= ladoC) {
+		if (ladoA + ladoB <= ladoC || ladoA + ladoC <= ladoB || ladoB + ladoC <= ladoA) {
 			System.out.print("La suma de dos de los lados debe ser mayor que el tercer lado.");
 		} else if (ladoA == ladoB && ladoA == ladoC) {
+			// todos los lados iguales
 			System.out.print("Triángulo Equilátero");
 		} else if (ladoA == ladoB || ladoA == ladoC || ladoB == ladoC) {
+			// dos lados iguales
 			System.out.print("Triángulo Isósceles");
 		} else {
+			// ningun lado igual
 			System.out.print("Triángulo Escaleno");
 		}
 	}
