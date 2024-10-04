@@ -35,9 +35,9 @@ public class OrdenarReales_3x10 {
 		}
 		
 		float medio;
-		if ((menor == num1 && mayor == num2) || (menor == num2 && mayor == num1)) {
+		if (menor != num3 && mayor != num3) {
 			medio = num3;
-		} else if ((menor == num3 && mayor == num2) || (menor == num2 && mayor == num3)) {
+		} else if (menor != num1 && mayor != num1) {
 			medio = num1;
 		} else {
 			medio = num2;
