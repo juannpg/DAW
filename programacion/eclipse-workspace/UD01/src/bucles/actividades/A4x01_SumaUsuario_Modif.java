@@ -1,16 +1,18 @@
 package bucles.actividades;
 import java.util.Scanner;
 
-public class LeerEnteros_4x02 {
+public class A4x01_SumaUsuario_Modif {
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
-		int num = 0;
+		int num = 1, suma = 0;
 		
-		while (num > 5 || num < 1) {
-			System.out.print("¿Número entero? (entreo 1 y 5 para salir): ");
+		while (num != 0) {
+			System.out.print("¿Número entero? (0 para salir): ");
 			num = teclado.nextInt();
+			suma += num;
 		}
 		
 		teclado.close();
+		System.out.printf("Suma: %d", suma);
 	}
 }
