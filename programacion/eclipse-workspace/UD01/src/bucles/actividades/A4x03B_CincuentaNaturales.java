@@ -1,12 +1,12 @@
 package bucles.actividades;
 
-public class CincuentaNaturales_4x03 {
+public class A4x03B_CincuentaNaturales {
 	public static void main(String[] args) {
-		int num = 100;
-		
-		while (num <= 200) {
+		int num = 1;
+
+		do {
 			System.out.println("Numero natural: " + num);
-			num += 2;
-		}
+			num ++;
+		} while (num <= 50);
 	}
 }
