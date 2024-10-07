@@ -7,8 +7,9 @@ public class A4x12_TablaTemperaturas {
 		int celsius = -20;
 		
 		while (celsius <= 100) {
+			final double K = 273.15;
 			int fahrenheit = (celsius * 9) / 5 + 32;
-			double kelvin = (celsius + 273.15);
+			double kelvin = (celsius + K);
 			
 			System.out.printf("%7d %10d %6.0f\n", celsius, fahrenheit, kelvin);
 			
