@@ -5,24 +5,23 @@ public class A4x07A_MaxMin {
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
 		
-		int num, mayor, menor, contador = 0;
+		int num, mayor, menor, contador;
+		final int ITERACIONES = 10;
 		
 		System.out.print("¿Número entero 0? ");
 		num = teclado.nextInt();
-		contador++;
 		
 		mayor = num;
 		menor = num;
+		contador = 1;
 		
-		while (contador < 10) {
+		while (contador < ITERACIONES) {
 			System.out.printf("¿Número entero %d? ", contador);
 			num = teclado.nextInt();
 			
 			if (num > mayor) {
 				mayor = num;
-			}
-			
-			if (num < menor) {
+			} else if (num < menor) {
 				menor = num;
 			}
 			
@@ -30,6 +29,6 @@ public class A4x07A_MaxMin {
 		}
 		
 		teclado.close();
-		System.out.printf("Mínimo %d\nMáximo %d", menor, mayor);
+		System.out.printf("Mínimo: %d\nMáximo: %d", menor, mayor);
 	}
 }
