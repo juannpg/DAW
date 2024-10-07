@@ -16,7 +16,7 @@ public class A4x06A_MediaAritmetica {
 		if (contador == 0) {
 			System.out.print("No hay Media Aritmética");
 		} else {
-			double media = suma * 1.00 / contador;
+			double media = (double) suma / contador;
 			System.out.printf("Media Aritmética: %.2f", media);
 		}
 		
