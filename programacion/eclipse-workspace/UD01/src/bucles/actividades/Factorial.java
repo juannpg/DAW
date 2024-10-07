@@ -12,7 +12,9 @@ public class Factorial {
 		if (num == 0) {
 			System.out.printf("Factorial de %d = 1", num);
 		} else {
-			int factorial = num, contador = num - 1;
+			int factorial = num;
+			int contador = num - 1;
+			
 			while (contador > 0) {
 				factorial *= contador;
 				contador--;

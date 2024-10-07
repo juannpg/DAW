@@ -10,7 +10,7 @@ public class A4x12_TablaTemperaturas {
 			int fahrenheit = (celsius * 9) / 5 + 32;
 			double kelvin = (celsius + 273.15);
 			
-			System.out.printf("%7d %7d %7.0f\n", celsius, fahrenheit, kelvin);
+			System.out.printf("%7d %10d %6.0f\n", celsius, fahrenheit, kelvin);
 			
 			celsius += 10;
 		}
