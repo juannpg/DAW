@@ -13,7 +13,7 @@ public class A4x06A_MediaAritmetica {
 			suma += num;
 		}
 		
-		if (suma == 0) {
+		if (contador == 0) {
 			System.out.print("No hay Media Aritmética");
 		} else {
 			double media = suma * 1.00 / contador;
