@@ -6,7 +6,7 @@ public class A4x03B_CincuentaNaturales {
 
 		do {
 			System.out.println("Numero natural: " + num);
-			num ++;
+			num++;
 		} while (num <= 50);
 	}
 }
