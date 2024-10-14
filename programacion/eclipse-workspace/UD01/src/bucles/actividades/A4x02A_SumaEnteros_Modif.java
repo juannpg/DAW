@@ -1,7 +1,7 @@
 package bucles.actividades;
 import java.util.Scanner;
 
-public class A4x02_SumaEnteros_Modif {
+public class A4x02A_SumaEnteros_Modif {
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
 		int num = 0;
