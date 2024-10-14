@@ -5,6 +5,8 @@ public class A4x15_NotasAlumnos {
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
 		
+		final int NUM_ALUMNOS = 10;
+		
 		int numAlumno = 1;
 		double notaTeoria, notaProblemas, notaPractica, notaFinal;
 		double sumaFinal = 0, mediaFinal = 0;
@@ -12,7 +14,7 @@ public class A4x15_NotasAlumnos {
 		
 		boolean error = false;
 		
-		while (numAlumno <= 10) {
+		while (numAlumno <= NUM_ALUMNOS) {
 			System.out.printf("ALUMNO %d\n", numAlumno);
 			System.out.print("¿Nota de Teoría? ");
 			notaTeoria = teclado.nextDouble();
