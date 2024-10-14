@@ -3,12 +3,115 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Imagenes</title>
+  <title>Imagenes, enlaces y listas</title>
+
+  <meta name="description" content="Entregable 2 de Lenguaje de Marcado con Marta">
 
   <!-- favicon -->
   <link rel="shortcut icon" href="./media/icons8-favicon-16.png">
 </head>
 <body>
-  
+  <!-- imagenes con con widht y height -->
+  <h1>Imagenes de flores:</h1>
+  <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2F4.bp.blogspot.com%2F_EZ16vWYvHHg%2FS8oaHQIGP7I%2FAAAAAAAAKg0%2FkiXEx_iNOfw%2Fs1600%2Fwww.BancodeImagenesGratuitas.com%2B-Flores-30.jpg&f=1&nofb=1&ipt=91ec0b5327783b4917d3af178c17f1f7daf5567b5df8914a78f565d48b5293fc&ipo=images" alt="Flores" width="300" height="200">
+  <img src="./media/flor1.jpg" alt="Flores" width="300" height="200">
+  <img src="./media/flor2.jpg" alt="Flores" width="200" height="100">
+  <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.5UmsfzZGeMzEirOsY1Ie0QHaE4%26pid%3DApi&f=1&ipt=883f78a959d171215d82e12b2178225eacc302ff48e2eb79624e6eb52a7ac99d&ipo=images" alt="Flores" width="200" height="100">
+
+  <!-- video de youtube, reproduccion de audio (download) y cancion de fondo -->
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/RV5jJrv2kjY?si=LGjSFiLGjpvQmH5_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+  <!-- Audio de fondo -->
+  <audio autoplay loop>
+      <source src="./media/kk good day.mp3" type="audio/mpeg">
+  </audio>
+
+  <audio controls>
+    <source src="./media/kk good day.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- listados -->
+  <h1>Tipos de Flores</h1>
+
+  <!-- Lista ordenada de categorías de flores -->
+  <ol>
+      <li>Rosas
+          <ul>
+              <li>Rosa Roja</li>
+              <li>Rosa Blanca</li>
+          </ul>
+      </li>
+      <li>Tulipanes
+          <ul>
+              <li>Tulipán Amarillo</li>
+              <li>Tulipán Rosa</li>
+          </ul>
+      </li>
+      <li>Margaritas
+          <ul>
+              <li>Margarita Blanca</li>
+              <li>Margarita Amarilla</li>
+          </ul>
+      </li>
+      <li>Girasoles
+          <ul>
+              <li>Girasol Gigante</li>
+              <li>Girasol enano</li>
+          </ul>
+      </li>
+  </ol>
+
+  <!-- Lista ordenada con atributo 'start' -->
+  <h2>Mis flores favoritas</h2>
+  <ol start="5">
+      <li>Orquídeas</li>
+      <li>Gardenias</li>
+      <li>Lirios</li>
+  </ol>
+
+  <!-- Lista de definición -->
+  <h2>Definiciones relacionadas con las flores</h2>
+  <dl>
+      <dt>Pétalo <a href="https://es.wikipedia.org/wiki/P%C3%A9talo">[Wikipedia]</a></dt>
+      <dd>Parte colorida de una flor que atrae a los polinizadores.</dd>
+
+      <dt>Polen <a href="https://es.wikipedia.org/wiki/Polen">[Wikipedia]</a></dt>
+      <dd>Sustancia en las flores que permite la fertilización.</dd>
+
+      <dt>Estambre <a href="https://es.wikipedia.org/wiki/Estambre">[Wikipedia]</a></dt>
+      <dd>Órgano reproductor masculino de la flor.</dd>
+
+      <!-- enlaces externos en texto -->
+      <dt>Floración <a href="https://es.wikipedia.org/wiki/Desarrollo_floral">[Wikipedia]</a></dt>
+      <dd>
+          El proceso de florecimiento ocurre en distintas estaciones:
+          <ul>
+              <li>Primavera</li>
+              <li>Verano</li>
+              <li>Otoño</li>
+          </ul>
+          <a href="https://es.wikipedia.org/wiki/Estaciones_del_a%C3%B1o">
+            <button>Ver más...</button>
+          </a>
+      </dd>
+  </dl>
+
+  <h1>Imagen con áreas clickeables</h1>
+
+  <!-- Imagen con el mapa de áreas clickeables -->
+  <img src="./media/flor1.jpg" alt="Imagen de flores" usemap="#floresmap" width="500">
+
+  <!-- Mapa de áreas clickeables -->
+  <map name="floresmap">
+      <!-- Área rectangular (por ejemplo, para un enlace sobre una flor específica) -->
+      <area shape="rect" coords="50,50,200,200" alt="Rosa" href="https://es.wikipedia.org/wiki/Rosa" target="_blank">
+
+      <!-- Área circular (por ejemplo, para otro tipo de flor) -->
+      <area shape="circle" coords="350,150,50" alt="Tulipán" href="https://es.wikipedia.org/wiki/Tulipán" target="_blank">
+
+      <!-- Área poligonal (definir una zona irregular de la imagen) -->
+      <area shape="poly" coords="250,300,400,350,450,400,300,450" alt="Girasol" href="https://es.wikipedia.org/wiki/Girasol" target="_blank">
+  </map>
+
 </body>
 </html>
