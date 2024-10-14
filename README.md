@@ -9,6 +9,7 @@ UNIDAD
 ├── subunidad1.ejemplos
 
 ```
+### Reglas de nomenclatura
 El nombre de las actividades viene dado por la siguiente regla:
 
 `A1x01A_Nombre.java`
