@@ -1,6 +1,6 @@
 package bucles.actividades;
 
-public class Suma1a50 {
+public class A4x04A_Suma50 {
 	public static void main(String[] args) {
 		int num = 1, suma = 0;
 		
