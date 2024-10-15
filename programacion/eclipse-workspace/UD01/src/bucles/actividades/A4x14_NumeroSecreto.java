@@ -7,12 +7,11 @@ public class A4x14_NumeroSecreto {
 		
 		final int NUM_SECRETO = 19;
 		int numIntentos = 5;
-		int adivinar = 0;
 		boolean acierto = false;
 		
-		while (numIntentos > 0 && !acierto) {
+		do {
 			System.out.print("¿Número? ");
-			adivinar = teclado.nextInt();
+			int adivinar = teclado.nextInt();
 			numIntentos--;
 			
 			if (adivinar == NUM_SECRETO) {
@@ -26,7 +25,7 @@ public class A4x14_NumeroSecreto {
 					System.out.printf("El número %d es mayor que el número secreto.\n", adivinar);
 				}
 			}
-		}
+		} while (numIntentos > 0 && !acierto);
 		
 		teclado.close();
 		
