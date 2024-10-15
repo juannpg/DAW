@@ -1,6 +1,9 @@
 package bucles.actividades;
 import java.util.Scanner;
 
+/*
+ * este programa pide por teclado 10 numeros e imprime por consola su suma.
+ */
 public class A4x05B_DiezSumas {
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
