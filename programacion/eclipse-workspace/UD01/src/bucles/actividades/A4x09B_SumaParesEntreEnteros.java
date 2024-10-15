@@ -14,14 +14,14 @@ public class A4x09B_SumaParesEntreEnteros {
 		if (num1 > num2) {
 			System.out.print("El número entero A debe ser menor o igual que el número entero B.");
 		} else {
-			int suma = 0, contador = num1;
+			int suma = 0, i = num1;
 			
 			do {
-				if (contador % 2 == 0) {
-					suma += contador;
+				if (i % 2 == 0) {
+					suma += i;
 				}
-				contador++;
-			} while (contador <= num2);
+				i++;
+			} while (i <= num2);
 			
 			System.out.printf("Suma de Números Pares comprendidos entre %d y %d: %d", num1, num2, suma);
 		}

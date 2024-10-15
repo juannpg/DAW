@@ -10,9 +10,9 @@ public class A4x13_CerosMediaPosNeg {
 		int numCeros = 0;
 		double mediaPos = 0, mediaNeg = 0;
 		
-		int contador = 0;
-		while (contador < 10) {
-			System.out.printf("¿Número entero %d? ", contador);
+		int i = 0;
+		while (i < 10) {
+			System.out.printf("¿Número entero %d? ", i);
 			int num = teclado.nextInt();
 			
 			if (num > 0) {
@@ -25,7 +25,7 @@ public class A4x13_CerosMediaPosNeg {
 				numCeros++;
 			}
 			
-			contador++;
+			i++;
 		}
 		
 		teclado.close();
