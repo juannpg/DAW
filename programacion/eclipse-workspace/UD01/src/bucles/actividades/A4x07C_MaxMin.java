@@ -1,6 +1,10 @@
 package bucles.actividades;
 import java.util.Scanner;
 
+/*
+ * este programa pide por teclado 10 numeros e 
+ * imprime por consola el maximo y minimo
+ */
 public class A4x07C_MaxMin {
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
