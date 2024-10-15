@@ -19,10 +19,8 @@ public class A4x08C_SumaImparesMenores {
 		} else {
 			int suma = 0;
 			
-			for (int i = num; i > 0; i--) {
-				if (i % 2 != 0) {
-					suma += i;
-				}
+			for (int i = 1; i <= num; i += 2) {
+				suma += i;
 			}
 			
 			System.out.printf("Suma de Números Impares menores o iguales que %d: %d", num, suma);
