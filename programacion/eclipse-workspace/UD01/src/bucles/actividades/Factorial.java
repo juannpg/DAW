@@ -13,11 +13,11 @@ public class Factorial {
 			System.out.printf("Factorial de %d = 1", num);
 		} else {
 			int factorial = num;
-			int contador = num - 1;
+			int i = num - 1;
 			
-			while (contador > 0) {
-				factorial *= contador;
-				contador--;
+			while (i > 0) {
+				factorial *= i;
+				i--;
 			}
 
 			System.out.printf("Factorial de %d = %d", num, factorial);

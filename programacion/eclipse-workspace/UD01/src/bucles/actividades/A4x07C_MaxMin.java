@@ -9,6 +9,7 @@ public class A4x07C_MaxMin {
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
 		
+		final int ITERACIONES = 10;
 		int num, mayor, menor;
 		
 		System.out.printf("¿Número entero %d? ", 0);
@@ -17,7 +18,7 @@ public class A4x07C_MaxMin {
 		mayor = num;
 		menor = num;
 		
-		for (int i = 1; i < 10; i++) {
+		for (int i = 1; i < ITERACIONES; i++) {
 			System.out.printf("¿Número entero %d? ", i);
 			num = teclado.nextInt();
 			

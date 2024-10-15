@@ -1,11 +1,15 @@
 package bucles.actividades;
 import java.util.Scanner;
 
+/*
+ * este programa pide por teclado 10 numeros e 
+ * imprime por consola el maximo y minimo
+ */
 public class A4x07B_MaxMin {
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
 		
-		int num, mayor, menor, contador;
+		int num, mayor, menor;
 		final int ITERACIONES = 10;
 		
 		System.out.print("¿Número entero 0? ");
@@ -14,9 +18,9 @@ public class A4x07B_MaxMin {
 		mayor = num;
 		menor = num;
 		
-		contador = 1;
+		int i = 1;
 		do {
-			System.out.printf("¿Número entero %d? ", contador);
+			System.out.printf("¿Número entero %d? ", i);
 			num = teclado.nextInt();
 			
 			if (num > mayor) {
@@ -25,8 +29,8 @@ public class A4x07B_MaxMin {
 				menor = num;
 			}
 			
-			contador++;
-		} while (contador < ITERACIONES);
+			i++;
+		} while (i < ITERACIONES);
 		
 		teclado.close();
 		System.out.printf("Mínimo: %d\nMáximo: %d", menor, mayor);

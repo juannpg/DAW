@@ -12,13 +12,13 @@ public class A4x08A_SumaImparesMenores {
 		if (num <= 0) {
 			System.out.print("El número natural N debe ser positivo.");
 		} else {
-			int suma = 0, contador = num;
+			int suma = 0, i = num;
 			
-			while (contador > 0) {
-				if (contador % 2 != 0) {
-					suma += contador;
+			while (i > 0) {
+				if (i % 2 != 0) {
+					suma += i;
 				}
-				contador--;
+				i--;
 			}
 			
 			System.out.printf("Suma de Números Impares menores o iguales que %d: %d", num, suma);
