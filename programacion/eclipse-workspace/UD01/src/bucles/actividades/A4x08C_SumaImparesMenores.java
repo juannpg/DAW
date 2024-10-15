@@ -4,7 +4,7 @@ import java.util.Scanner;
 /*
  * este programa pide por teclado un numero natural positivo,
  * e imprime por consola la suma de los numeros naturales impartes
- * menores o iguales que él hasta 0
+ * menores o iguales que él hasta 0.
  */
 public class A4x08C_SumaImparesMenores {
 	public static void main(String[] args) {
