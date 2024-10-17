@@ -14,9 +14,11 @@ public class A5x04_TrianguloSimetrico {
         } else {
             // este bucle crea las filas
             for (int i = 1, numAsteriscos = 1; i <= dimension; i++, numAsteriscos += 2) {
-                // este crea los espacios, que toman el valor dimension - i
-                // para en cada iteracion dejar el espacio correspondiente
-                // a los asteriscos que toquen.
+                /*
+                 este crea los espacios, que toman el valor dimension - i
+                 para en cada iteracion dejar el espacio correspondiente
+                 a los asteriscos que toquen.
+                */
                 for (int j = 0; j < dimension - i; j++) {
                     System.out.print(" ");
                 }
