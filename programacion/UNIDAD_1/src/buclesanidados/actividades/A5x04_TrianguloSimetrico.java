@@ -12,14 +12,23 @@ public class A5x04_TrianguloSimetrico {
         if (dimension <= 0) {
             System.out.print("La altura del Triángulo debe ser positiva");
         } else {
-            for (int i = 0; i < dimension - 1; i++) {
-                System.out.print(" ");
+            int numAsteriscos = 1;
+            // este bucle crea las filas
+            for (int i = 1; i <= dimension; i++) {
+                // este crea los espacios, que empiezan en dimension -1
+                // para dejar espacio para el asterisco, y disminuyen
+                // de uno en uno en cada fila
                 for (int j = 0; j < dimension - i; j++) {
+                    System.out.print(" ");
+                }
+                // este crea los asteriscos, que empiezan en 1 aumentan
+                // de dos en dos en cada fila
+                for (int k = 0; k < numAsteriscos; k++) {
                     System.out.print("*");
                 }
+                numAsteriscos += 2;
                 System.out.println();
             }
-            System.out.println();
         }
     }
 }
