@@ -12,9 +12,8 @@ public class A5x04_TrianguloSimetrico {
         if (dimension <= 0) {
             System.out.print("La altura del Triángulo debe ser positiva");
         } else {
-            int numAsteriscos = 1;
             // este bucle crea las filas
-            for (int i = 1; i <= dimension; i++) {
+            for (int i = 1, numAsteriscos = 1; i <= dimension; i++, numAsteriscos += 2) {
                 // este crea los espacios, que empiezan en dimension -1
                 // para dejar espacio para el asterisco, y disminuyen
                 // de uno en uno en cada fila
@@ -26,7 +25,6 @@ public class A5x04_TrianguloSimetrico {
                 for (int k = 0; k < numAsteriscos; k++) {
                     System.out.print("*");
                 }
-                numAsteriscos += 2;
                 System.out.println();
             }
         }
