@@ -1,6 +1,12 @@
 package buclesanidados.actividades;
 import java.util.Scanner;
 
+/*
+ * este programa pide por teclado un numero limite e imprime por consola un
+ * triangulo con el numero de filas proporcionado y escribiendo en cada fila
+ * su numero y la cantidad del numero de fila, pero empieza por el final y solo
+ * imprime los numeros pares.
+ */
 public class A5x06_TrianguloParesInvertido {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

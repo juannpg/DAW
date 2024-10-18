@@ -1,6 +1,11 @@
 package buclesanidados.actividades;
 import java.util.Scanner;
 
+/*
+ * este programa pide por teclado un numero limite e imprime por consola un
+ * triangulo con el numero de filas proporcionado y escribiendo en cada fila
+ * su numero y la cantidad del numero de fila
+ */
 public class A5x05_TrianguloNumeros {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

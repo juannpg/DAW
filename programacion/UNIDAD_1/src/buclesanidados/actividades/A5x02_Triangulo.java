@@ -1,6 +1,9 @@
 package buclesanidados.actividades;
 import java.util.Scanner;
 
+/*
+ * este programa pide por teclado la altura del triangulo y lo imprime por consola
+ */
 public class A5x02_Triangulo {
     public static void main(String[] args) {
         Scanner teclado = new Scanner(System.in);

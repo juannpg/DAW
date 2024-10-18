@@ -1,6 +1,9 @@
 package buclesanidados.actividades;
 import java.util.Scanner;
 
+/*
+ * este programa pidie por teclado la altura y anchura de un rectangulo y lo imprime por consola
+ */
 public class A5x01_Rectangulo {
     public static void main(String[] args) {
         Scanner teclado = new Scanner(System.in);
