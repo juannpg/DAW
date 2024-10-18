@@ -7,8 +7,7 @@ public class AreaTriangulo {
      * base y altura
      */
     public static double areaTriangulo(double altura, double base) {
-        double area = (altura * base) / 2;
-        return area;
+        return (altura * base) / 2;
     }
 
     /*
