@@ -3,11 +3,7 @@ import java.util.Scanner;
 
 public class MayorEdad {
     public static boolean esMayorEdad(int edad) {
-        boolean resultado = false;
-        if (edad >= 18) {
-            resultado = true;
-        }
-        return resultado;
+        return edad >= 18;
     }
 
     public static void main(String[] args) {
