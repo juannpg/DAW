@@ -1,6 +1,10 @@
 package buclesanidados.actividades;
 import java.util.Scanner;
 
+/*
+ * este programa pide por teclado dos numeros y imprime por consola las tablas
+ * de multiplicar entre ellos
+ */
 public class A5x07_TablasMultiplicar {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

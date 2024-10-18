@@ -1,6 +1,9 @@
 package buclesanidados.actividades;
 import java.util.Scanner;
 
+/*
+ * este programa pide por teclado la altura del triangulo y lo imprime por consola, pero alineado a la derecha
+ */
 public class A5x03_TrianguloReves {
     public static void main(String[] args) {
         Scanner teclado = new Scanner(System.in);
