@@ -15,12 +15,11 @@ public class A5x03_TrianguloReves {
         if (dimension <= 0) {
             System.out.print("La altura del triangulo debe ser positiva.");
         } else {
-            int j;
             for (int i = 1; i <= dimension; i++) {
-                for (j = dimension - i; j > 0; j--) {
+                for (int j = dimension - i; j > 0; j--) {
                     System.out.print(" ");
                 }
-                for (j = 0; j < i; j++) {
+                for (int k = 0; k < i; k++) {
                     System.out.print("*");
                 }
                 System.out.println();
