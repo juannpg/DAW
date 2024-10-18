@@ -35,7 +35,7 @@ public class A5x07_TablasMultiplicar {
         if (!err) {
             for (int i = A; i <= B; i++) {
                 System.out.println("TABLA DE MULTIPLICAR DEL NÚMERO " + i);
-                for (int j = 1; j <= 10; j++) {
+                for (int j = 0; j <= 10; j++) {
                     System.out.printf("%d x %d = %d\n", i, j, i * j);
                 }
             }
