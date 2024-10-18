@@ -12,11 +12,15 @@ public class A5x02_Triangulo {
         int altura = teclado.nextInt();
         teclado.close();
 
-        for (int i = altura++; i > 0; i--) {
-            for (int j = 0; j < altura - i; j++) {
-                System.out.print("*");
+        if (altura <= 0) {
+            System.out.print("La altura del triangulo debe ser positiva.");
+        } else {
+            for (int i = 1; i <= altura; i++) {
+                for (int j = 1; j <= i; j++) {
+                    System.out.print("*");
+                }
+                System.out.println();
             }
-            System.out.println();
         }
     }
 }
