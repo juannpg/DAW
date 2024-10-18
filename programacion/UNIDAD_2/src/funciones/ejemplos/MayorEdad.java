@@ -17,6 +17,10 @@ public class MayorEdad {
         int edad = sc.nextInt();
         sc.close();
 
-        System.out.println("¿mayor de edad? " + esMayorEdad(edad));
+        if (esMayorEdad(edad)) {
+            System.out.print("Es mayor de edad");
+        } else {
+            System.out.print("No es mayor de edad");
+        }
     }
 }
