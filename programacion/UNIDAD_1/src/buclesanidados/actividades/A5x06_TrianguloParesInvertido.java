@@ -20,7 +20,7 @@ public class A5x06_TrianguloParesInvertido {
         } else {
             for (int i = LIMIT; i > 0; i -= 2) {
                 for (int j = i; j > 0; j -= 2) {
-                    System.out.print(j + " ");
+                    System.out.printf("%2d ", j);
                 }
                 System.out.println();
             }
