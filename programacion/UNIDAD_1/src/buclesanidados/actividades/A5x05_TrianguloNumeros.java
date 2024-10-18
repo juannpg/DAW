@@ -22,7 +22,7 @@ public class A5x05_TrianguloNumeros {
                 // este escribe los números de j a i, y escribe
                 // i al ser el numero de linea
                 for (int j = 1; j <= i; j++) {
-                    System.out.print(i + " ");
+                    System.out.printf("%2d ",i);
                 }
                 System.out.println();
             }
