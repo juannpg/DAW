@@ -6,7 +6,7 @@ public class A1x03_CapicuasEntreNums {
      * esta función inverte un número.
      */
     public static int invertir(int num) {
-        int invertido = 0;
+        int invertido = 0, digito;
         /*
          * este bucle invierte el numero de la siguiente manera:
          * consigue el resto de dividir el numero entre 10, de tal manera que obtenemos su ultimo digito:
@@ -30,8 +30,10 @@ public class A1x03_CapicuasEntreNums {
          * y así hasta que num valga 0 o menos, lo que detiene el bucle ya que no tenemos más digitos,
          */
         while (num > 0) {
-            invertido = invertido * 10 + num % 10;
-            num = num / 10;
+            invertido *= 10;
+            digito = num % 10;
+            invertido = invertido + digito;
+            num /= 10;
         }
 
         return invertido;
