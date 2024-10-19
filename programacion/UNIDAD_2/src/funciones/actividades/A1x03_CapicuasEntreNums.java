@@ -33,7 +33,7 @@ public class A1x03_CapicuasEntreNums {
             invertido = invertido * 10 + num % 10;
             num = num / 10;
         }
-        
+
         return invertido;
     }
 
