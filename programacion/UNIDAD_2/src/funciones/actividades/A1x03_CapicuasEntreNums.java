@@ -30,8 +30,8 @@ public class A1x03_CapicuasEntreNums {
          * y así hasta que num valga 0 o menos, lo que detiene el bucle ya que no tenemos más digitos,
          */
         while (num > 0) {
-            invertido *= 10;
             digito = num % 10;
+            invertido *= 10;
             invertido = invertido + digito;
             num /= 10;
         }
