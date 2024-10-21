@@ -8,9 +8,9 @@ public class A1x01_MinMax {
     public static int min(int a, int b, int c) {
         int min;
 
-        if (a < b && a < c) {
+        if (a <= b && a <= c) {
             min = a;
-        } else if (b < a && b < c) {
+        } else if (b <= a && b <= c) {
             min = b;
         } else {
             min = c;
@@ -25,9 +25,9 @@ public class A1x01_MinMax {
     public static int max(int a, int b, int c) {
         int max;
 
-        if (a > b && a > c) {
+        if (a >= b && a >= c) {
             max = a;
-        } else if (b > a && b > c) {
+        } else if (b >= a && b >= c) {
             max = b;
         } else {
             max = c;
