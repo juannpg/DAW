@@ -2,10 +2,12 @@ package funciones.actividades;
 import java.util.Scanner;
 
 public class A1x05_NumDivisores {
-    /*
+    /**
      * calcula si un numero es divisor de otro y si es así lo
      * imprime por consola. además cuenta el numero de divisores
      * del número.
+     * @param num
+     * @return
      */
     public static int contarNumerosDivisores(int num) {
         int numDivisores = 0;
@@ -19,9 +21,10 @@ public class A1x05_NumDivisores {
         return numDivisores;
     }
 
-    /*
+    /**
      * pide por teclado un número y devuelve por consola
      * todos sus divisores y su cantidad de divisores
+     * @param args
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
