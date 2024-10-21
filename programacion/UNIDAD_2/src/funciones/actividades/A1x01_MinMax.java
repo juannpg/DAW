@@ -2,6 +2,9 @@ package funciones.actividades;
 import java.util.Scanner;
 
 public class A1x01_MinMax {
+    /*
+     * acepta tres enteros por parametros y devuelve el mínimo
+     */
     public static int min(int a, int b, int c) {
         int min = a;
 
@@ -16,6 +19,9 @@ public class A1x01_MinMax {
         return min;
     }
 
+    /*
+     * acepta tres enteros por parametros y devuelve el maximo
+     */
     public static int max(int a, int b, int c) {
         int max = a;
 
@@ -30,6 +36,9 @@ public class A1x01_MinMax {
         return max;
     }
 
+    /*
+     * pide tresn numeros por teclado e imrpime el minimo y el maximo
+     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
