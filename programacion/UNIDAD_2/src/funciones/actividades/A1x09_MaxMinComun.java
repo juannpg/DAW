@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class A1x09_MaxMinComun {
     public static int numeroMaximo(int num1, int num2) {
+        // uno debe ser mayor ?
         return num1 > num2 ? num1 : num2;
     }
 
@@ -17,9 +18,7 @@ public class A1x09_MaxMinComun {
     }
 
     public static int calcularMinimoComunMultiplo(int num1, int num2) {
-        int min = 0;
-
-        return min;
+        return (num1 * num2) / calcularMaximoComunDivisor(num1, num2);
     }
 
     public static void main(String[] args) {
