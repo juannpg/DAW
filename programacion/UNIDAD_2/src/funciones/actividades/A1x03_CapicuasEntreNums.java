@@ -2,8 +2,9 @@ package funciones.actividades;
 import java.util.Scanner;
 
 public class A1x03_CapicuasEntreNums {
-    /*
+    /**
      * esta función inverte un número.
+     * @param num
      */
     public static int invertir(int num) {
         int invertido = 0, digito;
@@ -39,10 +40,11 @@ public class A1x03_CapicuasEntreNums {
         return invertido;
     }
 
-    /*
+    /**
      * el programa pide por teclado un numero inicial y uno final,
      * y calcula las capicúas entre ellos para imprimir las capicuas
      * y el numero de capicuas encontradas por consola
+     * @param args
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
