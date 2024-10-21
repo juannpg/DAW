@@ -29,16 +29,18 @@ public class A1x02_ParesMult3y5 {
            }
        }
 
+       int divisor = 3;
        System.out.println("\nNumeros Múltiplos de 3 entre 1 y 20");
        for (int i = LIMITE_ABAJO; i <= LIMITE_ARRIBA; i++) {
-           if (esMultiplo(i, 3)) {
+           if (esMultiplo(i, divisor)) {
                System.out.printf("%d ", i);
            }
        }
 
+       divisor = 5;
        System.out.println("\nNumeros Múltiplos de 5 entre 1 y 20");
        for (int i = LIMITE_ABAJO; i <= LIMITE_ARRIBA; i++) {
-           if (esMultiplo(i, 5)) {
+           if (esMultiplo(i, divisor)) {
                System.out.printf("%d ", i);
            }
        }
