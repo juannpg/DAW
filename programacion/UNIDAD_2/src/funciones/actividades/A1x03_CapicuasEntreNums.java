@@ -5,6 +5,7 @@ public class A1x03_CapicuasEntreNums {
     /**
      * esta función inverte un número.
      * @param num
+     * @return
      */
     public static int invertir(int num) {
         int invertido = 0, digito;
@@ -41,6 +42,15 @@ public class A1x03_CapicuasEntreNums {
     }
 
     /**
+     * comprueba si un numero es capicua
+     * @param num
+     * @return
+     */
+    public static boolean esCapicua(int num) {
+        return num == invertir(num);
+    }
+
+    /**
      * el programa pide por teclado un numero inicial y uno final,
      * y calcula las capicúas entre ellos para imprimir las capicuas
      * y el numero de capicuas encontradas por consola
@@ -71,7 +81,7 @@ public class A1x03_CapicuasEntreNums {
             // por cada numero entre el inicial y el final, lo comprueba con su invertido.
             // si coinciden, lo imprime por consola.
             for (int i = numInicial; i <= numFinal; i++) {
-                if (i == invertir(i)) {
+                if (esCapicua(i)) {
                     System.out.printf("%d ", i);
                     numCapicuas++;
                 }
