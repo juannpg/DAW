@@ -32,7 +32,7 @@ public class A1x03_CapicuasEntreNums {
         while (num > 0) {
             digito = num % 10;
             invertido *= 10;
-            invertido = invertido + digito;
+            invertido += digito;
             num /= 10;
         }
 
