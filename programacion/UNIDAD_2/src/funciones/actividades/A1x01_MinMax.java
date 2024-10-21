@@ -6,13 +6,13 @@ public class A1x01_MinMax {
      * acepta tres enteros por parametros y devuelve el mínimo
      */
     public static int min(int a, int b, int c) {
-        int min = a;
+        int min;
 
-        if (b < min) {
+        if (a < b && a < c) {
+            min = a;
+        } else if (b < a && b < c) {
             min = b;
-        }
-
-        if (c < min) {
+        } else {
             min = c;
         }
 
@@ -23,13 +23,13 @@ public class A1x01_MinMax {
      * acepta tres enteros por parametros y devuelve el maximo
      */
     public static int max(int a, int b, int c) {
-        int max = a;
+        int max;
 
-        if (b > max) {
+        if (a > b && a > c) {
+            max = a;
+        } else if (b > a && b > c) {
             max = b;
-        }
-
-        if (c > max) {
+        } else {
             max = c;
         }
 
