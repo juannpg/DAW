@@ -1,6 +1,6 @@
 package funciones.actividades;
 
-public class A1x07_esPerfecto {
+public class A1x07_NumerosPerfectos {
     /**
      * acepta un parametro num entero, y devuelve
      * si es un "numero perfecto"
