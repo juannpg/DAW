@@ -13,7 +13,7 @@ public class A2x03_RectuanguloConySinBordes {
         for (int i = 1; i <= alto; i++) {
             for (int j = 1; j <= ancho; j++) {
                 /*
-                 si interior es true, o si el punto es el primer o último
+                 si interior es true, o si el punto es el primer o último/primero
                  de cada fila o columna, imprime un asterisco, sino
                  imprime un espacio. Así, siempre que el modo es interior, tenemos
                  el rectangulo completo, y cuando interior es false, comprueba
