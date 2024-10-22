@@ -13,7 +13,7 @@ public class A1x10_CuotaEstacionamiento {
         double cargo = 2;
 
         if (tiempo > 3) {
-            for (double i = tiempo; i > 3; i--) {
+            for (double i = tiempo; i > 3 && cargo < 10; i--) {
                 cargo += 0.50;
             }
         }
