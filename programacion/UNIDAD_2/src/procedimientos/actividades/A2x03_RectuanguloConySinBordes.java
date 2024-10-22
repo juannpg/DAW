@@ -5,9 +5,9 @@ public class A2x03_RectuanguloConySinBordes {
     /**
      * dibuja un rectangulo dependiendo de su altura y anchura,
      * y de si se desea imprimir el interior o solo el borde
-     * @param alto
-     * @param ancho
-     * @param interior
+     * @param alto int, altura del rectangulo
+     * @param ancho int, anchura del rectangulo
+     * @param interior boolean, si se desea imprimir el interior o solo el borde
      */
     public static void dibujarRectangulo(int alto, int ancho, boolean interior) {
         for (int i = 1; i <= alto; i++) {
@@ -33,7 +33,7 @@ public class A2x03_RectuanguloConySinBordes {
     /**
      * pide la altura y anchura de un rectangulo por teclado, y
      * dibuja el rectangulo con y sin bordes.
-     * @param args
+     * @param args String[], argumentos
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

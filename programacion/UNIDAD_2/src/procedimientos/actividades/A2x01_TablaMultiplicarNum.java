@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class A2x01_TablaMultiplicarNum {
     /**
      * escribe la tabla de multiplicar de un entero
-     * @param num
+     * @param num int, numero de la tabla
      */
     public static void escribirTablaMultiplicar(int num) {
         System.out.println("Tabla de multiplicar del número " + num);
@@ -16,7 +16,7 @@ public class A2x01_TablaMultiplicarNum {
     /**
      * pide un entero por teclado y llama al procedimiento
      * de escribir la tabla de multiplicar
-     * @param args
+     * @param args String[], argumentos
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
