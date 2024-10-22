@@ -4,8 +4,8 @@ import java.util.Scanner;
 public class A2x02_Rectangulo {
     /**
      * dibuja un rectangulo proporcionados su alto y su ancho
-     * @param alto
-     * @param ancho
+     * @param alto int, altura del rectangulo
+     * @param ancho int, anchura del rectangulo
      */
     public static void dibujarRectangulo(int alto, int ancho) {
         for (int i = 1; i <= alto; i++) {
@@ -21,7 +21,7 @@ public class A2x02_Rectangulo {
      * pide su altura y anchura. Si el número es positivo, dibuja
      * el rectangulo. Si no, muestra un mensaje de error, hasta que
      * el usuario quiera salir.
-     * @param args
+     * @param args String[], argumentos
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
