@@ -26,7 +26,7 @@ public class A2x03_RectuanguloConySinBordes {
                     System.out.print(" ");
                 }
             }
-        System.out.println();
+            System.out.println();
         }
     }
 
