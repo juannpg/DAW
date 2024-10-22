@@ -2,9 +2,11 @@ package funciones.ejemplos;
 import java.util.Scanner;
 
 public class AreaTriangulo {
-    /*
-     * calcula el area del triangulo en base a dos parametros
-     * base y altura
+    /**
+     * calcula la área de un triangulo
+     * @param altura altura del triangulo
+     * @param base base del triangulo
+     * @return área del triangulo
      */
     public static double areaTriangulo(double altura, double base) {
         return (altura * base) / 2;
