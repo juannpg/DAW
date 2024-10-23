@@ -1,6 +1,6 @@
 # MODO DE USO
 ## Módulo de Programación:
-En éste módulo, los archivos editables con el IDE Eclipse, se encuentran en `./programación/eclipse-workspace`
+En éste módulo, los archivos editables con el IDE Intellij, se encuentran en `./programacion/`
 Los arvhicos están organizados según éste esquema:
 ```
 UNIDAD
