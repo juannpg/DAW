@@ -74,6 +74,7 @@ public class A2x04_MenuTriangulos {
             switch (opcion) {
                 case 0:
                     break;
+                // para todas las opciones entre 1 y 3 pide la altura
                 case 1:
                 case 2:
                 case 3:
@@ -82,6 +83,7 @@ public class A2x04_MenuTriangulos {
                     if (altura <= 0) {
                         System.out.println("La altura del triángulo debe ser positiva.");
                     } else {
+                        // para cada opcion dibuja lo correspondiente
                         switch (opcion) {
                             case 1:
                                 trianguloIzquierda(altura);
