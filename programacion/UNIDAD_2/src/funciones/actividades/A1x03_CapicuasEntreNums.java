@@ -47,7 +47,15 @@ public class A1x03_CapicuasEntreNums {
      * @return
      */
     public static boolean esCapicua(int num) {
-        return num == invertir(num);
+        int numeroNoInvertido = num;
+        int numeroInvertido = invertir(num);
+        boolean esCapicua = false;
+
+        if (numeroInvertido == numeroNoInvertido) {
+            esCapicua = true;
+        }
+
+        return esCapicua;
     }
 
     /**
