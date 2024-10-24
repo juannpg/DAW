@@ -17,7 +17,7 @@ import javax.swing.SwingConstants;
 public class Ventana1 {
 
 	private JFrame frame;
-	private JTextField textField;
+	private JTextField textFieldCod;
 
 	/**
 	 * Launch the application.
@@ -57,53 +57,53 @@ public class Ventana1 {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setBackground(new Color(255, 0, 255));
-		textField.setBounds(206, 39, 58, 19);
-		panel.add(textField);
-		textField.setColumns(10);
+		textFieldCod = new JTextField();
+		textFieldCod.setHorizontalAlignment(SwingConstants.CENTER);
+		textFieldCod.setBackground(new Color(255, 0, 255));
+		textFieldCod.setBounds(206, 39, 58, 19);
+		panel.add(textFieldCod);
+		textFieldCod.setColumns(10);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(206, 68, 130, 22);
-		panel.add(textArea);
+		JTextArea textAreaDep = new JTextArea();
+		textAreaDep.setBounds(206, 68, 130, 22);
+		panel.add(textAreaDep);
 		
-		JTextArea textArea_1 = new JTextArea();
-		textArea_1.setBounds(206, 100, 130, 22);
-		panel.add(textArea_1);
+		JTextArea textAreaLoc = new JTextArea();
+		textAreaLoc.setBounds(206, 100, 130, 22);
+		panel.add(textAreaLoc);
 		
-		JLabel lblNewLabel_1 = new JLabel("Código Departamento:");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_1.setBounds(42, 42, 132, 13);
-		panel.add(lblNewLabel_1);
+		JLabel codDep = new JLabel("Código Departamento:");
+		codDep.setFont(new Font("Tahoma", Font.BOLD, 11));
+		codDep.setBounds(42, 42, 132, 13);
+		panel.add(codDep);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Nombre Departamento:");
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_1_1.setBounds(42, 74, 132, 13);
-		panel.add(lblNewLabel_1_1);
+		JLabel nomDep = new JLabel("Nombre Departamento:");
+		nomDep.setFont(new Font("Tahoma", Font.BOLD, 11));
+		nomDep.setBounds(42, 74, 132, 13);
+		panel.add(nomDep);
 		
-		JLabel lblNewLabel_1_1_1 = new JLabel("Localidad Departamento:");
-		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_1_1_1.setBounds(42, 106, 154, 13);
-		panel.add(lblNewLabel_1_1_1);
+		JLabel locDep = new JLabel("Localidad Departamento:");
+		locDep.setFont(new Font("Tahoma", Font.BOLD, 11));
+		locDep.setBounds(42, 106, 154, 13);
+		panel.add(locDep);
 		
-		JButton btnNewButton = new JButton("Insertar Datos");
-		btnNewButton.setBounds(55, 211, 134, 21);
-		frame.getContentPane().add(btnNewButton);
+		JButton insertBtn = new JButton("Insertar Datos");
+		insertBtn.setBounds(55, 211, 134, 21);
+		frame.getContentPane().add(insertBtn);
 		
-		JButton btnLimpiarDatos = new JButton("Limpiar Datos");
-		btnLimpiarDatos.addActionListener(new ActionListener() {
+		JButton cleanBtn = new JButton("Limpiar Datos");
+		cleanBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("SE HA PULSADO EL BOTON LIMPIAR");
 			}
 		});
-		btnLimpiarDatos.setBounds(239, 211, 134, 21);
-		frame.getContentPane().add(btnLimpiarDatos);
+		cleanBtn.setBounds(239, 211, 134, 21);
+		frame.getContentPane().add(cleanBtn);
 		
-		JLabel lblNewLabel = new JLabel("DATOS DE DEPARTAMENTOS");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel.setForeground(new Color(0, 0, 255));
-		lblNewLabel.setBounds(129, 10, 177, 13);
-		frame.getContentPane().add(lblNewLabel);
+		JLabel textoTitulo = new JLabel("DATOS DE DEPARTAMENTOS");
+		textoTitulo.setFont(new Font("Tahoma", Font.BOLD, 12));
+		textoTitulo.setForeground(new Color(0, 0, 255));
+		textoTitulo.setBounds(129, 10, 177, 13);
+		frame.getContentPane().add(textoTitulo);
 	}
 }
