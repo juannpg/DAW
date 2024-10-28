@@ -33,13 +33,16 @@ public class Ejercicio1 {
 		for (int i = 0; i < LIMITE; i++) {
 			System.out.print("Escribe un número: ");
 			num = sc.nextInt();
-			if (num > numAnterior) {
-				ordenada = false;
-			} else {
-				if (num % MULT_CINCO == 0 && num != numAnterior) {
-					sumaMultiplos += num;
+			// if(ordenada {} ES CORRECCION DE TERESA
+			if (ordenada) {
+				if (num > numAnterior) {
+					ordenada = false;
+				} else {
+					if (num % MULT_CINCO == 0 && num != numAnterior) {
+						sumaMultiplos += num;
+					}
+					numAnterior = num;
 				}
-				numAnterior = num;
 			}
 		}
 		
