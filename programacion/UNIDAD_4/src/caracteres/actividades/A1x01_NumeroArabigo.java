@@ -1,5 +1,5 @@
 package caracteres.actividades;
-import java.util.Scanner;
+import entrada.Teclado;
 
 public class A1x01_NumeroArabigo {
     public static boolean esNumeroArabigo(char c) {
@@ -7,11 +7,7 @@ public class A1x01_NumeroArabigo {
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("¿Carácter? ");
-        char c = sc.next().charAt(0);
-        sc.close();
+        char c = Teclado.leerCaracter("¿Carácter? ");
 
         if (esNumeroArabigo(c)) {
             System.out.printf("El carácter %c es un número arábigo", c);

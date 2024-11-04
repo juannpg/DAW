@@ -1,5 +1,5 @@
 package caracteres.actividades;
-import java.util.Scanner;
+import entrada.Teclado;
 
 public class A1x02_MayusculaMinuscula {
     public static boolean esMayuscula(char c) {
@@ -11,11 +11,7 @@ public class A1x02_MayusculaMinuscula {
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("¿Carácter? ");
-        char c = sc.next().charAt(0);
-        sc.close();
+        char c = Teclado.leerCaracter("¿Carácter? ");
 
         if (esMayuscula(c)) {
             System.out.printf("El carácter %c es una letra mayúscula", c);
