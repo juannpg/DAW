@@ -21,7 +21,8 @@ public class A2x07_Rotaciones {
     public static void rotarDerecha(String frase) {
         System.out.println("rotaciones a la derecha");
 
-        for (int i = 0; i < frase.length(); i++) {
+        System.out.println(frase);
+        for (int i = 0; i < frase.length() - 1; i++) {
             frase = frase.charAt(frase.length() - 1) + frase.substring(0, frase.length() - 1);
             System.out.println(frase);
         }
@@ -30,8 +31,9 @@ public class A2x07_Rotaciones {
     public static void rotarIzquierda(String frase) {
         System.out.println("rotaciones a la izquierda");
 
-        for (int i = 0; i < frase.length(); i++) {
-            frase = frase.substring(1, frase.length() - 1) + frase.charAt(0);
+        System.out.println(frase);
+        for (int i = 0; i < frase.length() - 1; i++) {
+            frase = frase.substring(1, frase.length()) + frase.charAt(0);
             System.out.println(frase);
         }
     }
