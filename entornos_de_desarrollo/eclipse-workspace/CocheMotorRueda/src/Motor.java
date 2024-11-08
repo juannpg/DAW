@@ -9,5 +9,5 @@ public class Motor {
 	
 	public void inyectarCarburante() {
 		System.out.println("Carburante en el motro de tipo " + this.tipo + " inyectado.");
-	}
+	}	
 }
