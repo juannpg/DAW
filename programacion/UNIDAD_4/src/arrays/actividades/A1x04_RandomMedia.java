@@ -25,7 +25,7 @@ public class A1x04_RandomMedia {
         return (float) media / v.length;
     }
 
-    public static int inferioresMedia(int[] v, int x) {
+    public static int inferioresMedia(int[] v, float x) {
         int contadorInferiores = 0;
         for (int i = 0; i < v.length; i++) {
             if (v[i] < x) {
@@ -35,17 +35,7 @@ public class A1x04_RandomMedia {
         return contadorInferiores;
     }
 
-    public static int igualesMedia(int[] v, float x) {
-        int contadorIguales = 0;
-        for (int i = 0; i < v.length; i++) {
-            if (v[i] == x) {
-                contadorIguales++;
-            }
-        }
-        return contadorIguales;
-    }
-
-    public static int mayoresMedia(int[] v, int x) {
+    public static int mayoresMedia(int[] v, float x) {
         int contadorMayores = 0;
         for (int i = 0; i < v.length; i++) {
             if (v[i] > x) {
@@ -56,16 +46,19 @@ public class A1x04_RandomMedia {
     }
 
     public static void main(String[] args) {
-        int[] vectorRandom = crearVectorAleatorio(15, 10, 10);
+        final int LONGITUD = 15;
+
+        int[] vectorRandom = crearVectorAleatorio(LONGITUD, 10, 10);
 
         float media = mediaVector(vectorRandom);
-        int inferioresMedia = inferioresMedia(vectorRandom, (int) media);
-        int mayoresMedia = mayoresMedia(vectorRandom, (int) media);
+        int inferioresMedia = inferioresMedia(vectorRandom, media);
+        int mayoresMedia = mayoresMedia(vectorRandom, media);
+        int igualesMedia = LONGITUD - (inferioresMedia + mayoresMedia);
 
         System.out.println(Arrays.toString(vectorRandom));
         System.out.println("Media: " + media);
         System.out.println("Número de elementos inferiores a la media: " + inferioresMedia);
-        System.out.println("Número de elementos iguales a la media: " + igualesMedia(vectorRandom, media));
+        System.out.println("Número de elementos iguales a la media: " + igualesMedia);
         System.out.println("Número de elementos mayores a la media: " + mayoresMedia);
     }
 }
