@@ -20,7 +20,7 @@ public class A1x01_MinMax {
         System.out.println("]");
     }
 
-    public static int[] min(int[] v) {
+    public static int[] calcular(int[] v) {
         int[] result = new int[4];
         result[0] = v[0];
         result[1] = 0;
@@ -46,9 +46,9 @@ public class A1x01_MinMax {
 
         imprimirVector(numeros);
 
-        System.out.println("Mínimo: " + min(numeros)[0]);
-        System.out.println("Primera posición del mínimo: " + min(numeros)[1]);
-        System.out.println("Máximo: " + min(numeros)[2]);
-        System.out.println("Primera posición del máximo: " + min(numeros)[3]);
+        System.out.println("Mínimo: " + calcular(numeros)[0]);
+        System.out.println("Primera posición del mínimo: " + calcular(numeros)[1]);
+        System.out.println("Máximo: " + calcular(numeros)[2]);
+        System.out.println("Primera posición del máximo: " + calcular(numeros)[3]);
     }
 }
