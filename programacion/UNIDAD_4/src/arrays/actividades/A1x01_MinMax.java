@@ -20,33 +20,24 @@ public class A1x01_MinMax {
         System.out.println("]");
     }
 
-    public static int min(int[] v) {
-        int min = v[0];
-        for (int i = 1; i < v.length; i++) {
-            if (v[i] < min) {
-                min = v[i];
-            }
-        }
-        return min;
-    }
+    public static int[] min(int[] v) {
+        int[] result = new int[4];
+        result[0] = v[0];
+        result[1] = 0;
+        result[2] = v[0];
+        result[3] = 0;
 
-    public static int max(int[] v) {
-        int max = v[0];
         for (int i = 1; i < v.length; i++) {
-            if (v[i] > max) {
-                max = v[i];
+            if (v[i] < result[0]) {
+                result[0] = v[i];
+                result[1] = i;
+            } else if (v[i] > result[2]) {
+                result[2] = v[i];
+                result[3] = i;
             }
         }
-        return max;
-    }
 
-    public static int buscarPosicion(int[] v, int valor) {
-        for (int i = 0; i < v.length; i++) {
-            if (v[i] == valor) {
-                return i;
-            }
-        }
-        return -1;
+        return result;
     }
 
     public static void main(String[] args) {
@@ -55,9 +46,9 @@ public class A1x01_MinMax {
 
         imprimirVector(numeros);
 
-        System.out.println("Mínimo: " + min(numeros));
-        System.out.println("Primera posición del mínimo: " + buscarPosicion(numeros, min(numeros)));
-        System.out.println("Máximo: " + max(numeros));
-        System.out.println("Primera posición del máximo: " + buscarPosicion(numeros, max(numeros)));
+        System.out.println("Mínimo: " + min(numeros)[0]);
+        System.out.println("Primera posición del mínimo: " + min(numeros)[1]);
+        System.out.println("Máximo: " + min(numeros)[2]);
+        System.out.println("Primera posición del máximo: " + min(numeros)[3]);
     }
 }
