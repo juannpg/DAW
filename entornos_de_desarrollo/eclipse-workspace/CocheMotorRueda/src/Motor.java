@@ -7,5 +7,7 @@ public class Motor {
 		this.caballos = caballos;
 	}
 	
-	public void inyectarCarburante() {};
+	public void inyectarCarburante() {
+		System.out.println("Carburante en el motro de tipo " + this.tipo + " inyectado.");
+	}
 }
