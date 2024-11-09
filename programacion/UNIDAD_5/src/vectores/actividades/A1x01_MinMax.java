@@ -2,12 +2,20 @@ package vectores.actividades;
 import entrada.Teclado;
 
 public class A1x01_MinMax {
+    /**
+     * Añade los numeros insertados a un vector.
+     * @param v vector de enteros
+     */
     public static void leerVector(int[] v) {
         for (int i = 0; i < v.length; i++) {
             v[i] = Teclado.leerEntero("Numero entero " + (i + 1) + ": ");
         }
     }
 
+    /**
+     * imprime el vector con formato.
+     * @param v vector de enteros
+     */
     public static void imprimirVector(int[] v) {
         System.out.println("VECTOR:");
         System.out.print("[");
@@ -20,6 +28,11 @@ public class A1x01_MinMax {
         System.out.println("]");
     }
 
+    /**
+     * calcula el minimo, su posicion, maxio y su posicion de un vector y los devuelve en otro.
+     * @param v vector de enteros
+     * @return vector con los resultados
+     */
     public static int[] calcular(int[] v) {
         int[] result = new int[4];
         result[0] = v[0];
@@ -40,6 +53,10 @@ public class A1x01_MinMax {
         return result;
     }
 
+    /**
+     * crea un vector de numeros, los rellena y luego calcula el minimo, su posicion, maxio y su posicion.
+     * @param args argumentos
+     */
     public static void main(String[] args) {
         int[] numeros = new int[10];
         leerVector(numeros);
