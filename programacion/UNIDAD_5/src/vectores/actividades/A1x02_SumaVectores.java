@@ -1,4 +1,4 @@
-package arrays.actividades;
+package vectores.actividades;
 import entrada.Teclado;
 
 public class A1x02_SumaVectores {

@@ -1,4 +1,4 @@
-package arrays.actividades;
+package vectores.actividades;
 
 import java.util.Arrays;
 import java.util.Random;
