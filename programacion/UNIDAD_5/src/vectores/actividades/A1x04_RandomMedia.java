@@ -4,11 +4,18 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class A1x04_RandomMedia {
+    /**
+     * crea un vector aleatorio de enteros.
+     * @param longitud longitud del vector
+     * @param limiteSupRandom numero maximo aleatorio
+     * @param limiteInfRandom numero minimo aleatorio
+     * @return vector de enteros aleatorios
+     */
     public static int[] crearVectorAleatorio(int longitud, int limiteSupRandom, int limiteInfRandom) {
         int[] v = new int[longitud];
         for (int i = 0; i < v.length; i++) {
             Random r = new Random();
-            int random = r.nextInt(limiteSupRandom + limiteInfRandom + 1) - limiteInfRandom;
+            int random = r.nextInt(limiteSupRandom - limiteInfRandom - 1) + limiteInfRandom;
 
             v[i] = random;
         }
@@ -16,6 +23,11 @@ public class A1x04_RandomMedia {
         return v;
     }
 
+    /**
+     * calcula la media de un vector.
+     * @param v vector de enteros
+     * @return media del vector
+     */
     public static float mediaVector(int[] v) {
         int media = 0;
         for (int i = 0; i < v.length; i++) {
@@ -25,6 +37,12 @@ public class A1x04_RandomMedia {
         return (float) media / v.length;
     }
 
+    /**
+     * contar el numero de elementos inferiores a la media de un vector.
+     * @param v vector de enteros
+     * @param x valor de la media
+     * @return numero de elementos inferiores a la media
+     */
     public static int inferioresMedia(int[] v, float x) {
         int contadorInferiores = 0;
         for (int i = 0; i < v.length; i++) {
@@ -35,6 +53,12 @@ public class A1x04_RandomMedia {
         return contadorInferiores;
     }
 
+    /**
+     * contar el numero de elementos mayores a la media de un vector.
+     * @param v vector de enteros
+     * @param x valor de la media
+     * @return numero de elementos mayores a la media
+     */
     public static int mayoresMedia(int[] v, float x) {
         int contadorMayores = 0;
         for (int i = 0; i < v.length; i++) {
@@ -45,10 +69,14 @@ public class A1x04_RandomMedia {
         return contadorMayores;
     }
 
+    /**
+     * crea un vector aleatorio, lo rellena y luego calcula la media, cuenta los elementos inferiores, iguales y mayores a la media y el numero de elementos iguales a la media.
+     * @param args argumentos
+     */
     public static void main(String[] args) {
         final int LONGITUD = 15;
 
-        int[] vectorRandom = crearVectorAleatorio(LONGITUD, 10, 10);
+        int[] vectorRandom = crearVectorAleatorio(LONGITUD, 10, -10);
 
         float media = mediaVector(vectorRandom);
         int inferioresMedia = inferioresMedia(vectorRandom, media);
