@@ -25,25 +25,16 @@ public class A1x0X_PrimosAscendentes {
         return v;
     }
 
-    public static int contarNumeroDivisores(int num) {
+    public static boolean esPrimo(int num) {
         int divisores = 0;
         for (int i = 1; i <= num; i++) {
             if (num % i == 0) {
                 divisores++;
             }
         }
-        return divisores;
+        return divisores == 2;
     }
-
-    /**
-     * acetpa un parametro entero y comprueba si es un numero primo
-     * @param num
-     * @return
-     */
-    public static boolean esPrimo(int num) {
-        return contarNumeroDivisores(num) == 2;
-    }
-
+    
     /**
      * comprueba si algún valor del vector es múltiplo de un numero
      * @param v vector de enteros
