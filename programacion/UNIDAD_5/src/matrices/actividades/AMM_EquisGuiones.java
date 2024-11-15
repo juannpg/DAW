@@ -35,7 +35,7 @@ public class AMM_EquisGuiones {
         }
     }
 
-    public static boolean estaVaciaFila(char v[]) {
+    public static boolean estaVaciaFila(char[] v) {
         for (int i = 0; i < v.length; i++) {
             if (v[i] == 'x') {
                 return false;
@@ -45,7 +45,7 @@ public class AMM_EquisGuiones {
         return true;
     }
 
-    public static int buscarFilaVacia(char m[][]) {
+    public static int buscarFilaVacia(char[][] m) {
         for (int i = 0; i < m.length; i++) {
             if (estaVaciaFila(m[i])) {
                 return i;
