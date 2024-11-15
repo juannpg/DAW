@@ -26,14 +26,14 @@ public class A2x03_RellenarMatriz {
         return m;
     }
 
-    public static int leerFila(int numFila) {
+    public static int leerFila(int numFila, int max) {
         int fila;
         do {
             fila = Teclado.leerEntero("¿Fila " + numFila + "? ");
-            if (fila < 0 || fila > 7) {
+            if (fila > max) {
                 System.out.println("La fila debe estar comprendida entre 0 y 7");
             }
-        } while (fila < 0 || fila > 7);
+        } while (fila > max);
 
         return fila;
     }
@@ -52,8 +52,8 @@ public class A2x03_RellenarMatriz {
         System.out.println("MATRIZ ANTES DE INTERCAMBIAR");
         escribirMatriz(matrizRandom);
 
-        int fila1 = leerFila(1);
-        int fila2 = leerFila(2);
+        int fila1 = leerFila(1, 7);
+        int fila2 = leerFila(2, 7);
 
         cambiarFilas(fila1, fila2, matrizRandom);
 
