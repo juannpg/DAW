@@ -28,6 +28,7 @@ public class Videojuego {
     }
 
     public String obtenerEstado() {
-        return "Videojuego [Título = " + this.nombre + ", Desarrollador = " + this.desarrollador + ", Año de lanzamiento = " + this.anyoLanzamiento + ", Máximo de jugadores = " + this.maxJugadores + "]";
+        return "Videojuego [Título = " + this.nombre + ", Desarrollador = " + this.desarrollador + ", Año de lanzamiento = "
+                + this.anyoLanzamiento + ", Máximo de jugadores = " + this.maxJugadores + "]";
     }
 }
