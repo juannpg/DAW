@@ -21,8 +21,8 @@ public class PruebaCirculo {
 
         c2.setColor("negro");
 
-        System.out.println(c1.getRadio());
-        System.out.println(c1.getColor());
+        System.out.println(c1);
+        System.out.println("C1 " + c1.getColor() + " " + c1.getRadio());
         System.out.println(c1.toString());
     }
 }
