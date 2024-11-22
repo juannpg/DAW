@@ -26,13 +26,22 @@ public class main {
     public static void main(String[] args) {
         int numParada = Teclado.leerEntero("¿Número de parada? ");
 
-        // crea un vector que contiene cinco lienas de autobús.
+        // crea un vector que contiene cinco lienas de autobús y las añade a avanza.
         LineaAutobus[] vectorLineas = crearLineas(5);
+        Avanza avanza = new Avanza(20);
+        for (int i = 0; i < vectorLineas.length; i++) {
+            avanza.addLinea(vectorLineas[i]);
+        }
 
         for (int i = 0; i < vectorLineas.length; i++) {
-            if (vectorLineas[i].tieneParada(numParada)) {
+            if (avanza.getLineas()[i].tieneParada(numParada)) {
                 System.out.println(vectorLineas[i].toString());
             }
         }
+
+        final int LINEA_A_BORRAR = 2;
+        avanza.borrarLinea(vectorLineas[LINEA_A_BORRAR]);
+
+        System.out.println(avanza.toString());
     }
 }
