@@ -4,7 +4,7 @@ import entrada.Teclado;
 
 public class main {
     public static LineaAutobus[] crearLineas(int numLineas) {
-        LineaAutobus[] vectorLineas = new LineaAutobus[5];
+        LineaAutobus[] vectorLineas = new LineaAutobus[numLineas];
 
         for (int i = 0; i < numLineas; i++) {
             LineaAutobus linea =  PrincipalLineaAutobus.crearLineaAleatoria();
@@ -26,6 +26,7 @@ public class main {
     public static void main(String[] args) {
         int numParada = Teclado.leerEntero("¿Número de parada? ");
 
+        // crea un vector que contiene cinco lienas de autobús.
         LineaAutobus[] vectorLineas = crearLineas(5);
 
         for (int i = 0; i < vectorLineas.length; i++) {
