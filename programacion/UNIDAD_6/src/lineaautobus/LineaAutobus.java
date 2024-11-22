@@ -45,14 +45,12 @@ public class LineaAutobus {
     }
 
     public boolean tieneParada(int parada) {
-        boolean tieneParada = false;
-
         for (int i = 0; i < paradas.length; i++) {
             if (paradas[i] == parada) {
-                tieneParada = true;
+                return true;
             }
         }
 
-        return tieneParada;
+        return false;
     }
 }
