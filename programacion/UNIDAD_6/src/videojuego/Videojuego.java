@@ -5,10 +5,15 @@ public class Videojuego {
 
     private int codigo;
     private String titulo;
-    private float precio;
+    private double precio;
     private int stock;
 
-    public Videojuego(String titulo, float precio) {
+    /**
+     * constructor con titulo y precio como parametros
+     * @param titulo titulo
+     * @param precio precio
+     */
+    public Videojuego(String titulo, double precio) {
         total++;
 
         this.titulo = titulo;
@@ -34,7 +39,7 @@ public class Videojuego {
         return titulo;
     }
 
-    public float getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
