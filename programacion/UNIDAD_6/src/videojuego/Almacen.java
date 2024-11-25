@@ -63,7 +63,7 @@ public class Almacen {
     }
 
     /**
-     * elimina un videojuego dada su posicion en el vector almacen.
+     * elimina un videojuego dada su posicion en el vector almacen y disminuye en 1 el total.
      * los siguientes a ellos los desplaza para agruparlos todos al principio
      * y dejar los nulls al final.
      * @param pos posicion
