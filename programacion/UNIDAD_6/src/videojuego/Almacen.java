@@ -74,6 +74,7 @@ public class Almacen {
         for (int i = 0; i < this.numElementos && !borrado; i++) {
             if (this.videojuegos[i] != null && i == pos) {
                 this.videojuegos[i] = null;
+                Videojuego.setTotal(Videojuego.getTotal() - 1);
                 borrado = true;
             }
         }
