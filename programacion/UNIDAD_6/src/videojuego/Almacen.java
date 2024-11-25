@@ -20,7 +20,7 @@ public class Almacen {
     public String toString() {
         String resultado = "";
         for (int i = 0; i < numElementos; i++) {
-            String append = this.videojuegos[i].toString();
+            String append = this.videojuegos[i].toString() + "\n";
 
             resultado += append;
         }

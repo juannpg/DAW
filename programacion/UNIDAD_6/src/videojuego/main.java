@@ -5,6 +5,10 @@ import entrada.Teclado;
 import java.util.Arrays;
 
 public class main {
+    /**
+     * menu con opciones del 0 al 6 que pide una entrada siempre que no sea correcta
+     * @return opcion
+     */
     public static int menu() {
         int opcion;
         do {
@@ -24,6 +28,12 @@ public class main {
         return opcion;
     }
 
+    /**
+     * crea un alamacen con capacidad 20
+     * muestra el menu hasta que se salga de el
+     * hace las opciones del menu
+     * @param args argumentos
+     */
     public static void main(String[] args) {
         final int CAPACIDAD = 20;
         Almacen almacen = new Almacen(CAPACIDAD);
