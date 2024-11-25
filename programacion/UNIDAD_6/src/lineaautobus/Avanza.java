@@ -29,17 +29,33 @@ public class Avanza {
     public void borrarLinea(LineaAutobus linea) {
         boolean borrado = false;
         for (int i = 0; i < this.numElementos && !borrado; i++) {
-            if (this.lineas[i].getNumLinea().equals(linea.getNumLinea())) {
+            if (this.lineas[i] != null && this.lineas[i].getNumLinea().equals(linea.getNumLinea())) {
                 this.lineas[i] = null;
                 borrado = true;
             }
         }
+
+        // mueve una posición atrás todos los elementos que detrás tengan un hueco.
+        for (int i = 0; i < this.numElementos; i++) {
+            boolean movido = false;
+            if (this.lineas[i] == null) {
+                for (int j = i + 1; j < this.numElementos && !movido; j++) {
+                    if (this.lineas[j] != null) {
+                        this.lineas[i] = this.lineas[j];
+                        this.lineas[j] = null;
+                        movido = true;
+                    }
+                }
+            }
+        }
+
+        this.numElementos--;
     }
 
     public void modificarLinea(LineaAutobus linea) {
         boolean modificado = false;
         for (int i = 0; i < this.numElementos && !modificado; i++) {
-            if (this.lineas[i].getNumLinea().equals(linea.getNumLinea())) {
+            if (this.lineas[i] != null && this.lineas[i].getNumLinea().equals(linea.getNumLinea())) {
                 this.lineas[i] = linea;
                 modificado = true;
             }
