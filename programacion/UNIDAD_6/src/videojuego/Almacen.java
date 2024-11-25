@@ -46,20 +46,25 @@ public class Almacen {
     }
 
     /**
-     * consulta un videojuego mediante su código
-     * @param cod código
-     * @return videojuego consultado
+     * inserta un videojego al inicio del vector. Para ello
+     * desplaza todos los elementos del vector una poiscion hacia delante
+     * @param videojuego
+     * @return
      */
-    public Videojuego consultar(int cod) {
-        boolean encontrado = false;
-        Videojuego videojuego = null;
-        for (int i = 0; i < numElementos && !encontrado; i++) {
-            if (this.videojuegos[i].getCodigo() == cod) {
-                videojuego = this.videojuegos[i];
+    public boolean insertarPrincipio(Videojuego videojuego) {
+        boolean insertado = false;
+
+        if (this.numElementos < this.videojuegos.length) {
+            for (int i = numElementos; i > 0; i--) {
+                videojuegos[i + 1] = videojuegos[i];
             }
+
+            this.videojuegos[0] = videojuego;
+            this.numElementos++;
+            insertado = true;
         }
 
-        return videojuego;
+        return insertado;
     }
 
     /**
@@ -94,6 +99,23 @@ public class Almacen {
 
         this.numElementos--;
         return borrado;
+    }
+
+    /**
+     * consulta un videojuego mediante su código
+     * @param cod código
+     * @return videojuego consultado
+     */
+    public Videojuego consultar(int cod) {
+        boolean encontrado = false;
+        Videojuego videojuego = null;
+        for (int i = 0; i < numElementos && !encontrado; i++) {
+            if (this.videojuegos[i].getCodigo() == cod) {
+                videojuego = this.videojuegos[i];
+            }
+        }
+
+        return videojuego;
     }
 
     /**
