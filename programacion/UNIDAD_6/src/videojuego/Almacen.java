@@ -4,20 +4,23 @@ public class Almacen {
     private Videojuego[] videojuegos;
     private int numElementos;
 
+    /**
+     * constructor con capacidad como parametro
+     * @param capacidad capacidad
+     */
     public Almacen(int capacidad) {
         this.videojuegos = new Videojuego[capacidad];
         numElementos = 0;
     }
 
+    /**
+     * por cada elemento lo suma a un String con sus atributos
+     * @return
+     */
     public String toString() {
         String resultado = "";
         for (int i = 0; i < numElementos; i++) {
-            String append = i
-                + " Videojuego[Código=" + this.videojuegos[i].getCodigo()
-                + ", Título=" + this.videojuegos[i].getTitulo()
-                + ", Precio=" + this.videojuegos[i].getPrecio()
-                + ", Cantidad=" + this.videojuegos[i].getStock()
-            ;
+            String append = this.videojuegos[i].toString();
 
             resultado += append;
         }
@@ -25,6 +28,11 @@ public class Almacen {
         return resultado;
     }
 
+    /**
+     * inserta un videojuego en el almacen si no está lleno
+     * @param videojuego videojuego a insertar
+     * @return si ha sido insertado
+     */
     public boolean insertar(Videojuego videojuego) {
         boolean insertado = false;
 
@@ -37,6 +45,11 @@ public class Almacen {
         return insertado;
     }
 
+    /**
+     * consulta un videojuego mediante su código
+     * @param cod código
+     * @return videojuego consultado
+     */
     public Videojuego consultar(int cod) {
         boolean encontrado = false;
         Videojuego videojuego = null;
@@ -49,6 +62,13 @@ public class Almacen {
         return videojuego;
     }
 
+    /**
+     * elimina un videojuego dada su posicion en el vector almacen.
+     * los siguientes a ellos los desplaza para agruparlos todos al principio
+     * y dejar los nulls al final.
+     * @param pos posicion
+     * @return si ha sido borrado.
+     */
     public boolean eliminar(int pos) {
         boolean borrado = false;
         for (int i = 0; i < this.numElementos && !borrado; i++) {
@@ -75,10 +95,15 @@ public class Almacen {
         return borrado;
     }
 
-    public int modificaCantidad(float precio) {
+    /**
+     * suma 1 al stock de los elementos que sean menores que un precio
+     * @param precio precio
+     * @return numero de modificados
+     */
+    public int modificaCantidad(double precio) {
         int numModif = 0;
         for (int i = 0; i < this.numElementos; i++) {
-            if (this.videojuegos[i].getPrecio() == precio) {
+            if (this.videojuegos[i].getPrecio() < precio) {
                 int stock = this.videojuegos[i].getStock();
                 this.videojuegos[i].setStock(stock + 1);
                 numModif++;
@@ -88,6 +113,11 @@ public class Almacen {
         return numModif;
     }
 
+    /**
+     * busca todos los videojuegos dado un stock
+     * @param stock stock
+     * @return vector de videojuegos
+     */
     public Videojuego[] buscaVideojuegos(int stock) {
         int numCoincidencias = 0;
         for (int i = 0; i < numElementos; i++) {
