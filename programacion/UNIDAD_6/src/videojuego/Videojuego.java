@@ -50,4 +50,12 @@ public class Videojuego {
     public void setStock(int stock) {
         this.stock = stock;
     }
+
+    public static int getTotal() {
+        return total;
+    }
+
+    public static void setTotal(int total) {
+        Videojuego.total = total;
+    }
 }
