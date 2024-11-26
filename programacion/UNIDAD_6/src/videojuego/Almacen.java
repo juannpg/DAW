@@ -112,6 +112,7 @@ public class Almacen {
         for (int i = 0; i < numElementos && !encontrado; i++) {
             if (this.videojuegos[i].getCodigo() == cod) {
                 videojuego = this.videojuegos[i];
+                encontrado = true;
             }
         }
 
@@ -151,11 +152,68 @@ public class Almacen {
 
         Videojuego[] devolver = new Videojuego[numCoincidencias];
         for (int i = 0; i < numElementos; i++) {
-            if (this.videojuegos[i].getStock() == stock) {
-                devolver[i] = this.videojuegos[i];
+            for (int j = 0; j < numCoincidencias; j++) {
+                if (devolver[j] == null) {
+                    if (this.videojuegos[i].getStock() == stock) {
+                        devolver[j] = this.videojuegos[i];
+                    }
+                }
             }
         }
 
         return devolver;
+    }
+
+    /**
+     * buscar videojuegos con stock a 1
+     */
+    public Videojuego[] buscaVideojuegosStock(int stock) {
+        int numCoincidencias = 0;
+        for (int i = 0; i < numElementos; i++) {
+            if (this.videojuegos[i].getStock() == stock) {
+                numCoincidencias++;
+            }
+        }
+
+        Videojuego[] devolver = new Videojuego[numCoincidencias];
+        for (int i = 0; i < numElementos; i++) {
+            for (int j = 0; j < numCoincidencias; j++) {
+                if (devolver[j] == null) {
+                    if (this.videojuegos[i].getStock() == stock) {
+                        devolver[j] = this.videojuegos[i];
+                    }
+                }
+            }
+        }
+
+        return devolver;
+    }
+
+    /**
+     * devolver vidoejugo de mayor precio
+     */
+    public Videojuego buscarMayorPrecio() {
+        Videojuego precioMayor = this.videojuegos[0];
+        for (int i = 0; i < numElementos; i++) {
+            if (this.videojuegos[i].getPrecio() > precioMayor.getPrecio()) {
+                precioMayor = this.videojuegos[i];
+            }
+        }
+
+        return precioMayor;
+    }
+
+    /**
+     * Devolver la cantidad de vieojuegos con prcio menor al pasado
+     */
+    public int buscarMenorPrecio(double precio) {
+        int numMenores = 0;
+        for (int i = 0; i < this.numElementos; i++) {
+            if (this.videojuegos[i].getPrecio() < precio) {
+                numMenores++;
+            }
+        }
+
+        return numMenores;
     }
 }
