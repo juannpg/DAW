@@ -152,10 +152,12 @@ public class Almacen {
 
         Videojuego[] devolver = new Videojuego[numCoincidencias];
         for (int i = 0; i < numElementos; i++) {
-            for (int j = 0; j < numCoincidencias; j++) {
+            boolean insertado = false;
+            for (int j = 0; j < numCoincidencias && !insertado; j++) {
                 if (devolver[j] == null) {
                     if (this.videojuegos[i].getStock() == stock) {
                         devolver[j] = this.videojuegos[i];
+                        insertado = true;
                     }
                 }
             }
@@ -177,10 +179,12 @@ public class Almacen {
 
         Videojuego[] devolver = new Videojuego[numCoincidencias];
         for (int i = 0; i < numElementos; i++) {
-            for (int j = 0; j < numCoincidencias; j++) {
+            boolean insertado = false;
+            for (int j = 0; j < numCoincidencias && !insertado; j++) {
                 if (devolver[j] == null) {
                     if (this.videojuegos[i].getStock() == stock) {
                         devolver[j] = this.videojuegos[i];
+                        insertado = true;
                     }
                 }
             }
@@ -193,6 +197,10 @@ public class Almacen {
      * devolver vidoejugo de mayor precio
      */
     public Videojuego buscarMayorPrecio() {
+        if (numElementos == 0) {
+            return null;
+        }
+
         Videojuego precioMayor = this.videojuegos[0];
         for (int i = 0; i < numElementos; i++) {
             if (this.videojuegos[i].getPrecio() > precioMayor.getPrecio()) {
