@@ -12,27 +12,23 @@ public class Ejercicio1 {
 		boolean longitudBien = matricula.length() == 7;
 		boolean numerosBien = true, letrasBien = true;
 		
-		if (longitudBien) {
-			String numeros = matricula.substring(0, 4);
-			String letras = matricula.substring(4);
-			
-			for (int i = 0; i < 4 && numerosBien; i++) {
-				if (numeros.charAt(i) < '1' || numeros.charAt(i) > '9') {
-					numerosBien = false;
-				}
+		String numeros = matricula.substring(0, 4);
+		String letras = matricula.substring(4);
+		
+		for (int i = 0; i < 4 && numerosBien && longitudBien; i++) {
+			if (numeros.charAt(i) < '1' || numeros.charAt(i) > '9') {
+				numerosBien = false;
 			}
-			
-			if (numerosBien) {
-				if (!letras.equals(letras.toUpperCase())) {
-					letrasBien = false;
-				}
-				
-				for (int i = 0; i < 3 && letrasBien; i++) {
-					if (letras.charAt(i) == 'A' || letras.charAt(i) == 'E' || letras.charAt(i) == 'I' || letras.charAt(i) == 'O' || 
-							letras.charAt(i) == 'U' || letras.charAt(i) == 'Q' || letras.charAt(i) == 'Ñ') {
-						letrasBien = false;
-					}
-				}
+		}
+		
+		if (numerosBien && !letras.equals(letras.toUpperCase())) {
+			letrasBien = false;
+		}
+		
+		for (int i = 0; i < 3 && letrasBien && numerosBien; i++) {
+			if (letras.charAt(i) == 'A' || letras.charAt(i) == 'E' || letras.charAt(i) == 'I' || letras.charAt(i) == 'O' || 
+					letras.charAt(i) == 'U' || letras.charAt(i) == 'Q' || letras.charAt(i) == 'Ñ') {
+				letrasBien = false;
 			}
 		}
 		
