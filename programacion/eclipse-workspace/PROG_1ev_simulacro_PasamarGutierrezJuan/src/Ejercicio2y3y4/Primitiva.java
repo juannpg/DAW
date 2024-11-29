@@ -130,10 +130,8 @@ public class Primitiva {
 		int numAciertos = 0;
 		
 		for (int i = 0; i < boletoUsuario.length; i++) {
-			for (int j = 0; j < this.combinacionGanadora.length; j++) {
-				if (boletoUsuario[i] == this.combinacionGanadora[j]) {
-					numAciertos++;
-				}
+			if (esta(i, boletoUsuario)) {
+				numAciertos++;
 			}
 		}
 		
