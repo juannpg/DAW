@@ -13,10 +13,7 @@ public class Cifrar {
 		do {
 			valido = true;
 			frase = Teclado.leerCadena("¿Frase? ");
-			if (!frase.toUpperCase().equals(frase)) {
-				valido = false;
-			};
-			
+		
 			for (int i = 0; i < frase.length() && valido; i++) {
 				if (frase.charAt(i) > 'Z' || frase.charAt(i) < 'A' && frase.charAt(i) != ' ') {
 					valido = false;
