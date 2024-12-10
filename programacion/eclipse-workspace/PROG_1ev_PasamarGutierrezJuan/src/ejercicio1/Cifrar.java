@@ -8,15 +8,18 @@ public class Cifrar {
 	 * @return
 	 */
 	public static String leerFraseValida() {
-		boolean valido;
+		boolean valido ;
 		String frase;
 		do {
 			valido = true;
 			frase = Teclado.leerCadena("¿Frase? ");
-		
-			for (int i = 0; i < frase.length() && valido; i++) {
-				if (frase.charAt(i) > 'Z' || frase.charAt(i) < 'A' && frase.charAt(i) != ' ') {
-					valido = false;
+			if (frase.toUpperCase() != frase) {
+				valido = false;
+			} else {
+				for (int i = 0; i < frase.length() && !valido; i++) {
+					if (frase.charAt(i) >= 'Z' || frase.charAt(i) <= 'A' || frase.charAt(i) != ' ') {
+						valido = false;
+					}
 				}
 			}
 			
