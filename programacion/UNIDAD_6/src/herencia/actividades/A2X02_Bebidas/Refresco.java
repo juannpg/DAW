@@ -33,4 +33,13 @@ public class Refresco extends Bebida{
     public double calcularPrecio() {
         return 1 + ((double) this.cantidadAzucar / 10);
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                "Refresco{" +
+                "cantidadAzucar=" + cantidadAzucar +
+                ", tieneGas=" + tieneGas +
+                "} ";
+    }
 }

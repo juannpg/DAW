@@ -12,4 +12,12 @@ public abstract class Bebida {
     }
 
     public abstract double calcularPrecio();
+
+    @Override
+    public String toString() {
+        return "Bebida{" +
+                "codigo=" + codigo +
+                ", nombre='" + nombre + '\'' +
+                '}';
+    }
 }

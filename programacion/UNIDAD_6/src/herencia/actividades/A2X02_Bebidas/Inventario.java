@@ -19,24 +19,24 @@ public class Inventario {
     }
 
     public int[] generarBebidasAleatorias(int numBebidas) {
-        int[] devolver = {0, 0, 0};
+        int[] contadorBebidas = {0, 0, 0};
         for (int i = 0; i < numBebidas && numElementos < this.bebidas.length; i++) {
             int random = new Random().nextInt(3);
-            if (random == 1) {
-                this.bebidas[i] = new Refresco();
-                devolver[0]++;
-            } else if (random == 2) {
+            if (random == 0) {
+                this.bebidas[   i] = new Refresco();
+                contadorBebidas[0]++;
+            } else if (random == 1) {
                 this.bebidas[i] = new Fermentada();
-                devolver[1]++;
+                contadorBebidas[1]++;
             } else {
                 this.bebidas[i] = new Destilada();
-                devolver[2]++;
+                contadorBebidas[2]++;
             }
 
             Inventario.numElementos++;
         }
 
-        return devolver;
+        return contadorBebidas;
     }
 
 
