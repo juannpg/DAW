@@ -27,4 +27,12 @@ public class Fermentada extends Alcoholica{
     public double calcularPrecio() {
         return 5 + (this.graduacion / 10);
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                "Fermentada{" +
+                "graduacion=" + graduacion +
+                "} ";
+    }
 }

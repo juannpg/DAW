@@ -30,4 +30,12 @@ public class Destilada extends Alcoholica {
     public double calcularPrecio() {
         return 12 + (this.graduacion / 10);
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                "Destilada{" +
+                "graduacion=" + graduacion +
+                "} ";
+    }
 }
