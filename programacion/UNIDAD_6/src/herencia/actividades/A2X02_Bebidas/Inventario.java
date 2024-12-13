@@ -29,7 +29,7 @@ public class Inventario {
                 this.bebidas[i] = new Fermentada();
                 devolver[1]++;
             } else {
-                this.bebidas[i] = new Fermentada();
+                this.bebidas[i] = new Destilada();
                 devolver[2]++;
             }
 
@@ -39,5 +39,5 @@ public class Inventario {
         return devolver;
     }
 
-    
+
 }
