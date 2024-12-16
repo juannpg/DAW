@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6f854f1e-70ac-49f0-824e-139b05e7d4be" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Examen1/Examen1/lib/teclado.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/teclado.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UNIDAD_6.iml" beforeDir="false" afterPath="$PROJECT_DIR$/UNIDAD_6.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/herencia/actividades/A2X02_Bebidas/Inventario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/herencia/actividades/A2X02_Bebidas/Inventario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/herencia/actividades/A2X02_Bebidas/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/herencia/actividades/A2X02_Bebidas/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/herencia/actividades/A2X02_Bebidas/Refresco.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/herencia/actividades/A2X02_Bebidas/Refresco.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/herencia/actividades/A2X02_Bebidas/Bebida.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/herencia/actividades/A2X02_Bebidas/Bebida.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/herencia/actividades/A2X02_Bebidas/Destilada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/herencia/actividades/A2X02_Bebidas/Destilada.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/herencia/actividades/A2X02_Bebidas/Fermentada.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/herencia/actividades/A2X02_Bebidas/Fermentada.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

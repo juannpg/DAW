@@ -18,7 +18,7 @@ public abstract class Bebida {
         return "Bebida{" +
                 "codigo=" + codigo +
                 ", nombre='" + nombre + '\'' +
-                ", precio='" + this.calcularPrecio() + '\'' +
+                ", precio='" + String.format("%.2f", this.calcularPrecio()) + '\'' +
                 '}';
     }
 }
