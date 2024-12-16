@@ -142,4 +142,14 @@ public class Inventario {
 
         return contadorGaseosos;
     }
+
+    public Inventario ordenarInventario() {
+        Inventario inventarioOrdenar = new Inventario(this.numElementos);
+        for (int i = 0; i < this.numElementos; i++) {
+            inventarioOrdenar.insertarBebida(bebidas[i]);
+        }
+
+        Arrays.sort(inventarioOrdenar.bebidas);
+        return inventarioOrdenar;
+    }
 }
