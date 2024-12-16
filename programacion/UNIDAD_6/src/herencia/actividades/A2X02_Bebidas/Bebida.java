@@ -18,6 +18,7 @@ public abstract class Bebida {
         return "Bebida{" +
                 "codigo=" + codigo +
                 ", nombre='" + nombre + '\'' +
+                ", precio='" + this.calcularPrecio() + '\'' +
                 '}';
     }
 }

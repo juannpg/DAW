@@ -42,4 +42,8 @@ public class Refresco extends Bebida{
                 ", tieneGas=" + tieneGas +
                 "} ";
     }
+
+    public boolean isTieneGas() {
+        return tieneGas;
+    }
 }
