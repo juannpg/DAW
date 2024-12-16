@@ -32,7 +32,7 @@ public class Fermentada extends Alcoholica{
     public String toString() {
         return super.toString() +
                 "Fermentada{" +
-                "graduacion=" + graduacion +
+                "graduacion=" + String.format("%.2f", graduacion) +
                 "} ";
     }
 }

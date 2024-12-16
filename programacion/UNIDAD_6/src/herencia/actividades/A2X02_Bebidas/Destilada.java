@@ -35,7 +35,7 @@ public class Destilada extends Alcoholica {
     public String toString() {
         return super.toString() +
                 "Destilada{" +
-                "graduacion=" + graduacion +
+                "graduacion=" + String.format("%.2f", graduacion) +
                 "} ";
     }
 }
