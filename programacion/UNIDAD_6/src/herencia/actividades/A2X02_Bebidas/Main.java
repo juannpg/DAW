@@ -2,6 +2,8 @@ package herencia.actividades.A2X02_Bebidas;
 
 import entrada.Teclado;
 
+import java.util.Arrays;
+
 public class Main {
     public static int menu(int LIMITE) {
         int opcion;
@@ -13,7 +15,8 @@ public class Main {
                     "(4) Consultar las bebidas fermentadas del inventario\n" +
                     "(5) Consultar las bebidas destiladas del inventario\n" +
                     "(6) Consultar las bebidas con precio comprendido estre dos límites\n" +
-                    "(7) Consultar el número de refrescos gaseosos del inventario\n"
+                    "(7) Consultar el número de refrescos gaseosos del inventario\n" +
+                    "(8) Ordenar el vector de bebidas por nombre"
             );
 
             opcion = Teclado.leerEntero("Opción: ");
@@ -29,7 +32,7 @@ public class Main {
         Inventario inventario = new Inventario(20);
 
         do {
-            opcion = menu(7);
+            opcion = menu(8);
 
             switch (opcion) {
                 case 1:
@@ -67,6 +70,10 @@ public class Main {
                 case 7:
                     int contadorGaseosos = inventario.numeroRefrescosGaseosos();
                     System.out.println("El inventario tiene " + contadorGaseosos + " refrescos gaseosos");
+                    break;
+                case 8:
+                    Inventario inventarioOrdenado = inventario.ordenarInventario();
+                    System.out.println(inventarioOrdenado.toString());
                     break;
                 default:
 
