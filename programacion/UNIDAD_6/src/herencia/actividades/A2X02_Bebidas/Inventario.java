@@ -120,12 +120,10 @@ public class Inventario {
         }
 
         Inventario inventarioBebidasEncontradas = new Inventario(contadorBebidas);
-        int numBebidas = 0;
         for (int i = 0; i < this.numElementos; i++) {
             double precioBebida = bebidas[i].calcularPrecio();
             if (precioBebida <= max && precioBebida >= min) {
                 inventarioBebidasEncontradas.insertarBebida(bebidas[i]);
-                numBebidas++;
             }
         }
 
