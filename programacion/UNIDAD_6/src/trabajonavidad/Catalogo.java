@@ -22,6 +22,16 @@ public class Catalogo {
         return false;
     }
 
+    public boolean insertarSerie(Serie s) {
+        if (this.numElementos < this.videos.length) {
+            this.videos[this.numElementos] = s;
+            this.numElementos++;
+            return true;
+        }
+
+        return false;
+    }
+
     public int[] generarVideosAleatorios(int numVideos) {
         int[] contadorVideos = {0, 0};
         for (int i = 0; i < numVideos && numElementos < this.videos.length; i++) {
@@ -38,5 +48,19 @@ public class Catalogo {
         }
 
         return contadorVideos;
+    }
+
+    public String generarStringVideos() {
+        String strVideos = "";
+        for (int i = 0; i < this.numElementos; i++) {
+            strVideos += this.videos[i].toString() + "\n";
+        }
+
+        return strVideos;
+    }
+
+    @Override
+    public String toString() {
+        return this.nombre + " {\n\tVideos {\n" + this.generarStringVideos() + "\n}";
     }
 }

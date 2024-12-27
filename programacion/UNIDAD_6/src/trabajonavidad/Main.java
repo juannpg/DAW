@@ -2,6 +2,10 @@ package trabajonavidad;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Catalogo catalogo = new Catalogo("Catalogo", 10);
+        catalogo.generarVideosAleatorios(10);
+        System.out.println(catalogo.toString());
     }
 }
+
+// TODO: Arreglar los años. Métodos del main.
