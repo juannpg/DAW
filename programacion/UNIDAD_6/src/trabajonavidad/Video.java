@@ -33,7 +33,7 @@ public abstract class Video {
             "Reino Unido"
     };
 
-    private static GregorianCalendar[] AÑOS = {
+    protected static GregorianCalendar[] AÑOS = {
             new GregorianCalendar(1990, GregorianCalendar.JANUARY, 1),
             new GregorianCalendar(1995, GregorianCalendar.JANUARY, 1),
             new GregorianCalendar(2000, GregorianCalendar.JANUARY, 1),
@@ -50,17 +50,17 @@ public abstract class Video {
     protected int puntuacion;
 
     private static String generarTitulo() {
-        int i = new Random().nextInt(5);
+        int i = new Random().nextInt(Video.TITULOS.length);
         return Video.TITULOS[i];
     }
 
     private static String generarGenero() {
-        int i = new Random().nextInt(10);
+        int i = new Random().nextInt(Video.GENEROS.length);
         return Video.GENEROS[i];
     }
 
     private static String generarPais() {
-        int i = new Random().nextInt(8);
+        int i = new Random().nextInt(Video.PAISES.length);
         return Video.PAISES[i];
     }
 
@@ -78,5 +78,11 @@ public abstract class Video {
 
     public static GregorianCalendar getAño(int i) {
         return Video.AÑOS[i];
+    }
+
+    @Override
+    public String toString() {
+        return "\t\t[" + this.codigo + ", " + this.titulo + ", " + this.genero + ", " + this.pais +
+                ", " + this.puntuacion + "/10, ";
     }
 }

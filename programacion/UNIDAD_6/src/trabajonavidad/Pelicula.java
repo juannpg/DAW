@@ -19,7 +19,7 @@ public class Pelicula extends Video {
     };
 
     private static String generarDirector() {
-        int i = Pelicula.R.nextInt(6);
+        int i = Pelicula.R.nextInt(Pelicula.DIRECTORES.length);
         return Pelicula.DIRECTORES[i];
     }
 
@@ -28,5 +28,10 @@ public class Pelicula extends Video {
         this.añoEstreno = Pelicula.R.nextInt(2025 - 1950 + 1) + 1950;
         this.duracion = Pelicula.R.nextInt(150);
         this.director = Pelicula.generarDirector();
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + this.añoEstreno + ", " + this.duracion + ", " + this.director + "],";
     }
 }
