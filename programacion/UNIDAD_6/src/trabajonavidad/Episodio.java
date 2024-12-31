@@ -70,6 +70,6 @@ public class Episodio {
 
     @Override
     public String toString() {
-        return "\t\t\t\t[" + this.codigo + ", " + this.titulo + ", " + this.descripcion + "],";
+        return "\t\t\t\t\t[" + this.codigo + ", " + this.titulo + ", " + this.descripcion + "],";
     }
 }

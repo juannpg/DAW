@@ -30,6 +30,6 @@ public class Temporada {
 
     @Override
     public String toString() {
-        return "\t\t\t[" + this.codigo + ", Episodios {\n" + this.generarStringEpisodios() + "\n\t\t\t}]";
+        return "\t\t\t\t[" + this.codigo + ", Episodios {\n" + this.generarStringEpisodios() + "\n\t\t\t\t}]";
     }
 }

@@ -4,25 +4,30 @@ import java.util.GregorianCalendar;
 import java.util.Random;
 
 public class Serie extends Video {
-    private GregorianCalendar añoInicio;
-    private GregorianCalendar añoFin;
+    private int añoInicio;
+    private int añoFin;
     private Temporada[] temporadas;
     private int numTemporadas;
 
-    private static GregorianCalendar generarAño() {
-        int i = new Random().nextInt(Video.AÑOS.length);
-        return Video.getAño(i);
+    private static int[] generarAños() {
+        int añoInicio = new Random().nextInt(2025 - 1950 + 1) + 1950;
+        int añoFin;
+        do {
+            añoFin = new Random().nextInt(2025 - 1950 + 1) + 1950;
+        } while (añoFin <= añoInicio);
+
+        return new int[] {añoInicio, añoFin};
     }
 
     public Serie(int codigo) {
         super(codigo);
-        this.añoInicio = generarAño();
-        this.añoFin = generarAño();
+        this.añoInicio = generarAños()[0];
+        this.añoFin = generarAños()[1];
         generarTemporadas();
     }
 
     public void generarTemporadas() {
-        this.temporadas = new Temporada[new Random().nextInt(8)];
+        this.temporadas = new Temporada[new Random().nextInt(7) + 1];
 
         for (int i = 0; i < this.temporadas.length; i++) {
             this.numTemporadas++;
@@ -33,7 +38,11 @@ public class Serie extends Video {
     private String generarStringTemporadas() {
         String strTemporadas = "";
         for (int i = 0; i < this.numTemporadas; i++) {
-            strTemporadas += this.temporadas[i].toString() + "\n";
+            if (this.temporadas[i] != this.temporadas[this.numTemporadas - 1]) {
+                strTemporadas += this.temporadas[i].toString() + "\n";
+            } else {
+                strTemporadas += this.temporadas[i].toString();
+            }
         }
 
         return strTemporadas;
@@ -41,7 +50,7 @@ public class Serie extends Video {
 
     @Override
     public String toString() {
-        return super.toString() + this.añoInicio.get(GregorianCalendar.YEAR) + "-" +
-                this.añoFin.get(GregorianCalendar.YEAR) + ", Temporadas {\n" + this.generarStringTemporadas() + "\n\t\t}]";
+        return super.toString() + this.añoInicio+ "-" +
+                this.añoFin + ", Temporadas {\n" + this.generarStringTemporadas() + "\n\t\t\t}]";
     }
 }
