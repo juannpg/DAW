@@ -51,16 +51,24 @@ public class Catalogo {
     }
 
     public String generarStringVideos() {
-        String strVideos = "";
+        String strPeliculas = "\t\tPelículas {\n";
+        String strSeries = "\t\tSeries {\n";
         for (int i = 0; i < this.numElementos; i++) {
-            strVideos += this.videos[i].toString() + "\n";
+            if (this.videos[i] instanceof Pelicula) {
+                strPeliculas += this.videos[i].toString() + "\n";
+            } else {
+                strSeries += this.videos[i].toString() + "\n";
+            }
         }
 
-        return strVideos;
+        strPeliculas += "\t\t}\n";
+        strSeries += "\t\t}";
+
+        return strPeliculas + strSeries;
     }
 
     @Override
     public String toString() {
-        return this.nombre + " {\n\tVideos {\n" + this.generarStringVideos() + "\n}";
+        return this.nombre + " {\n\tVideos {\n" + this.generarStringVideos() + "\n\t}\n}";
     }
 }

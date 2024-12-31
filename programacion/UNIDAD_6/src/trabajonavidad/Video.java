@@ -33,16 +33,6 @@ public abstract class Video {
             "Reino Unido"
     };
 
-    protected static GregorianCalendar[] AÑOS = {
-            new GregorianCalendar(1990, GregorianCalendar.JANUARY, 1),
-            new GregorianCalendar(1995, GregorianCalendar.JANUARY, 1),
-            new GregorianCalendar(2000, GregorianCalendar.JANUARY, 1),
-            new GregorianCalendar(2005, GregorianCalendar.JANUARY, 1),
-            new GregorianCalendar(2010, GregorianCalendar.JANUARY, 1),
-            new GregorianCalendar(2015, GregorianCalendar.JANUARY, 1),
-            new GregorianCalendar(2020, GregorianCalendar.JANUARY, 1)
-    };
-
     protected String codigo;
     protected String titulo;
     protected String genero;
@@ -76,13 +66,9 @@ public abstract class Video {
         this.puntuacion = generarPuntuacion();
     }
 
-    public static GregorianCalendar getAño(int i) {
-        return Video.AÑOS[i];
-    }
-
     @Override
     public String toString() {
-        return "\t\t[" + this.codigo + ", " + this.titulo + ", " + this.genero + ", " + this.pais +
+        return "\t\t\t[" + this.codigo + ", "  + this.titulo + ", " + this.genero + ", " + this.pais +
                 ", " + this.puntuacion + "/10, ";
     }
 }
