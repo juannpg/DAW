@@ -19,10 +19,13 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        System.out.println("********************************" +
-                "*\n*¿Cuántos catálogos desea tener?*" +
-                "\n*********************************\n");
-        int numCatalogos = Teclado.leerEntero("Número de catálogos: ");
+        int numCatalogos;
+        do {
+            System.out.println("******************************************" +
+                    "*\n*¿Cuántos catálogos desea tener? (2 o más)*" +
+                    "\n*******************************************\n");
+            numCatalogos = Teclado.leerEntero("Número de catálogos: ");
+        } while (numCatalogos < 2);
         Catalogo[] vectorCatalogos = new Catalogo[numCatalogos];
 
         int opcion;
@@ -54,7 +57,7 @@ public class Main {
                                 error = true;
                             } else {
                                 int tamañoCreacion = Teclado.leerEntero("¿Cuál será el tamaño del catálogo? ");
-                                vectorCatalogos[indiceCatalogo] = new Catalogo("Catalogo", tamañoCreacion);
+                                vectorCatalogos[indiceCatalogo] = new Catalogo("Catalogo " + indiceCatalogo, tamañoCreacion);
                                 int numVideosCreacion = Teclado.leerEntero("¿Cuántos vídeos desea crear? ");
                                 vectorCatalogos[indiceCatalogo].generarVideosAleatorios(numVideosCreacion);
                                 break;
