@@ -12,24 +12,8 @@ public class Catalogo {
         this.videos = new Video[capacidad];
     }
 
-    public boolean insertarPelicula(Pelicula p) {
-        if (this.numElementos < this.videos.length) {
-            this.videos[this.numElementos] = p;
-            this.numElementos++;
-            return true;
-        }
-
-        return false;
-    }
-
-    public boolean insertarSerie(Serie s) {
-        if (this.numElementos < this.videos.length) {
-            this.videos[this.numElementos] = s;
-            this.numElementos++;
-            return true;
-        }
-
-        return false;
+    public int getNumElementos() {
+        return numElementos;
     }
 
     public int[] generarVideosAleatorios(int numVideos) {
@@ -70,5 +54,25 @@ public class Catalogo {
     @Override
     public String toString() {
         return this.nombre + " {\n\tVideos {\n" + this.generarStringVideos() + "\n\t}\n}";
+    }
+
+    public boolean insertarPelicula(Pelicula p) {
+        if (this.numElementos < this.videos.length) {
+            this.videos[this.numElementos] = p;
+            this.numElementos++;
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean insertarSerie(Serie s) {
+        if (this.numElementos < this.videos.length) {
+            this.videos[this.numElementos] = s;
+            this.numElementos++;
+            return true;
+        }
+
+        return false;
     }
 }
