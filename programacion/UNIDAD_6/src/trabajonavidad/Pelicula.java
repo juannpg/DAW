@@ -34,4 +34,12 @@ public class Pelicula extends Video {
     public String toString() {
         return super.toString() + this.añoEstreno + ", " + this.duracion + ", " + this.director + "],";
     }
+
+    public static String[] getDirectores() {
+        return Pelicula.DIRECTORES;
+    }
+
+    public String getDirector() {
+        return this.director;
+    }
 }

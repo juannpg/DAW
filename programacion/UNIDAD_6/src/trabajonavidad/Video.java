@@ -1,6 +1,5 @@
 package trabajonavidad;
 
-import java.util.GregorianCalendar;
 import java.util.Random;
 
 public abstract class Video {
@@ -12,12 +11,12 @@ public abstract class Video {
     };
 
     private static final String[] GENEROS = {
-            "Accion",
+            "Acción",
             "Comedia",
             "Crimen",
             "Ciencia",
-            "Ficcion",
-            "Animacion",
+            "Ficción",
+            "Animación",
             "Drama",
             "Misterio",
             "Documental"
@@ -70,5 +69,13 @@ public abstract class Video {
     public String toString() {
         return "\t\t\t[" + this.codigo + ", "  + this.titulo + ", " + this.genero + ", " + this.pais +
                 ", " + this.puntuacion + "/10, ";
+    }
+
+    public static String[] getGeneros() {
+        return Video.GENEROS;
+    }
+
+    public String getGenero() {
+        return this.genero;
     }
 }

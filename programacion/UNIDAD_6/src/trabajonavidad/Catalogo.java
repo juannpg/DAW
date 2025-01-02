@@ -75,4 +75,8 @@ public class Catalogo {
 
         return false;
     }
+
+    public Video getVideo(int indice) {
+        return this.videos[indice];
+    }
 }
