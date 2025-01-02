@@ -1,6 +1,5 @@
 package trabajonavidad;
 
-import java.util.GregorianCalendar;
 import java.util.Random;
 
 public class Serie extends Video {
@@ -52,5 +51,9 @@ public class Serie extends Video {
     public String toString() {
         return super.toString() + this.añoInicio+ "-" +
                 this.añoFin + ", Temporadas {\n" + this.generarStringTemporadas() + "\n\t\t\t}]";
+    }
+
+    public int getAñoInicio() {
+        return this.añoInicio;
     }
 }

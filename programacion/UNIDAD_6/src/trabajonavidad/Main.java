@@ -40,10 +40,13 @@ public class Main {
 
             boolean error;
             do {
-                opcion = menu(3, "\n(0) Salir del programa.\n" +
+                opcion = menu(6, "\n(0) Salir del programa.\n" +
                         "(1) Generar catálogo.\n" +
                         "(2) Insertar una película/serie en el catálogo.\n" +
-                        "(3) Consultar catálogo.\n");
+                        "(3) Consultar todo el catálogo.\n" +
+                        "(4) Consultar las películas de un director.\n" +
+                        "(5) Consultar las series por año de inicio.\n" +
+                        "(6) Consultar videos por género.\n");
 
                 error = false;
                 if (vectorCatalogos[indiceCatalogo] == null && opcion != 1 && opcion != 0) {
@@ -86,11 +89,101 @@ public class Main {
                         case 3:
                             System.out.println(vectorCatalogos[indiceCatalogo].toString());
                             break;
+                        case 4:
+                            System.out.println("Directores disponibles:");
+                            for (int i = 0; i < Pelicula.getDirectores().length; i++) {
+                                System.out.println(Pelicula.getDirectores()[i]);
+                            }
+                            System.out.println("-+-+-+-+-+-+-+-+-+-+-+-");
+                            boolean encontradoPelicula;
+                            String director;
+                            do {
+                                encontradoPelicula = false;
+                                director = Teclado.leerCadena("Director: ");
+                                for (int i = 0; i < Pelicula.getDirectores().length && !encontradoPelicula; i++) {
+                                    if (director.equalsIgnoreCase(Pelicula.getDirectores()[i])) {
+                                        encontradoPelicula = true;
+                                    }
+                                }
+
+                                if (!encontradoPelicula) {
+                                    System.out.println("Director no encontrado.");
+                                }
+                            } while (!encontradoPelicula);
+                            System.out.println("Peliculas del director " + director + ":");
+
+                            boolean tienePeliculas = false;
+                            for (int i = 0; i < vectorCatalogos[indiceCatalogo].getNumElementos(); i++) {
+                                if (vectorCatalogos[indiceCatalogo].getVideo(i) instanceof Pelicula
+                                        && ((Pelicula) vectorCatalogos[indiceCatalogo].getVideo(i)).getDirector().equalsIgnoreCase(director)) {
+                                    System.out.println(vectorCatalogos[indiceCatalogo].getVideo(i).toString());
+                                    tienePeliculas = true;
+                                }
+                            }
+
+                            if (!tienePeliculas) {
+                                System.out.println("No hay películas del director " + director + ".");
+                                error = true;
+                            }
+                            break;
+                        case 5:
+                            boolean encontradoSerie;
+                            int añoInicio;
+                            encontradoSerie = false;
+                            añoInicio = Teclado.leerEntero("Año de inicio: ");
+                            for (int i = 0; i < vectorCatalogos[indiceCatalogo].getNumElementos(); i++) {
+                                if (vectorCatalogos[indiceCatalogo].getVideo(i) instanceof Serie
+                                        && ((Serie) vectorCatalogos[indiceCatalogo].getVideo(i)).getAñoInicio() == añoInicio) {
+                                    System.out.println(vectorCatalogos[indiceCatalogo].getVideo(i).toString());
+                                    encontradoSerie = true;
+                                }
+                            }
+
+                            if (!encontradoSerie) {
+                                System.out.println("No hay series del año " + añoInicio + ".");
+                                error = true;
+                            }
+                            break;
+                        case 6:
+                            System.out.println("Géneros disponibles:");
+                            for (int i = 0; i < Video.getGeneros().length; i++) {
+                                System.out.println(Video.getGeneros()[i]);
+                            }
+                            System.out.println("-+-+-+-+-+-+-+-+-+-+-+-");
+                            boolean encontradoVideo;
+                            String genero;
+                            do {
+                                encontradoVideo = false;
+                                genero = Teclado.leerCadena("Género: ");
+                                for (int i = 0; i < Video.getGeneros().length && !encontradoVideo; i++) {
+                                    if (genero.equalsIgnoreCase(Video.getGeneros()[i])) {
+                                        encontradoVideo = true;
+                                    }
+                                }
+
+                                if (!encontradoVideo) {
+                                    System.out.println("Género no encontrado.");
+                                }
+                            } while (!encontradoVideo);
+                            System.out.println("Vídeos del género " + genero + ":");
+
+                            boolean hayVideos = false;
+                            for (int i = 0; i < vectorCatalogos[indiceCatalogo].getNumElementos(); i++) {
+                                if (vectorCatalogos[indiceCatalogo].getVideo(i).getGenero().equalsIgnoreCase(genero)) {
+                                    System.out.println(vectorCatalogos[indiceCatalogo].getVideo(i).toString());
+                                    hayVideos = true;
+                                }
+                            }
+
+                            if (!hayVideos) {
+                                System.out.println("No hay vídeos del género " + genero + ".");
+                                error = true;
+                            }
+                            break;
                         default:
                     }
                 }
             } while (error);
-
         } while (opcion != 0);
     }
 }
