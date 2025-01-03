@@ -40,13 +40,14 @@ public class Main {
 
             boolean error;
             do {
-                opcion = menu(6, "\n(0) Salir del programa.\n" +
+                opcion = menu(7, "\n(0) Salir del programa.\n" +
                         "(1) Generar catálogo.\n" +
                         "(2) Insertar una película/serie en el catálogo.\n" +
                         "(3) Consultar todo el catálogo.\n" +
                         "(4) Consultar las películas de un director.\n" +
                         "(5) Consultar las series por año de inicio.\n" +
-                        "(6) Consultar videos por género.\n");
+                        "(6) Consultar videos por género.\n" +
+                        "(7) Modificar el género de un vídeo por código.\n");
 
                 error = false;
                 if (vectorCatalogos[indiceCatalogo] == null && opcion != 1 && opcion != 0) {
@@ -180,6 +181,43 @@ public class Main {
                                 error = true;
                             }
                             break;
+                        case 7:
+                            int codigoModificacion;
+                            do {
+                                codigoModificacion = Teclado.leerEntero("Código del vídeo (0 - " + (vectorCatalogos[indiceCatalogo].getNumElementos() - 1) + "): ");
+                                if (codigoModificacion < 0 || codigoModificacion > vectorCatalogos[indiceCatalogo].getNumElementos()) {
+                                    System.out.println("Código no válido.");
+                                }
+                            } while (codigoModificacion < 0 || codigoModificacion > vectorCatalogos[indiceCatalogo].getNumElementos());
+
+                            System.out.println("Géneros disponibles:");
+                            for (int i = 0; i < Video.getGeneros().length; i++) {
+                                System.out.println(Video.getGeneros()[i]);
+                            }
+                            System.out.println("-+-+-+-+-+-+-+-+-+-+-+-");
+
+                            Video videoModificacion = vectorCatalogos[indiceCatalogo].getVideo(codigoModificacion);
+                            String generoModificacion;
+                            boolean coincideGenero;
+                            do {
+                                coincideGenero = false;
+                                generoModificacion = Teclado.leerCadena("Género: ");
+                                for (int i = 0; i < Video.getGeneros().length && !coincideGenero; i++) {
+                                    if (generoModificacion.equalsIgnoreCase(Video.getGeneros()[i]) && !generoModificacion.equalsIgnoreCase(videoModificacion.getGenero())) {
+                                        videoModificacion.setGenero(Video.getGeneros()[i]);
+                                        coincideGenero = true;
+                                    }
+                                }
+
+                                if (!generoModificacion.equalsIgnoreCase(videoModificacion.getGenero())) {
+                                    System.out.println("Debes introducir un género distinto al del vídeo.");
+                                    error = true;
+                                }
+
+                                if (!coincideGenero) {
+                                    System.out.println("Género no encontrado.");
+                                }
+                            } while (!coincideGenero);
                         default:
                     }
                 }
