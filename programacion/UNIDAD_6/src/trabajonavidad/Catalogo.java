@@ -79,4 +79,34 @@ public class Catalogo {
     public Video getVideo(int indice) {
         return this.videos[indice];
     }
+
+    public boolean eliminarVideo(int pos) {
+        if (pos < 0 || pos >= this.numElementos) {
+            return false;
+        }
+
+        boolean borrado = false;
+        for (int i = 0; i < this.numElementos && !borrado; i++) {
+            if (this.videos[i] != null && i == pos) {
+                this.videos[i] = null;
+                borrado = true;
+            }
+        }
+
+        for (int i = 0; i < this.numElementos; i++) {
+            boolean movido = false;
+            if (this.videos[i] == null) {
+                for (int j = i + 1; j < this.numElementos && !movido; j++) {
+                    if (this.videos[j] != null) {
+                        this.videos[i] = this.videos[j];
+                        this.videos[j] = null;
+                        movido = true;
+                    }
+                }
+            }
+        }
+
+        this.numElementos--;
+        return true;
+    }
 }

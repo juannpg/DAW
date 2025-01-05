@@ -56,4 +56,12 @@ public class Serie extends Video {
     public int getAñoInicio() {
         return this.añoInicio;
     }
+
+    public int getNumTemporadas() {
+        return this.numTemporadas;
+    }
+
+    public Temporada getTemporada(int indice) {
+        return this.temporadas[indice];
+    }
 }

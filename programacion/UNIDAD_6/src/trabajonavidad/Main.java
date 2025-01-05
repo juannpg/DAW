@@ -40,14 +40,16 @@ public class Main {
 
             boolean error;
             do {
-                opcion = menu(7, "\n(0) Salir del programa.\n" +
+                opcion = menu(9, "\n(0) Salir del programa.\n" +
                         "(1) Generar catálogo.\n" +
                         "(2) Insertar una película/serie en el catálogo.\n" +
                         "(3) Consultar todo el catálogo.\n" +
                         "(4) Consultar las películas de un director.\n" +
                         "(5) Consultar las series por año de inicio.\n" +
                         "(6) Consultar videos por género.\n" +
-                        "(7) Modificar el género de un vídeo por código.\n");
+                        "(7) Modificar el género de un vídeo por código.\n" +
+                        "(8) Eliminar una pelicla/serie por código.\n" +
+                        "(9) Indicar el número de episodios de una temporada de una serie.\n");
 
                 error = false;
                 if (vectorCatalogos[indiceCatalogo] == null && opcion != 1 && opcion != 0) {
@@ -218,6 +220,55 @@ public class Main {
                                     System.out.println("Género no encontrado.");
                                 }
                             } while (!coincideGenero);
+                        case 8:
+                            int codigoBorrar;
+                            boolean borrado;
+                            do {
+                                borrado = false;
+                                codigoBorrar = Teclado.leerEntero("Código del vídeo (0 - " + (vectorCatalogos[indiceCatalogo].getNumElementos() - 1) + "): ");
+                                if (vectorCatalogos[indiceCatalogo].eliminarVideo(codigoBorrar)) {
+                                    borrado = true;
+                                } else {
+                                    System.out.println("Código no válido.");
+                                }
+                            } while (!borrado);
+
+                            System.out.println("Vídeo borrado con éxito.");
+                            break;
+                        case 9:
+                            int codigoSerie;
+                            boolean encontradaSerie;
+                            do {
+                                encontradaSerie = false;
+                                codigoSerie = Teclado.leerEntero("Código de la serie: ");
+                                for (int i = 0; i < vectorCatalogos[indiceCatalogo].getNumElementos(); i++) {
+                                    if (vectorCatalogos[indiceCatalogo].getVideo(i).getCodigo().equals("VID" + codigoSerie)) {
+                                        encontradaSerie = true;
+                                    }
+                                }
+
+                                if (!encontradaSerie) {
+                                    System.out.println("Serie no encontrada.");
+                                }
+                            } while (!encontradaSerie);
+
+                            System.out.println("Temporadas de la serie:");
+                            Serie s = (Serie) vectorCatalogos[indiceCatalogo].getVideo(codigoSerie);
+                            System.out.println(s.toString());
+
+                            // seleccionar temporada de la serie
+                            int indiceTemporada;
+                            do {
+                                indiceTemporada = Teclado.leerEntero("Indice de la temporada (0 - " + (s.getNumTemporadas() - 1) + "): ");
+                                if (indiceTemporada < 0 || indiceTemporada > s.getNumTemporadas()) {
+                                    System.out.println("Indice no válido.");
+                                }
+                            } while (indiceTemporada < 0 || indiceTemporada > s.getNumTemporadas());
+
+                            int numEpisodios = Teclado.leerEntero("Número de episodios: ");
+                            Temporada episodiosGenerados = ((Serie) vectorCatalogos[indiceCatalogo].getVideo(codigoSerie)).getTemporada(indiceTemporada).generarEpisodios(numEpisodios);
+                            System.out.println("Episodios generados:\n" + episodiosGenerados.toString());
+                            break;
                         default:
                     }
                 }

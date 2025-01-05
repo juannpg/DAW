@@ -82,4 +82,8 @@ public abstract class Video {
     public void setGenero(String genero) {
         this.genero = genero;
     }
+
+    public String getCodigo() {
+        return this.codigo;
+    }
 }
