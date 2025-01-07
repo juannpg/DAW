@@ -148,40 +148,10 @@ public class Main {
                             }
                             break;
                         case 6:
-                            System.out.println("Géneros disponibles:");
-                            for (int i = 0; i < Video.getGeneros().length; i++) {
-                                System.out.println(Video.getGeneros()[i]);
-                            }
-                            System.out.println("-+-+-+-+-+-+-+-+-+-+-+-");
-                            boolean encontradoVideo;
-                            String genero;
-                            do {
-                                encontradoVideo = false;
-                                genero = Teclado.leerCadena("Género: ");
-                                for (int i = 0; i < Video.getGeneros().length && !encontradoVideo; i++) {
-                                    if (genero.equalsIgnoreCase(Video.getGeneros()[i])) {
-                                        encontradoVideo = true;
-                                    }
-                                }
-
-                                if (!encontradoVideo) {
-                                    System.out.println("Género no encontrado.");
-                                }
-                            } while (!encontradoVideo);
-                            System.out.println("Vídeos del género " + genero + ":");
-
-                            boolean hayVideos = false;
-                            for (int i = 0; i < vectorCatalogos[indiceCatalogo].getNumElementos(); i++) {
-                                if (vectorCatalogos[indiceCatalogo].getVideo(i).getGenero().equalsIgnoreCase(genero)) {
-                                    System.out.println(vectorCatalogos[indiceCatalogo].getVideo(i).toString());
-                                    hayVideos = true;
-                                }
-                            }
-
-                            if (!hayVideos) {
-                                System.out.println("No hay vídeos del género " + genero + ".");
+                            if (!vectorCatalogos[indiceCatalogo].consultarVideosPorGenero()) {
                                 error = true;
                             }
+
                             break;
                         case 7:
                             int codigoModificacion;
