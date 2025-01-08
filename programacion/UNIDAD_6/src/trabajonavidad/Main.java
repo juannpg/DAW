@@ -66,27 +66,13 @@ public class Main {
                                 vectorCatalogos[indiceCatalogo] = new Catalogo("Catalogo " + indiceCatalogo, tamañoCreacion);
                                 int numVideosCreacion = Teclado.leerEntero("¿Cuántos vídeos desea crear? ");
                                 vectorCatalogos[indiceCatalogo].generarVideosAleatorios(numVideosCreacion);
-                                break;
                             }
+                            break;
                         case 2:
                             int opcionVideo = menu(1, "\n(0) Crear película.\n" +
                                     "(1) Crear serie.\n");
-                            if (opcionVideo == 0) {
-                                Pelicula pelicula = new Pelicula(vectorCatalogos[indiceCatalogo].getNumElementos());
-                                if (vectorCatalogos[indiceCatalogo].insertarPelicula(pelicula)) {
-                                    System.out.println("Pelicula insertada con éxito.");
-                                } else {
-                                    System.out.println("No se pudo insertar la película en el catálogo.");
-                                    error = true;
-                                }
-                            } else {
-                                Serie serie = new Serie(vectorCatalogos[indiceCatalogo].getNumElementos());
-                                if (vectorCatalogos[indiceCatalogo].insertarSerie(serie)) {
-                                    System.out.println("Serie insertada con éxito.");
-                                } else {
-                                    System.out.println("No se pudo insertar la serie en el catálogo.");
-                                    error = true;
-                                }
+                            if (!vectorCatalogos[indiceCatalogo].insertarVideo(opcionVideo)) {
+                                error = true;
                             }
                             break;
                         case 3:

@@ -112,6 +112,32 @@ public class Catalogo {
         return true;
     }
 
+    public boolean insertarVideo(int opcionVideo) {
+        boolean insertado;
+        if (opcionVideo == 0) {
+            Pelicula pelicula = new Pelicula(this.getNumElementos());
+            if (this.insertarPelicula(pelicula)) {
+                System.out.println("Pelicula insertada con éxito.");
+                insertado = true;
+            } else {
+                System.out.println("No se pudo insertar la película en el catálogo.");
+                insertado = false;
+            }
+        } else {
+            Serie serie = new Serie(this.getNumElementos());
+            if (this.insertarSerie(serie)) {
+                System.out.println("Serie insertada con éxito.");
+                insertado = true;
+            } else {
+                System.out.println("No se pudo insertar la serie en el catálogo.");
+                insertado = false;
+            }
+        }
+
+        return insertado;
+    }
+
+
     // case 6: consultar por genero
     public boolean consultarVideosPorGenero() {
         System.out.println("Géneros disponibles:");
