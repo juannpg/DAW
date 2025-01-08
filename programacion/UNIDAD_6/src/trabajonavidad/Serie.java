@@ -53,6 +53,15 @@ public class Serie extends Video {
                 this.añoFin + ", Temporadas {\n" + this.generarStringTemporadas() + "\n\t\t\t}]";
     }
 
+    /**
+     * genera un string con la serie sin las temporadas
+     * @return
+     */
+    public String toStringNoTemporadas() {
+        return super.toString() + this.añoInicio+ "-" +
+                this.añoFin;
+    }
+
     public int getAñoInicio() {
         return this.añoInicio;
     }

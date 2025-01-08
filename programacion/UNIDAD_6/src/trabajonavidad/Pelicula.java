@@ -18,6 +18,32 @@ public class Pelicula extends Video {
       "Kevin"
     };
 
+    public static String getStringDirectores() {
+        String directores = "Directores disponibles:\n";
+        for (int i = 0; i < Pelicula.getDirectores().length; i++) {
+            directores += Pelicula.getDirectores()[i] + "\n";
+        }
+        directores += "-+-+-+-+-+-+-+-+-+-+-+-";
+
+        return directores;
+    }
+
+    /**
+     * Busca si un director existe en la lista de directores disponibles.
+     * @param director
+     * @return
+     */
+    public static boolean buscarDirector(String director) {
+        boolean existe = false;
+        for (int i = 0; i < Pelicula.getDirectores().length && !existe; i++) {
+            if (director.equalsIgnoreCase(Pelicula.getDirectores()[i])) {
+                existe = true;
+            }
+        }
+
+        return existe;
+    }
+
     private static String generarDirector() {
         int i = Pelicula.R.nextInt(Pelicula.DIRECTORES.length);
         return Pelicula.DIRECTORES[i];

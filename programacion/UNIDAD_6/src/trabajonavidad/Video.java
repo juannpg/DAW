@@ -75,6 +75,32 @@ public abstract class Video {
         return Video.GENEROS;
     }
 
+    public static String getStringGeneros() {
+        String generos = "Géneros disponibles:\n";
+        for (int i = 0; i < Video.getGeneros().length; i++) {
+            generos += Video.getGeneros()[i] + "\n";
+        }
+        generos += "-+-+-+-+-+-+-+-+-+-+-+-";
+
+        return generos;
+    }
+
+    /**
+     * busca si un género existe en la lista de géneros disponibles
+     * @param genero
+     * @return
+     */
+    public static boolean buscarGenero(String genero) {
+        boolean existe = false;
+        for (int i = 0; i < Video.getGeneros().length && !existe; i++) {
+            if (genero.equalsIgnoreCase(Video.getGeneros()[i])) {
+                existe = true;
+            }
+        }
+
+        return existe;
+    }
+
     public String getGenero() {
         return this.genero;
     }
@@ -85,5 +111,13 @@ public abstract class Video {
 
     public String getCodigo() {
         return this.codigo;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public int getPuntuacion() {
+        return this.puntuacion;
     }
 }

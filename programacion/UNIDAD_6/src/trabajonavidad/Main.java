@@ -3,6 +3,12 @@ package trabajonavidad;
 import entrada.Teclado;
 
 public class Main {
+    /**
+     * menú de opciones parametrizado
+     * @param NUM_OPCIONES
+     * @param MENSAJE
+     * @return
+     */
     public static int menu(int NUM_OPCIONES, String MENSAJE) {
         int opcion;
         do {
@@ -18,6 +24,10 @@ public class Main {
         return opcion;
     }
 
+    /**
+     * programa que muestra la interfaz de usuario, con un menú de opciones y varias posibilidades para trabajar con varios catálogos.
+     * @param args
+     */
     public static void main(String[] args) {
         int numCatalogos;
         do {
@@ -40,7 +50,7 @@ public class Main {
 
             boolean error;
             do {
-                opcion = menu(9, "\n(0) Salir del programa.\n" +
+                opcion = menu(16, "\n(0) Salir del programa.\n" +
                         "(1) Generar catálogo.\n" +
                         "(2) Insertar una película/serie en el catálogo.\n" +
                         "(3) Consultar todo el catálogo.\n" +
@@ -49,7 +59,14 @@ public class Main {
                         "(6) Consultar videos por género.\n" +
                         "(7) Modificar el género de un vídeo por código.\n" +
                         "(8) Eliminar una pelicla/serie por código.\n" +
-                        "(9) Indicar el número de episodios de una temporada de una serie.\n");
+                        "(9) Indicar el número de episodios de una temporada de una serie.\n" +
+                        "(10) Indicar episodios totales de una serie.\n" +
+                        "(11) Ordenar catálogo primero películas y luego series.\n" +
+                        "(12) Ordenar catálogo por título.\n" +
+                        "(13) Ordenar catálogo por género.\n" +
+                        "(14) Ordenar catálogo por puntuación y título.\n" +
+                        "(15) Consultar los 10 vídeos con más puntuación.\n" +
+                        "(16) Catálogo con más series entre 2.\n");
 
                 error = false;
                 if (vectorCatalogos[indiceCatalogo] == null && opcion != 1 && opcion != 0) {
@@ -79,153 +96,136 @@ public class Main {
                             System.out.println(vectorCatalogos[indiceCatalogo].toString());
                             break;
                         case 4:
-                            System.out.println("Directores disponibles:");
-                            for (int i = 0; i < Pelicula.getDirectores().length; i++) {
-                                System.out.println(Pelicula.getDirectores()[i]);
-                            }
-                            System.out.println("-+-+-+-+-+-+-+-+-+-+-+-");
-                            boolean encontradoPelicula;
-                            String director;
-                            do {
-                                encontradoPelicula = false;
-                                director = Teclado.leerCadena("Director: ");
-                                for (int i = 0; i < Pelicula.getDirectores().length && !encontradoPelicula; i++) {
-                                    if (director.equalsIgnoreCase(Pelicula.getDirectores()[i])) {
-                                        encontradoPelicula = true;
-                                    }
-                                }
+                            System.out.println(Pelicula.getStringDirectores());
+                            String director = Teclado.leerCadena("Director: ");
 
-                                if (!encontradoPelicula) {
-                                    System.out.println("Director no encontrado.");
-                                }
-                            } while (!encontradoPelicula);
-                            System.out.println("Peliculas del director " + director + ":");
-
-                            boolean tienePeliculas = false;
-                            for (int i = 0; i < vectorCatalogos[indiceCatalogo].getNumElementos(); i++) {
-                                if (vectorCatalogos[indiceCatalogo].getVideo(i) instanceof Pelicula
-                                        && ((Pelicula) vectorCatalogos[indiceCatalogo].getVideo(i)).getDirector().equalsIgnoreCase(director)) {
-                                    System.out.println(vectorCatalogos[indiceCatalogo].getVideo(i).toString());
-                                    tienePeliculas = true;
-                                }
-                            }
-
-                            if (!tienePeliculas) {
-                                System.out.println("No hay películas del director " + director + ".");
+                            boolean existeDirector = Pelicula.buscarDirector(director);
+                            if (!existeDirector) {
+                                System.out.println("Director no encontrado");
                                 error = true;
+                            } else {
+                                String strPeliculas = vectorCatalogos[indiceCatalogo].consultarPeliculasPorDirector(director);
+                                if (strPeliculas.isEmpty()) {
+                                    System.out.println("No hay películas del director " + director + ".");
+                                } else {
+                                    System.out.println("Películas del director " + director + ":");
+                                    System.out.println(strPeliculas);
+                                }
                             }
                             break;
                         case 5:
-                            boolean encontradoSerie;
-                            int añoInicio;
-                            encontradoSerie = false;
-                            añoInicio = Teclado.leerEntero("Año de inicio: ");
-                            for (int i = 0; i < vectorCatalogos[indiceCatalogo].getNumElementos(); i++) {
-                                if (vectorCatalogos[indiceCatalogo].getVideo(i) instanceof Serie
-                                        && ((Serie) vectorCatalogos[indiceCatalogo].getVideo(i)).getAñoInicio() == añoInicio) {
-                                    System.out.println(vectorCatalogos[indiceCatalogo].getVideo(i).toString());
-                                    encontradoSerie = true;
-                                }
-                            }
+                            int añoInicio = Teclado.leerEntero("Año de inicio: ");
 
-                            if (!encontradoSerie) {
+                            if (!vectorCatalogos[indiceCatalogo].seriePorAñoInicio(añoInicio)) {
                                 System.out.println("No hay series del año " + añoInicio + ".");
                                 error = true;
                             }
                             break;
                         case 6:
-                            if (!vectorCatalogos[indiceCatalogo].consultarVideosPorGenero()) {
+                            System.out.println(Video.getStringGeneros());
+                            String genero = Teclado.leerCadena("Género: ");
+
+                            boolean existeGenero = Video.buscarGenero(genero);
+                            if (!existeGenero) {
+                                System.out.println("Genero no encontrado");
+                                error = true;
+                            } else {
+                                String strVideos = vectorCatalogos[indiceCatalogo].consultarVideosPorGenero(genero);
+                                if (strVideos.isEmpty()) {
+                                    System.out.println("No hay videos del género " + genero + ".");
+                                } else {
+                                    System.out.println("Vídeos del género " + genero + ":");
+                                    System.out.println(strVideos);
+                                }
+                            }
+                            break;
+                        case 7:
+                            int codigoModificarVideoGenero = vectorCatalogos[indiceCatalogo].encontrarVideoPorCodigo("video");
+                            System.out.println(Video.getStringGeneros());
+                            String generoModificacionVideoGenero = Teclado.leerCadena("Género: ");
+                            if (vectorCatalogos[indiceCatalogo].modificarVideoPorGenero(codigoModificarVideoGenero, generoModificacionVideoGenero)) {
+                                System.out.println("Vídeo modificado con éxito.");
+                            } else {
+                                System.out.println("Debes introducir un género existente y distinto al del vídeo.");
                                 error = true;
                             }
 
                             break;
-                        case 7:
-                            int codigoModificacion;
-                            do {
-                                codigoModificacion = Teclado.leerEntero("Código del vídeo (0 - " + (vectorCatalogos[indiceCatalogo].getNumElementos() - 1) + "): ");
-                                if (codigoModificacion < 0 || codigoModificacion > vectorCatalogos[indiceCatalogo].getNumElementos()) {
-                                    System.out.println("Código no válido.");
-                                }
-                            } while (codigoModificacion < 0 || codigoModificacion > vectorCatalogos[indiceCatalogo].getNumElementos());
-
-                            System.out.println("Géneros disponibles:");
-                            for (int i = 0; i < Video.getGeneros().length; i++) {
-                                System.out.println(Video.getGeneros()[i]);
-                            }
-                            System.out.println("-+-+-+-+-+-+-+-+-+-+-+-");
-
-                            Video videoModificacion = vectorCatalogos[indiceCatalogo].getVideo(codigoModificacion);
-                            String generoModificacion;
-                            boolean coincideGenero;
-                            do {
-                                coincideGenero = false;
-                                generoModificacion = Teclado.leerCadena("Género: ");
-                                for (int i = 0; i < Video.getGeneros().length && !coincideGenero; i++) {
-                                    if (generoModificacion.equalsIgnoreCase(Video.getGeneros()[i]) && !generoModificacion.equalsIgnoreCase(videoModificacion.getGenero())) {
-                                        videoModificacion.setGenero(Video.getGeneros()[i]);
-                                        coincideGenero = true;
-                                    }
-                                }
-
-                                if (!generoModificacion.equalsIgnoreCase(videoModificacion.getGenero())) {
-                                    System.out.println("Debes introducir un género distinto al del vídeo.");
-                                    error = true;
-                                }
-
-                                if (!coincideGenero) {
-                                    System.out.println("Género no encontrado.");
-                                }
-                            } while (!coincideGenero);
                         case 8:
-                            int codigoBorrar;
-                            boolean borrado;
-                            do {
-                                borrado = false;
-                                codigoBorrar = Teclado.leerEntero("Código del vídeo (0 - " + (vectorCatalogos[indiceCatalogo].getNumElementos() - 1) + "): ");
-                                if (vectorCatalogos[indiceCatalogo].eliminarVideo(codigoBorrar)) {
-                                    borrado = true;
-                                } else {
-                                    System.out.println("Código no válido.");
-                                }
-                            } while (!borrado);
-
-                            System.out.println("Vídeo borrado con éxito.");
+                            int codigoBorrar = Teclado.leerEntero("Código del vídeo (0 - " + (vectorCatalogos[indiceCatalogo].getNumElementos() - 1) + "): ");
+                            if (vectorCatalogos[indiceCatalogo].eliminarVideo(codigoBorrar)) {
+                                System.out.println("Vídeo borrado con éxito.");
+                            } else {
+                                System.out.println("Código no válido.");
+                                error = true;
+                            }
                             break;
                         case 9:
-                            int codigoSerie;
-                            boolean encontradaSerie;
-                            do {
-                                encontradaSerie = false;
-                                codigoSerie = Teclado.leerEntero("Código de la serie: ");
-                                for (int i = 0; i < vectorCatalogos[indiceCatalogo].getNumElementos(); i++) {
-                                    if (vectorCatalogos[indiceCatalogo].getVideo(i).getCodigo().equals("VID" + codigoSerie)) {
-                                        encontradaSerie = true;
-                                    }
-                                }
-
-                                if (!encontradaSerie) {
-                                    System.out.println("Serie no encontrada.");
-                                }
-                            } while (!encontradaSerie);
-
-                            System.out.println("Temporadas de la serie:");
-                            Serie s = (Serie) vectorCatalogos[indiceCatalogo].getVideo(codigoSerie);
-                            System.out.println(s.toString());
-
-                            // seleccionar temporada de la serie
-                            int indiceTemporada;
-                            do {
-                                indiceTemporada = Teclado.leerEntero("Indice de la temporada (0 - " + (s.getNumTemporadas() - 1) + "): ");
-                                if (indiceTemporada < 0 || indiceTemporada > s.getNumTemporadas()) {
-                                    System.out.println("Indice no válido.");
-                                }
-                            } while (indiceTemporada < 0 || indiceTemporada > s.getNumTemporadas());
-
-                            int numEpisodios = Teclado.leerEntero("Número de episodios: ");
-                            Temporada episodiosGenerados = ((Serie) vectorCatalogos[indiceCatalogo].getVideo(codigoSerie)).getTemporada(indiceTemporada).generarEpisodios(numEpisodios);
-                            System.out.println("Episodios generados:\n" + episodiosGenerados.toString());
+                            System.out.println("Episodios generados:\n" + vectorCatalogos[indiceCatalogo].generarEpisodiosTemporada().toString());
                             break;
-                        default:
+                        case 10:
+                            int codigoSerie = vectorCatalogos[indiceCatalogo].encontrarSeriePorCodigo();
+                            System.out.println("Episodios generados:\n" + vectorCatalogos[indiceCatalogo].generarEpisodiosTemporadas(codigoSerie));
+                            break;
+                        case 11:
+                            if (vectorCatalogos[indiceCatalogo].getNumElementos() < vectorCatalogos[indiceCatalogo].getVideos().length) {
+                                System.out.println("No se puede ordenar el catálogo primero películas y luego series. El catálogo debe estar completo.");
+                                error = true;
+                            } else {
+                                vectorCatalogos[indiceCatalogo].ordenarCatalogoPelisSeries();
+                                System.out.println(vectorCatalogos[indiceCatalogo].toString());
+                            }
+                            break;
+                        case 12:
+                            if (vectorCatalogos[indiceCatalogo].getNumElementos() < vectorCatalogos[indiceCatalogo].getVideos().length) {
+                                System.out.println("No se puede ordenar el catálogo por título. El catálogo debe estar completo.");
+                                error = true;
+                            } else {
+                                vectorCatalogos[indiceCatalogo].ordenarCatalogoTitulo();
+                                System.out.println(vectorCatalogos[indiceCatalogo].toString());
+                            }
+                            break;
+                        case 13:
+                            if (vectorCatalogos[indiceCatalogo].getNumElementos() < vectorCatalogos[indiceCatalogo].getVideos().length) {
+                                System.out.println("No se puede ordenar el catálogo por género. El catálogo debe estar completo.");
+                                error = true;
+                            } else {
+                                vectorCatalogos[indiceCatalogo].ordenarCatalogoGenero();
+                                System.out.println(vectorCatalogos[indiceCatalogo].toString());
+                            }
+                            break;
+                        case 14:
+                            if (vectorCatalogos[indiceCatalogo].getNumElementos() < vectorCatalogos[indiceCatalogo].getVideos().length) {
+                                System.out.println("No se puede ordenar el catálogo por puntuación. El catálogo debe estar completo.");
+                                error = true;
+                            } else {
+                                vectorCatalogos[indiceCatalogo].ordenarCatalogoPuntuacion();
+                                System.out.println(vectorCatalogos[indiceCatalogo].toString());
+                            }
+                            break;
+                        case 15:
+                            Catalogo catalogoMasPuntuacion = vectorCatalogos[indiceCatalogo].videosConMasPuntuacion(10);
+                            System.out.println(catalogoMasPuntuacion.toString());
+                            break;
+                        case 16:
+                            int catalogoComparar;
+                            do {
+                                catalogoComparar = Teclado.leerEntero("¿Con qué catálogo lo quieres comparar (0 - " + (numCatalogos - 1) + " excepto " + indiceCatalogo + ")? ");
+                            } while (catalogoComparar == indiceCatalogo || catalogoComparar < 0 || catalogoComparar >= numCatalogos);
+
+                            if (vectorCatalogos[catalogoComparar] == null) {
+                                System.out.println("Antes debes crear el catálogo " + catalogoComparar);
+                            } else {
+                                int identificadorMayor = vectorCatalogos[indiceCatalogo].catalogoConMasSeries(vectorCatalogos[catalogoComparar]);
+                                if (identificadorMayor == 1) {
+                                    System.out.println("El catálogo " + indiceCatalogo + " tiene más series.");
+                                } else if (identificadorMayor == -1) {
+                                    System.out.println("El catálogo " + catalogoComparar + " tiene más series.");
+                                } else {
+                                    System.out.println("Los catálogos tienen la misma cantidad de series.");
+                                }
+                            }
+                            break;
                     }
                 }
             } while (error);
