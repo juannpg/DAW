@@ -28,11 +28,13 @@ public class Catalogo {
     public void generarVideosAleatorios(int numVideos) {
         numVideos -= 2;
         for (int i = 0; i < numVideos && numElementos < this.videos.length; i++) {
+            Video v = this.videos[i];
+
             int random = new Random().nextInt(2);
             if (random == 0) {
-                this.videos[i] = new Pelicula(this.numElementos);
+                v = new Pelicula(this.numElementos);
             } else {
-                this.videos[i] = new Serie(this.numElementos);
+                v = new Serie(this.numElementos);
             }
 
             this.numElementos++;
@@ -50,10 +52,12 @@ public class Catalogo {
         String strPeliculas = "\t\tPelículas {\n";
         String strSeries = "\t\tSeries {\n";
         for (int i = 0; i < this.numElementos; i++) {
-            if (this.videos[i] instanceof Pelicula) {
-                strPeliculas += this.videos[i].toString() + "\n";
+            Video v = this.videos[i];
+
+            if (v instanceof Pelicula) {
+                strPeliculas += v.toString() + "\n";
             } else {
-                strSeries += this.videos[i].toString() + "\n";
+                strSeries += v.toString() + "\n";
             }
         }
 
@@ -94,19 +98,24 @@ public class Catalogo {
 
         boolean borrado = false;
         for (int i = 0; i < this.numElementos && !borrado; i++) {
-            if (this.videos[i] != null && i == pos) {
-                this.videos[i] = null;
+            Video v = this.videos[i];
+
+            if (v != null && i == pos) {
+                v = null;
                 borrado = true;
             }
         }
 
         for (int i = 0; i < this.numElementos; i++) {
+            Video v = this.videos[i];
+
             boolean movido = false;
-            if (this.videos[i] == null) {
+            if (v == null) {
                 for (int j = i + 1; j < this.numElementos && !movido; j++) {
-                    if (this.videos[j] != null) {
-                        this.videos[i] = this.videos[j];
-                        this.videos[j] = null;
+                    Video v2 = this.videos[j];
+                    if (v2 != null) {
+                        v = v2;
+                        v2 = null;
                         movido = true;
                     }
                 }
@@ -165,10 +174,12 @@ public class Catalogo {
     public String consultarPeliculasPorDirector(String director) {
         String strPeliculas = "";
         for (int i = 0; i < this.numElementos; i++) {
-            if (this.videos[i] instanceof Pelicula
-                    && ((Pelicula) this.videos[i]).getDirector().equalsIgnoreCase(director)) {
-                strPeliculas += this.videos[i].toString() + "\n";
+            Video v = this.videos[i];
+            if (v instanceof Pelicula
+                    && ((Pelicula) v).getDirector().equalsIgnoreCase(director)) {
+                strPeliculas += v.toString() + "\n";
             }
+
         }
 
         return strPeliculas;
@@ -183,9 +194,10 @@ public class Catalogo {
         boolean encontradoSerie;
         encontradoSerie = false;
         for (int i = 0; i < this.numElementos && !encontradoSerie; i++) {
-            if (this.videos[i] instanceof Serie
-                    && ((Serie) this.videos[i]).getAñoInicio() == añoInicio) {
-                System.out.println(this.videos[i].toString());
+            Video v = this.videos[i];
+            if (v instanceof Serie
+                    && ((Serie) v).getAñoInicio() == añoInicio) {
+                System.out.println(v.toString());
                 encontradoSerie = true;
             }
         }
@@ -201,8 +213,9 @@ public class Catalogo {
     public String consultarVideosPorGenero(String genero) {
         String strVideos = "";
         for (int i = 0; i < this.numElementos; i++) {
-            if (this.videos[i].getGenero().equalsIgnoreCase(genero)) {
-                strVideos += this.videos[i].toString() + "\n";
+            Video v = this.videos[i];
+            if (v.getGenero().equalsIgnoreCase(genero)) {
+                strVideos += v.toString() + "\n";
             }
         }
 
