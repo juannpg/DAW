@@ -20,9 +20,8 @@ public class Serie extends Video {
 
     public Serie(int codigo) {
         super(codigo);
-        int[] años = generarAños();
-        this.añoInicio = años[0];
-        this.añoFin = años[1];
+        this.añoInicio = generarAños()[0];
+        this.añoFin = generarAños()[1];
         generarTemporadas();
     }
 
