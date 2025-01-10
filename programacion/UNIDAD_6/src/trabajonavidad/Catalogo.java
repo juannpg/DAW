@@ -38,8 +38,8 @@ public class Catalogo {
             this.numElementos++;
         }
 
-        this.insertarSerie(new Serie(this.numElementos));
-        this.insertarPelicula(new Pelicula(this.numElementos));
+        this.insertarVideoAlFinal(new Serie(this.numElementos));
+        this.insertarVideoAlFinal(new Pelicula(this.numElementos));
     }
 
     /**
@@ -72,29 +72,9 @@ public class Catalogo {
         return numElementos;
     }
 
-    /**
-     * inserta una pelicula en el catalogo si hay espacio libre
-     * @param p
-     * @return
-     */
-    public boolean insertarPelicula(Pelicula p) {
+    public boolean insertarVideoAlFinal(Video v) {
         if (this.numElementos < this.videos.length) {
-            this.videos[this.numElementos] = p;
-            this.numElementos++;
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * inserta una serie en el catalogo si hay espacio libre
-     * @param s
-     * @return
-     */
-    public boolean insertarSerie(Serie s) {
-        if (this.numElementos < this.videos.length) {
-            this.videos[this.numElementos] = s;
+            this.videos[this.numElementos] = v;
             this.numElementos++;
             return true;
         }
@@ -147,7 +127,7 @@ public class Catalogo {
         boolean insertado;
         if (opcionVideo == 0) {
             Pelicula pelicula = new Pelicula(this.numElementos);
-            if (this.insertarPelicula(pelicula)) {
+            if (this.insertarVideoAlFinal(pelicula)) {
                 System.out.println("Pelicula insertada con éxito.");
                 insertado = true;
             } else {
@@ -156,7 +136,7 @@ public class Catalogo {
             }
         } else {
             Serie serie = new Serie(this.numElementos);
-            if (this.insertarSerie(serie)) {
+            if (this.insertarVideoAlFinal(serie)) {
                 System.out.println("Serie insertada con éxito.");
                 insertado = true;
             } else {
