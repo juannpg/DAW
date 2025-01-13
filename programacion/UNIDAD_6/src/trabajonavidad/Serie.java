@@ -18,14 +18,6 @@ public class Serie extends Video {
         return new int[] {añoInicio, añoFin};
     }
 
-    public Serie(int codigo) {
-        super(codigo);
-        int[] años = generarAños();
-        this.añoInicio = años[0];
-        this.añoFin = años[1];
-        generarTemporadas();
-    }
-
     public void generarTemporadas() {
         this.temporadas = new Temporada[new Random().nextInt(7) + 1];
 
@@ -34,6 +26,15 @@ public class Serie extends Video {
             this.temporadas[i] = new Temporada(this.numTemporadas);
         }
     }
+
+    public Serie(int codigo) {
+        super(codigo);
+        int[] años = generarAños();
+        this.añoInicio = años[0];
+        this.añoFin = años[1];
+        generarTemporadas();
+    }
+
 
     private String generarStringTemporadas() {
         String strTemporadas = "";

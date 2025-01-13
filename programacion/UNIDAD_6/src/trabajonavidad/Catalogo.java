@@ -55,9 +55,9 @@ public class Catalogo {
             Video v = this.videos[i];
 
             if (v instanceof Pelicula) {
-                strPeliculas += v.toString() + "\n";
+                strPeliculas += v + "\n";
             } else {
-                strSeries += v.toString() + "\n";
+                strSeries += v + "\n";
             }
         }
 
@@ -137,19 +137,15 @@ public class Catalogo {
         if (opcionVideo == 0) {
             Pelicula pelicula = new Pelicula(this.numElementos);
             if (this.insertarVideoAlFinal(pelicula)) {
-                System.out.println("Pelicula insertada con éxito.");
                 insertado = true;
             } else {
-                System.out.println("No se pudo insertar la película en el catálogo.");
                 insertado = false;
             }
         } else {
             Serie serie = new Serie(this.numElementos);
             if (this.insertarVideoAlFinal(serie)) {
-                System.out.println("Serie insertada con éxito.");
                 insertado = true;
             } else {
-                System.out.println("No se pudo insertar la serie en el catálogo.");
                 insertado = false;
             }
         }
@@ -171,18 +167,28 @@ public class Catalogo {
      * @param director
      * @return
      */
-    public String consultarPeliculasPorDirector(String director) {
+    public Pelicula[] consultarPeliculasPorDirector(String director) {
         String strPeliculas = "";
+        int contadorPeliculas = 0;
         for (int i = 0; i < this.numElementos; i++) {
             Video v = this.videos[i];
             if (v instanceof Pelicula
                     && ((Pelicula) v).getDirector().equalsIgnoreCase(director)) {
-                strPeliculas += v.toString() + "\n";
+                contadorPeliculas++;
             }
-
         }
 
-        return strPeliculas;
+        Pelicula[] peliculas = new Pelicula[contadorPeliculas];
+        contadorPeliculas = 0;
+        for (int i = 0; i < this.numElementos; i++) {
+            Video v = this.videos[i];
+            if (v instanceof Pelicula
+                    && ((Pelicula) v).getDirector().equalsIgnoreCase(director)) {
+                peliculas[contadorPeliculas] = (Pelicula) v;
+                contadorPeliculas++;
+            }
+        }
+        return peliculas;
     }
 
     /**
@@ -190,19 +196,28 @@ public class Catalogo {
      * @param añoInicio
      * @return
      */
-    public boolean seriePorAñoInicio(int añoInicio) {
-        boolean encontradoSerie;
-        encontradoSerie = false;
-        for (int i = 0; i < this.numElementos && !encontradoSerie; i++) {
+    public Serie[] seriePorAñoInicio(int añoInicio) {
+        int contadorSeries = 0;
+        for (int i = 0; i < this.numElementos; i++) {
             Video v = this.videos[i];
             if (v instanceof Serie
                     && ((Serie) v).getAñoInicio() == añoInicio) {
-                System.out.println(v.toString());
-                encontradoSerie = true;
+                contadorSeries++;
             }
         }
 
-        return encontradoSerie;
+        Serie[] series = new Serie[contadorSeries];
+        contadorSeries = 0;
+        for (int i = 0; i < this.numElementos; i++) {
+            Video v = this.videos[i];
+            if (v instanceof Serie
+                    && ((Serie) v).getAñoInicio() == añoInicio) {
+                series[contadorSeries] = (Serie) v;
+                contadorSeries++;
+            }
+        }
+
+        return series;
     }
 
     /**
@@ -210,71 +225,40 @@ public class Catalogo {
      * @param genero
      * @return
      */
-    public String consultarVideosPorGenero(String genero) {
-        String strVideos = "";
+    public Video[] consultarVideosPorGenero(String genero) {
+        int contadorVideos = 0;
         for (int i = 0; i < this.numElementos; i++) {
             Video v = this.videos[i];
             if (v.getGenero().equalsIgnoreCase(genero)) {
-                strVideos += v.toString() + "\n";
+                contadorVideos++;
             }
         }
 
-        return strVideos;
+        Video[] videos = new Video[contadorVideos];
+        contadorVideos = 0;
+        for (int i = 0; i < this.numElementos; i++) {
+            Video v = this.videos[i];
+            if (v.getGenero().equalsIgnoreCase(genero)) {
+                videos[contadorVideos] = v;
+                contadorVideos++;
+            }
+        }
+        return videos;
     }
 
     /**
      * encuentra un video de cualquier tipo por su código
-     * @param tipo
+     *
      * @return
      */
-    public int encontrarVideoPorCodigo(String tipo) {
-        int codigo;
-        boolean encontrado;
-        do {
-            encontrado = false;
-            codigo = Teclado.leerEntero("Código de " + tipo + " (0 - " + (this.numElementos - 1) + "): ");
-            for (int i = 0; i < this.numElementos && !encontrado; i++) {
-                if (this.videos[i].getCodigo().equals("VID" + codigo)) {
-                    encontrado = true;
-                }
-            }
-
-            if (!encontrado) {
-                System.out.println("No encontrado.");
-            }
-        } while (!encontrado);
-
-        return codigo;
-    }
-
-    /**
-     * encuentra una serie por su código
-     * @return
-     */
-    public int encontrarSeriePorCodigo() {
+    public Video encontrarVideoPorCodigo(int codigo) {
         for (int i = 0; i < this.numElementos; i++) {
-            if (this.videos[i] instanceof Serie) {
-                System.out.println(((Serie) this.videos[i]).toStringNoTemporadas());
+            if (this.videos[i].getCodigo().equals("VID" + codigo)) {
+                return this.videos[i];
             }
         }
 
-        boolean encontradaSerie = false;
-        int codigo;
-        do {
-            codigo = Teclado.leerEntero("Código de la serie: ");
-            for (int i = 0; i < this.numElementos  && !encontradaSerie; i++) {
-                if (this.videos[i] instanceof Serie && this.videos[i].getCodigo().equals("VID" + codigo)) {
-                    codigo = i;
-                    encontradaSerie = true;
-                }
-            }
-
-            if (!encontradaSerie) {
-                System.out.println("Serie no encontrada.");
-            }
-        } while (!encontradaSerie);
-
-        return codigo;
+        return null;
     }
 
     /**
@@ -283,71 +267,25 @@ public class Catalogo {
      * @param generoModificacion
      * @return
      */
-    public boolean modificarVideoPorGenero(int codigoModificacion, String generoModificacion) {
-        Video videoModificacion = this.videos[codigoModificacion];
-        boolean coincideGenero =  false;
-        for (int i = 0; i < Video.getGeneros().length && !coincideGenero; i++) {
+    public boolean modificarVideoPorGenero(String codigoModificacion, String generoModificacion) {
+        int codigo = Integer.parseInt(codigoModificacion.substring(3));
+        Video videoModificacion = this.videos[codigo];
+        for (int i = 0; i < Video.getGeneros().length; i++) {
             if (generoModificacion.equalsIgnoreCase(Video.getGeneros()[i]) && !generoModificacion.equalsIgnoreCase(videoModificacion.getGenero())) {
                 videoModificacion.setGenero(Video.getGeneros()[i]);
-                coincideGenero = true;
+                return true;
             }
         }
-
-        return coincideGenero;
+        return false;
     }
 
     /**
-     * genera los episodios de una temporada
-     * @param indiceTemporada
-     * @param codigoSerie
+     * case 9. cuenta episodios de una temporada
      * @return
      */
-    public Temporada generarEpisodios(int indiceTemporada, int codigoSerie) {
-        int numEpisodios;
-        do {
-            numEpisodios = Teclado.leerEntero("Número de episodios de la temporada " + indiceTemporada + ": ");
-            if (numEpisodios < 1) {
-                System.out.println("La temporada debe tener al menos 1 episodio");
-            }
-        } while (numEpisodios < 1);
-        return ((Serie) this.videos[codigoSerie]).getTemporada(indiceTemporada).generarEpisodios(numEpisodios);
-    }
-
-    /**
-     * case 9. genera episodios de una temporada
-     * @return
-     */
-    public Temporada generarEpisodiosTemporada() {
-        System.out.println("\tSeries:");
-        int codigoSerie = encontrarSeriePorCodigo();
-        Serie s = (Serie) this.videos[codigoSerie];
-        System.out.println(s.toString());
-
-        // seleccionar temporada de la serie
-        int indiceTemporada;
-        do {
-            indiceTemporada = Teclado.leerEntero("Indice de la temporada (0 - " + (s.getNumTemporadas() - 1) + "): ");
-            if (indiceTemporada < 0 || indiceTemporada > s.getNumTemporadas()) {
-                System.out.println("Indice no válido.");
-            }
-        } while (indiceTemporada < 0 || indiceTemporada > s.getNumTemporadas());
-
-        return generarEpisodios(indiceTemporada, codigoSerie);
-    }
-
-    /**
-     * case 10. genera episodios de todas las temporadas de una serie
-     * @param codigoSerie
-     * @return
-     */
-    public String generarEpisodiosTemporadas(int codigoSerie) {
-        String strEpisodios = "";
-        for (int i = 0; i < ((Serie) this.videos[codigoSerie]).getNumTemporadas(); i++) {
-            Temporada episodiosGenerados = generarEpisodios(i, codigoSerie);
-            strEpisodios += episodiosGenerados.toString() + "\n";
-        }
-
-        return strEpisodios;
+    public int cantidadEpisodiosTemporada(int indiceTemporada, int codigoSerie) {
+        Serie v = (Serie) this.videos[codigoSerie];
+        return v.getTemporada(indiceTemporada).getNumEpisodios();
     }
 
     // case 11

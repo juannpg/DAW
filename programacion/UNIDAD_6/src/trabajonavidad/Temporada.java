@@ -1,5 +1,7 @@
 package trabajonavidad;
 
+import java.util.Random;
+
 public class Temporada {
     private String codigo;
     private Episodio[] episodios;
@@ -7,16 +9,16 @@ public class Temporada {
 
     public Temporada(int codigo) {
         this.codigo = "TEMP" + codigo;
+        generarEpisodios();
     }
 
-    public Temporada generarEpisodios(int capacidadEpisodios) {
-        this.episodios = new Episodio[capacidadEpisodios];
-        for (int i = 0; i < capacidadEpisodios; i++) {
+    public void generarEpisodios() {
+        int cantidadEpisodios = new Random().nextInt(7) + 1;
+        this.episodios = new Episodio[cantidadEpisodios];
+        for (int i = 0; i < cantidadEpisodios; i++) {
             this.numEpisodios++;
             this.episodios[i] = new Episodio(this.numEpisodios);
         }
-
-        return this;
     }
 
     public String generarStringEpisodios() {
@@ -31,5 +33,9 @@ public class Temporada {
     @Override
     public String toString() {
         return "\t\t\t\t[" + this.codigo + ", Episodios {\n" + this.generarStringEpisodios() + "\n\t\t\t\t}]";
+    }
+
+    public int getNumEpisodios() {
+        return this.numEpisodios;
     }
 }
