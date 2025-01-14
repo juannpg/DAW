@@ -19,10 +19,10 @@ public class A1x01_CocienteResto {
             error = false;
             try {
                 corto = Short.parseShort(solicitarCadena(mensaje));
-            } catch (NumberFormatException ae) {
+            } catch (NumberFormatException nfe) {
                 numIntentos++;
                 System.out.println("El dato introducido no tiene formato de número entero corto.");
-                System.out.println(ae.getMessage());
+                System.out.println(nfe.getMessage());
                 System.out.println("Error número " + numIntentos);
                 corto = 0;
                 error = true;
