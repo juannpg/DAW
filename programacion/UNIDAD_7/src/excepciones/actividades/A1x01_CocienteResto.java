@@ -13,7 +13,7 @@ public class A1x01_CocienteResto {
 
     public static short solicitarEnteroCorto(String mensaje, int numMaxErrores) throws IOException {
         boolean error;
-        short corto;
+        short corto = 0;
         int numIntentos = 0;
         do {
             error = false;
@@ -24,7 +24,6 @@ public class A1x01_CocienteResto {
                 System.out.println("El dato introducido no tiene formato de número entero corto.");
                 System.out.println(nfe.getMessage());
                 System.out.println("Error número " + numIntentos);
-                corto = 0;
                 error = true;
             }
         } while (error && numIntentos < numMaxErrores);
