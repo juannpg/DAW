@@ -13,12 +13,44 @@ public class A1x01_CocienteResto {
 
     public static short solicitarEnteroCorto(String mensaje, int numMaxErrores) throws IOException {
         boolean error;
+        short corto;
+        int numIntentos = 0;
         do {
+            error = false;
             try {
-                short corto = Short.parseShort(solicitarCadena(mensaje));
-            } catch (NumberFormatException) {
-                                   
+                corto = Short.parseShort(solicitarCadena(mensaje));
+            } catch (NumberFormatException ae) {
+                numIntentos++;
+                System.out.println("El dato introducido no tiene formato de número entero corto.");
+                System.out.println(ae.getMessage());
+                System.out.println("Error número " + numIntentos);
+                corto = 0;
+                error = true;
             }
-        } while (error && numMaxErrores != 0);
+        } while (error && numIntentos < numMaxErrores);
+        if (error) {
+            System.out.println("Se ha alcanzado el número máximo de errores, que es " + numMaxErrores);
+        }
+        return corto;
+    }
+
+    public static void main(String[] args) {
+        try {
+            short dividendo = solicitarEnteroCorto("Dividendo: ", 3);
+            short divisor = solicitarEnteroCorto("Divisor: ", 3);
+            if (dividendo % divisor == 0) {
+                System.out.println(dividendo + " es divisible entre " + divisor);
+            } else {
+                System.out.println(dividendo + " no es divisible entre " + divisor);
+            }
+            System.out.println("Cociente: " + dividendo / divisor);
+            System.out.println("Resto: " + dividendo % divisor);
+        } catch (IOException ioe) {
+            System.out.println("Se ha producido un error de entrada/salida.");
+            System.out.println(ioe.getMessage());
+        } catch (ArithmeticException ae) {
+            System.out.println("Se ha producido un error aritmético");
+            System.out.println(ae.getMessage());
+        }
     }
 }
