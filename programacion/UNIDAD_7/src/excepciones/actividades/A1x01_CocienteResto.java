@@ -35,9 +35,10 @@ public class A1x01_CocienteResto {
     }
 
     public static void main(String[] args) {
+        final int MAX_ERRORES = 3;
         try {
-            short dividendo = solicitarEnteroCorto("Dividendo: ", 3);
-            short divisor = solicitarEnteroCorto("Divisor: ", 3);
+            short dividendo = solicitarEnteroCorto("Dividendo: ", MAX_ERRORES);
+            short divisor = solicitarEnteroCorto("Divisor: ", MAX_ERRORES);
             if (dividendo % divisor == 0) {
                 System.out.println(dividendo + " es divisible entre " + divisor);
             } else {
