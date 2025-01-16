@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f854f1e-70ac-49f0-824e-139b05e7d4be" name="Changes" comment="" />
+    <list default="true" id="6f854f1e-70ac-49f0-824e-139b05e7d4be" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../UNIDAD_7/src/excepciones/actividades/A2x01_ExcepcionesPersonalizadas/Clientela.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UNIDAD_7/src/excepciones/actividades/A2x01_ExcepcionesPersonalizadas/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/../UNIDAD_7/src/excepciones/actividades/A2x01_ExcepcionesPersonalizadas/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UNIDAD_7/src/excepciones/actividades/A2x01_ExcepcionesPersonalizadas/excepciones/ExcepcionUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/../UNIDAD_7/src/excepciones/actividades/A2x01_ExcepcionesPersonalizadas/excepciones/ExcepcionUsuario.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
