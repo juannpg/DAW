@@ -47,7 +47,7 @@ public class Principal {
                     try {
                         System.out.println(clientela);
                     } catch (ExcepcionClientela ec) {
-                        System.out.println("La clientela está vacía.");
+                        System.out.println(ec.getMessage());
                     }
                     break;
                 case 3:
