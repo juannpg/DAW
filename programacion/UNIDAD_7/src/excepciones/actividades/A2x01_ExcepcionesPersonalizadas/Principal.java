@@ -42,11 +42,7 @@ public class Principal {
                     }
                     break;
                 case 2:
-                    try {
-                        System.out.println(clientela);
-                    } catch (ExcepcionClientela ec) {
-                        System.out.println(ec.getMessage());
-                    }
+                    System.out.println(clientela);
                     break;
                 case 3:
                     int pos = Teclado.leerEntero("Posición: ");

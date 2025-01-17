@@ -23,7 +23,7 @@ public class Clientela {
     @Override
     public String toString() {
         if (numElementos == 0) {
-            throw new ExcepcionClientela(ExcepcionClientela.EXCEPCION_CLIENTELA_VACIA);
+            return "La clientela está vacía";
         }
 
         return "usuarios{\n" + stringUsuarios() +
