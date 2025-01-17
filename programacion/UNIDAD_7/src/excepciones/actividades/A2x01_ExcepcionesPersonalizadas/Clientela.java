@@ -23,7 +23,7 @@ public class Clientela {
     @Override
     public String toString() {
         if (numElementos == 0) {
-            throw new ExcepcionClientela("La clientela está vacía.");
+            throw new ExcepcionClientela(ExcepcionClientela.EXCEPCION_CLIENTELA_VACIA);
         }
 
         return "usuarios{\n" + stringUsuarios() +
@@ -32,12 +32,12 @@ public class Clientela {
 
     public void agregar(Usuario usuario) {
         if (numElementos == usuarios.length) {
-            throw new ExcepcionClientela(ExcepcionClientela.EXCEPCION_INSERTAR + ExcepcionClientela.EXCEPCION_INSERTAR_LLENO);
+            throw new ExcepcionClientela(ExcepcionClientela.EXCEPCION_INSERTAR_LLENO);
         }
 
         for (int i = 0; i < numElementos; i++) {
             if (usuarios[i].getNombre().equalsIgnoreCase(usuario.getNombre())) {
-                throw new ExcepcionClientela(ExcepcionClientela.EXCEPCION_INSERTAR + ExcepcionClientela.EXCEPCION_INSERTAR_REPETIDO);
+                throw new ExcepcionClientela(ExcepcionClientela.EXCEPCION_INSERTAR_REPETIDO);
             }
         }
 
@@ -47,11 +47,11 @@ public class Clientela {
 
     public void eliminarPorPosciion(int pos) {
         if (this.numElementos == 0) {
-            throw new ExcepcionClientela(ExcepcionClientela.EXCEPCION_ELIMINAR + ExcepcionClientela.EXCEPCION_ELIMINAR_VACIO);
+            throw new ExcepcionClientela(ExcepcionClientela.EXCEPCION_ELIMINAR_VACIO);
         }
 
         if (pos < 0 || pos >= this.numElementos) {
-            throw new ExcepcionClientela(ExcepcionClientela.EXCEPCION_ELIMINAR + ExcepcionClientela.EXCEPCION_ELIMINAR_NO_ENCONTRADO);
+            throw new ExcepcionClientela(ExcepcionClientela.EXCEPCION_ELIMINAR_NO_ENCONTRADO);
         }
 
         boolean borrado = false;
@@ -65,7 +65,7 @@ public class Clientela {
         }
 
         if (!borrado) {
-            throw new ExcepcionClientela(ExcepcionClientela.EXCEPCION_ELIMINAR + ExcepcionClientela.EXCEPCION_ELIMINAR_NO_ENCONTRADO);
+            throw new ExcepcionClientela(ExcepcionClientela.EXCEPCION_ELIMINAR_NO_ENCONTRADO);
         }
 
         for (int i = 0; i < this.numElementos; i++) {

@@ -36,10 +36,8 @@ public class Principal {
                         clientela.agregar(usuarioInsertar);
                         System.out.println("Usuario insertado con éxito.");
                     } catch (ExcepcionUsuario eu) {
-                        System.out.println(eu.getClass());
                         System.out.println(eu.getMessage());
                     } catch (ExcepcionClientela ec) {
-                        System.out.println(ec.getClass());
                         System.out.println(ec.getMessage());
                     }
                     break;
@@ -56,7 +54,6 @@ public class Principal {
                         clientela.eliminarPorPosciion(pos);
                         System.out.println("Usuario eliminado con éxito.");
                     } catch (ExcepcionClientela ec) {
-                        System.out.println(ec.getClass());
                         System.out.println(ec.getMessage());
                     }
             }
