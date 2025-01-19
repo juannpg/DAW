@@ -33,47 +33,11 @@ public class Libro {
         return isbn;
     }
 
-    public void setIsbn(int isbn) {
-        this.isbn = isbn;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
     public String getEscritor() {
         return escritor;
     }
 
-    public void setEscritor(String escritor) {
-        this.escritor = escritor;
-    }
-
-    public int getAgnoPublicacion() {
-        return agnoPublicacion;
-    }
-
-    public void setAgnoPublicacion(int agnoPublicacion) {
-        this.agnoPublicacion = agnoPublicacion;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
     public double getEuros() {
         return euros;
-    }
-
-    public void setEuros(double euros) {
-        this.euros = euros;
     }
 }

@@ -2,6 +2,8 @@ package arrayList.actividades.A2x03_Libros;
 
 import entrada.Teclado;
 
+import java.util.ArrayList;
+
 public class Principal {
     public static int menu(String mensaje, int numOpciones) {
         int opcion;
@@ -21,20 +23,70 @@ public class Principal {
         int opcion;
         do {
             opcion = menu("\n(0) Salir del programa.\n" +
-                    "(1) Insertar un usuario en la clientela.\n" +
-                    "(2) Consultar todos los usuarios de la clientela.\n" +
-                    "(3) Eliminar un usuario, por posición, de la clientela.\n", 3);
+                    "(1) Insertar un libro en la lista.\n" +
+                    "(2) Eliminar libro por ISBN.\n" +
+                    "(3) Consultar libro por ISBN.\n" +
+                    "(4) Consultar todos los libros de la lista.\n" +
+                    "(5) Consultar todos los libros por orden descendente.\n" +
+                    "(6) Consultar todos los libros de un escritor.\n", 6);
             switch (opcion) {
                 case 1:
-
+                    int isbnAdd = Teclado.leerEntero("ISBN: ");
+                    String titulo = Teclado.leerCadena("Título: ");
+                    String escritor = Teclado.leerCadena("Escritor: ");
+                    int agnoPublicacion = Teclado.leerEntero("Año de publicación: ");
+                    int stock = Teclado.leerEntero("Stock: ");
+                    double euros = Teclado.leerEntero("Precio: ");
+                    Libro libro = new Libro(isbnAdd, titulo, escritor, agnoPublicacion, stock, euros);
+                    if (libreria.insertarLibro(libro)) {
+                        System.out.println("Libro insertado con éxito.");
+                    } else {
+                        System.out.println("Ya existe otro libro con ese ISBN en la lista.");
+                    }
                     break;
                 case 2:
-
+                    int isbnRemove = Teclado.leerEntero("ISBN: ");
+                    if (libreria.eliminarLibroPorISBN(isbnRemove)) {
+                        System.out.println("Libro eliminado con éxito.");
+                    } else {
+                        System.out.println("No existe ningún libro con ese ISBN en la lista.");
+                    }
                     break;
-
                 case 3:
-
+                    int isbnConsultar = Teclado.leerEntero("ISBN: ");
+                    Libro libroConsultar = libreria.consultarLibroPorISBN(isbnConsultar);
+                    if (libroConsultar != null) {
+                        System.out.println(libroConsultar);
+                    } else {
+                        System.out.println("No existe ningún libro con ese ISBN en la lista.");
+                    }
                     break;
+                case 4:
+                    Libreria libreriaConsultar = libreria.consultarLibros();
+                    if (!libreriaConsultar.getLibros().isEmpty()) {
+                        System.out.println(libreriaConsultar);
+                    } else {
+                        System.out.println("La libreria está vacía.");
+                    }
+                    break;
+                case 5:
+                    Libreria libreriaConsultarDescendente = libreria.consultarLibrosPrecioDescendente();
+                    if (!libreriaConsultarDescendente.getLibros().isEmpty()) {
+                        System.out.println(libreriaConsultarDescendente);
+                    } else {
+                        System.out.println("La libreria está vacía.");
+                    }
+                    break;
+                case 6:
+                    String escritorConsultar = Teclado.leerCadena("Escritor: ");
+                    ArrayList<Libro> listaConsultarEscritor = libreria.consultarLibrosPorEscritor(escritorConsultar);
+                    if (!listaConsultarEscritor.isEmpty()) {
+                        for (Libro l : listaConsultarEscritor) {
+                            System.out.println(l);
+                        }
+                    } else {
+                        System.out.println("No existe ningún libro de ese escritor en la lista.");
+                    }
             }
         } while (opcion != 0);
     }
