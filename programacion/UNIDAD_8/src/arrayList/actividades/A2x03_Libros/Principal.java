@@ -62,9 +62,8 @@ public class Principal {
                     }
                     break;
                 case 4:
-                    Libreria libreriaConsultar = libreria.consultarLibros();
-                    if (!libreriaConsultar.getLibros().isEmpty()) {
-                        System.out.println(libreriaConsultar);
+                    if (!libreria.getLibros().isEmpty()) {
+                        System.out.println(libreria);
                     } else {
                         System.out.println("La libreria está vacía.");
                     }

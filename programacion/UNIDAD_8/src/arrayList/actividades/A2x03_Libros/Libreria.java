@@ -51,9 +51,9 @@ public class Libreria {
     }
 
     public boolean eliminarLibroPorISBN(int isbn) {
-        for (Libro l : libros) {
-            if (l.getIsbn() == isbn) {
-                libros.remove(l);
+        for (int i = 0; i < this.libros.size(); i++) {
+            if (this.libros.get(i).getIsbn() == isbn) {
+                this.libros.remove(i);
                 return true;
             }
         }
@@ -61,19 +61,9 @@ public class Libreria {
         return false;
     }
 
-    public Libreria consultarLibros() {
-        Libreria libreria = new Libreria(this.nombre);
-        for (Libro l : libros) {
-            libreria.libros.add(l);
-        }
-        return libreria;
-    }
-
     public Libreria consultarLibrosPrecioDescendente() {
         Libreria libreria = new Libreria(this.nombre);
-        for (Libro l : libros) {
-            libreria.libros.add(l);
-        }
+        libreria.libros.addAll(libros);
 
         Collections.sort(libreria.libros, new LibreriaPrecioDescendente());
 
