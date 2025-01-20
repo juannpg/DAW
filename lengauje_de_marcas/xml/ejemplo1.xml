@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<tarjetadevisita>
+  <apellido>LAVALLE</apellido>
+  <nombre>Chris</nombre>
+  <empresa/>
+  <puesto>Doctor</puesto>
+  <direccion>
+    <numero>19</numero>
+    <calle>sobradiel</calle>
+    <codigopostal>28008</codigopostal>
+    <ciudad>madrid</ciudad>
+  </direccion>
+  <numdetelefono>644984293</numdetelefono>
+  <numdemovil/>
+  <numdefax/>
+  <email/>
+</tarjetadevisita>
