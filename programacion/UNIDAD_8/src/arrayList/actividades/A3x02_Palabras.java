@@ -9,13 +9,12 @@ public class A3x02_Palabras {
     private static final Random r = new Random();
 
     public static void generarPalabras(int cantidadPalabras, HashSet<String> h, LinkedHashSet<String> l, TreeSet<String> t) {
-        for (int i = 0; i < cantidadPalabras; i++) {
-            while (h.size() < cantidadPalabras && l.size() < cantidadPalabras && t.size() < cantidadPalabras) {
-                int random = r.nextInt(palabras.length);
-                h.add(palabras[random]);
-                l.add(palabras[random]);
-                t.add(palabras[random]);
-            }
+        while (h.size() < cantidadPalabras) {
+            int random = r.nextInt(palabras.length);
+            String p = palabras[random];
+            h.add(p);
+            l.add(p);
+            t.add(p);
         }
     }
 
@@ -24,10 +23,13 @@ public class A3x02_Palabras {
         LinkedHashSet<String> palabrasConEnlazado = new LinkedHashSet<>();
         TreeSet<String> palabrasConArbol = new TreeSet<>();
 
-        int cantidadCadenas = Teclado.leerEntero("¿Cuantas cadenas? (máximo 14)");
-        if (cantidadCadenas >= 14) {
-            cantidadCadenas = 14;
-        }
+        int cantidadCadenas;
+        do {
+            cantidadCadenas = Teclado.leerEntero("¿Cuantas cadenas? ");
+            if (cantidadCadenas > 14) {
+                System.out.println("No existen más de 14 palabras");
+            }
+        } while (cantidadCadenas > 14);
 
         System.out.println("Generando " + cantidadCadenas + " cadenas aleatorias de palabras");
         generarPalabras(cantidadCadenas, palabrasConHash, palabrasConEnlazado, palabrasConArbol);
