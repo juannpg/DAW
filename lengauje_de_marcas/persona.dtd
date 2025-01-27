@@ -1,0 +1,9 @@
+<!ELEMENT persona (nombre, apellido, edad, enActivo?)>
+<!ATTLIST persona
+  cod ID #REQUIRED
+  estadoCivil (Soltero | Casado | Divorciado) "Soltero">
+
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT apellido (#PCDATA)>
+<!ELEMENT edad (#PCDATA)>
+<!ELEMENT enActivo (#PCDATA)>
