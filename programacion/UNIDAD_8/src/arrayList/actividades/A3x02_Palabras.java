@@ -26,10 +26,10 @@ public class A3x02_Palabras {
         int cantidadCadenas;
         do {
             cantidadCadenas = Teclado.leerEntero("¿Cuantas cadenas? ");
-            if (cantidadCadenas > 14) {
-                System.out.println("No existen más de 14 palabras");
+            if (cantidadCadenas > palabras.length) {
+                System.out.println("No existen más de " + palabras.length + " palabras");
             }
-        } while (cantidadCadenas > 14);
+        } while (cantidadCadenas > palabras.length);
 
         System.out.println("Generando " + cantidadCadenas + " cadenas aleatorias de palabras");
         generarPalabras(cantidadCadenas, palabrasConHash, palabrasConEnlazado, palabrasConArbol);
