@@ -1,5 +1,9 @@
 package arrayList.actividades.A3x05_BancoOAlgo;
 
+import arrayList.actividades.A3x05_BancoOAlgo.orden.OrdenDNIAscendente;
+import arrayList.actividades.A3x05_BancoOAlgo.orden.OrdenNacimientoAscendente;
+import arrayList.actividades.A3x05_BancoOAlgo.orden.OrdenNombreAscendente;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
@@ -25,15 +29,15 @@ public class Banco {
         return strClientes;
     }
 
-    public boolean insertarCliente(Cliente c) {
-        return this.clientes.add(c);
+    public void insertarCliente(Cliente c) {
+        this.clientes.add(c);
     }
 
     public boolean eliminarPorDNI(String dni) {
         return this.clientes.remove(new Cliente(dni));
     }
 
-    private boolean estaDNI(String dni) {
+    public boolean estaDNI(String dni) {
         return this.clientes.contains(new Cliente(dni));
     }
 
@@ -45,6 +49,10 @@ public class Banco {
         }
 
         return null;
+    }
+
+    public boolean estaVacio() {
+        return this.clientes.isEmpty();
     }
 
     public Banco consultarTodosDNIAscendente() {
@@ -64,22 +72,4 @@ public class Banco {
         t.addAll(this.clientes);
         return new Banco(t);
     }
-
-    public static void main(String[] args) {
-        Banco banco = new Banco();
-
-        Cliente c1 = new Cliente("723456789A", "Juan Perez", new Fecha(1, 1, 2005), "juanperez@gmail.com", "Calle 1, 123", 1000.00);
-        Cliente c2 = new Cliente("223456789B", "Juan Perez", new Fecha(2, 1, 2000), "juanperez@gmail.com", "Calle 1, 123", 1000.00);
-        Cliente c3 = new Cliente("323456789C", "Angel Perez", new Fecha(1, 1, 2005), "juanperez@gmail.com", "Calle 1, 123", 1000.00);
-
-        banco.insertarCliente(c1);
-        banco.insertarCliente(c2);
-        banco.insertarCliente(c3);
-
-        System.out.println(banco);
-        System.out.println(banco.consultarTodosDNIAscendente());
-        System.out.println(banco.consultarTodosNombreAscendente());
-        System.out.println(banco.consultarTodosNacimientoAscendente());
-    }
-
 }

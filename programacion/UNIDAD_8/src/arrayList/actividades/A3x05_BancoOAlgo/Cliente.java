@@ -52,47 +52,11 @@ public class Cliente {
         return dni;
     }
 
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public Fecha getFechaNacimiento() {
         return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Fecha fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public String getDomicilio() {
-        return domicilio;
-    }
-
-    public void setDomicilio(String domicilio) {
-        this.domicilio = domicilio;
-    }
-
-    public String geteMail() {
-        return eMail;
-    }
-
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
-    }
-
-    public double getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
     }
 }

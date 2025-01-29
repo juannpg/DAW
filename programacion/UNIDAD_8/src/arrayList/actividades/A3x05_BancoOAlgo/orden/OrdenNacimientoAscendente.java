@@ -1,4 +1,6 @@
-package arrayList.actividades.A3x05_BancoOAlgo;
+package arrayList.actividades.A3x05_BancoOAlgo.orden;
+
+import arrayList.actividades.A3x05_BancoOAlgo.Cliente;
 
 import java.util.Comparator;
 
