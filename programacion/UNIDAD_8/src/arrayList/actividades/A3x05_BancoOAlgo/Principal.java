@@ -20,17 +20,6 @@ public class Principal {
 
     public static void main(String[] args) {
         Banco banco = new Banco();
-
-        ///////////
-        Cliente c1 = new Cliente("723456789A", "Juan Perez", new Fecha(1, 1, 2005), "juanperez@gmail.com", "Calle 1, 123", 1000.00);
-        Cliente c2 = new Cliente("223456789B", "Juan Perez", new Fecha(2, 1, 2000), "juanperez@gmail.com", "Calle 1, 123", 1000.00);
-        Cliente c3 = new Cliente("323456789C", "Angel Perez", new Fecha(1, 1, 2005), "juanperez@gmail.com", "Calle 1, 123", 1000.00);
-
-        banco.insertarCliente(c1);
-        banco.insertarCliente(c2);
-        banco.insertarCliente(c3);
-        ///////////
-
         int opcion;
 
         do {
