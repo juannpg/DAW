@@ -1,8 +1,6 @@
-package arrayList.actividades.A3x05_BancoOAlgo;
+package colecciones.actividades.A3x05_BancoOAlgo;
 
 import entrada.Teclado;
-
-import java.security.spec.RSAOtherPrimeInfo;
 
 public class Principal {
     public static int menu(String mensaje, int numOpciones) {
@@ -29,7 +27,8 @@ public class Principal {
                     "(3) Consultar un cliente, por DNI, del conjunto.\n" +
                     "(4) Consultar todos los clientes del conjunto, en orden por DNI ascendente.\n" +
                     "(5) Consultar todos los clientes del conjunto, en orden por nombre ascendente.\n" +
-                    "(6) Consultar todos los clientes del conjunto, en orden por fecha de nacimiento ascendente.\n", 6);
+                    "(6) Consultar todos los clientes del conjunto, en orden por fecha de nacimiento ascendente.\n" +
+                    "(7) Cambiar de yahoo a gmail.\n", 7);
 
             switch (opcion) {
                 case 1:
@@ -91,6 +90,10 @@ public class Principal {
                     } else {
                         System.out.println(consultarFecha);
                     }
+                    break;
+                case 7:
+                    int afectadosCambioEmail = banco.cambiarClientesYahooGmail();
+                    System.out.println("Afectados " + afectadosCambioEmail + " clientes.");
             }
         } while (opcion != 0);
     }

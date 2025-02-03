@@ -1,8 +1,8 @@
-package arrayList.actividades.A3x05_BancoOAlgo;
+package colecciones.actividades.A3x05_BancoOAlgo;
 
-import arrayList.actividades.A3x05_BancoOAlgo.orden.OrdenDNIAscendente;
-import arrayList.actividades.A3x05_BancoOAlgo.orden.OrdenNacimientoAscendente;
-import arrayList.actividades.A3x05_BancoOAlgo.orden.OrdenNombreAscendente;
+import colecciones.actividades.A3x05_BancoOAlgo.orden.OrdenDNIAscendente;
+import colecciones.actividades.A3x05_BancoOAlgo.orden.OrdenNacimientoAscendente;
+import colecciones.actividades.A3x05_BancoOAlgo.orden.OrdenNombreAscendente;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -43,7 +43,7 @@ public class Banco {
 
     public Cliente consultarPorDNI(String dni) {
         for (Cliente c : this.clientes) {
-            if (estaDNI(dni)) {
+            if (c.getDni().equals(dni)) {
                 return c;
             }
         }
@@ -71,5 +71,21 @@ public class Banco {
         TreeSet<Cliente> t = new TreeSet<>(new OrdenNacimientoAscendente());
         t.addAll(this.clientes);
         return new Banco(t);
+    }
+
+    public int cambiarClientesYahooGmail() {
+        int contadorAfectados = 0;
+        for (Cliente c : this.clientes) {
+            String email = c.getEmail();
+            if (email.endsWith("@yahoo.es")) {
+                int indexArroba = email.indexOf("@");
+                String prefijoEmail = email.substring(0, indexArroba);
+                String emailNuevo = prefijoEmail.concat("@gmail.com");
+                c.setEmail(emailNuevo);
+                contadorAfectados++;
+            }
+        }
+
+        return contadorAfectados;
     }
 }

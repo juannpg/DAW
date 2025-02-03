@@ -1,4 +1,4 @@
-package arrayList.actividades.BingoOposicion;
+package colecciones.actividades.BingoOposicion;
 
 import java.util.Set;
 import java.util.TreeSet;

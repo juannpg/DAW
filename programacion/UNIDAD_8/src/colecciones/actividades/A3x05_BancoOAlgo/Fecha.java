@@ -1,4 +1,4 @@
-package arrayList.actividades.A3x05_BancoOAlgo;
+package colecciones.actividades.A3x05_BancoOAlgo;
 
 public class Fecha {
     private int dia;

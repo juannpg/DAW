@@ -1,4 +1,4 @@
-package arrayList.actividades;
+package colecciones.actividades;
 
 import entrada.Teclado;
 

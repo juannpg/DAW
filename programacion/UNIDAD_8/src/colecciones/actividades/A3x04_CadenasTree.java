@@ -1,4 +1,4 @@
-package arrayList.actividades;
+package colecciones.actividades;
 
 import java.util.*;
 import entrada.Teclado;

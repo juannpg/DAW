@@ -1,4 +1,4 @@
-package arrayList.actividades.A2x03_Libros;
+package colecciones.actividades.A2x03_Libros;
 
 import java.util.Comparator;
 

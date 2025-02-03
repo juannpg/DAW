@@ -1,4 +1,4 @@
-package arrayList.actividades.A3x05_BancoOAlgo;
+package colecciones.actividades.A3x05_BancoOAlgo;
 
 import java.util.Objects;
 
@@ -58,5 +58,13 @@ public class Cliente {
 
     public Fecha getFechaNacimiento() {
         return fechaNacimiento;
+    }
+
+    public String getEmail() {
+        return this.eMail;
+    }
+
+    public void setEmail(String email) {
+        this.eMail = email;
     }
 }
