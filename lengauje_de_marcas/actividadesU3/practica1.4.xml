@@ -1,0 +1,32 @@
+<pais>
+  <capital></capital>
+  <idiomasOficiales>
+    <idioma></idioma>
+  </idiomasOficiales>
+  <gentilicio></gentilicio>
+  <gobierno>
+    <formaDeGobierno></formaDeGobierno>
+    <presidente></presidente>
+    <primerMinistro></primerMinistro>
+  </gobierno>
+  <organoLegislativo></organoLegislativo>
+  <formacion>
+    <fase>
+      <nombre></nombre>
+      <fecha>
+        <dia></dia>
+        <mes></mes>
+        <anio></anio>
+      </fecha>
+    </fase>
+  </formacion>
+  <superficie>
+    <superficieTotal></superficieTotal>
+    <procentajeAgua></procentajeAgua>
+  </superficie>
+  <fronteras>
+    <frontera>
+      <longitud></longitud>
+    </frontera>
+  </fronteras>
+</pais>

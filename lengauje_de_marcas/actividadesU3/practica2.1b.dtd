@@ -1,0 +1,10 @@
+<!ELEMENT contacto (nombre, dir, datosCon)>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT dir (calle, cp, ciudad)>
+<!ELEMENT calle (#PCDATA)>
+<!ELEMENT cp (#PCDATA)>
+<!ELEMENT ciudad (#PCDATA)>
+<!ELEMENT datosCon (telf, movil, mail)>
+<!ELEMENT telf (#PCDATA)>
+<!ELEMENT movil (#PCDATA)>
+<!ELEMENT mail (#PCDATA)>
