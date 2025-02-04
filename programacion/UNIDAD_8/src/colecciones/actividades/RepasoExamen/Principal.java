@@ -33,7 +33,11 @@ public class Principal {
             opcion = menu("\n(0) Salir del programa.\n" +
                     "(1) Insertar un administrador\n" +
                     "(2) Insertar un comprador\n" +
-                    "(3) Ver todo", 3);
+                    "(3) Ver todo\n" +
+                    "(4) Ver ordenados por clave ascendente\n" +
+                    "(5) Ver odenados por clave descendente\n" +
+                    "(6) Consultar un usuario por correo\n" +
+                    "(6) Actualizar nombre, apellios y contraseña dado el correo", 7);
 
             switch (opcion) {
                 case 1:
@@ -44,7 +48,7 @@ public class Principal {
                     if (gestion.insertarUsuario(a)) {
                         System.out.println("añadido");
                     } else {
-                        System.out.println("no añadido, ya existe con ese correo");
+                        System.out.println("no añadido, ya existe con ese correoActualizar");
                     }
                     break;
                 case 2:
@@ -55,11 +59,39 @@ public class Principal {
                     if (gestion.insertarUsuario(u)) {
                         System.out.println("añadido");
                     } else {
-                        System.out.println("no añadido, ya existe con ese correo");
+                        System.out.println("no añadido, ya existe con ese correoActualizar");
                     }
                     break;
                 case 3:
                     System.out.println(gestion);
+                    break;
+                case 4:
+                    System.out.println(gestion.ordenarPorClave());
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    String correo = Teclado.leerCadena("Correo: ");
+                    Usuario consultarCorreo = gestion.consultarPorCorreo(correo);
+                    if (consultarCorreo != null) {
+                        System.out.println(consultarCorreo);
+                    } else {
+                        System.out.println("no existe");
+                    }
+                    break;
+                case 7:
+                    String correoActualizar = Teclado.leerCadena("Correo: ");
+                    Usuario actualizarCorreo = gestion.consultarPorCorreo(correoActualizar);
+                    if (actualizarCorreo != null) {
+                        String nombreNuevo = Teclado.leerCadena("Nuevo nombre: ");
+                        String apellido1Nuevo = Teclado.leerCadena("Nuevo apellido1: ");
+                        String apellido2Nuevo = Teclado.leerCadena("Nuevo apellido2: ");
+                        String contraseñaNueva = Teclado.leerCadena("Nueva contraseña: ");
+                        gestion.actualizarPorCorreo(actualizarCorreo, nombreNuevo, apellido1Nuevo, apellido2Nuevo, contraseñaNueva);
+                        System.out.println("actualizado");
+                    } else {
+                        System.out.println("no existe");
+                    }
             }
         } while (opcion != 0);
     }
