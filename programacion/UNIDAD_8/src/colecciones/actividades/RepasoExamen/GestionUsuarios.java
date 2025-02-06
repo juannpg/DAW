@@ -34,6 +34,12 @@ public class GestionUsuarios {
         return new GestionUsuarios(treeMap);
     }
 
+    public GestionUsuarios ordenPorClaveDescendente() {
+        TreeMap<String, Usuario> treeMap = new TreeMap<>(new OrdenClaveDescendente());
+        treeMap.putAll(this.mapaUsuarios);
+        return new GestionUsuarios(treeMap);
+    }
+
     public Usuario consultarPorCorreo(String correo) {
         return this.mapaUsuarios.get(correo);
     }

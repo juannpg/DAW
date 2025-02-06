@@ -69,6 +69,7 @@ public class Principal {
                     System.out.println(gestion.ordenarPorClave());
                     break;
                 case 5:
+                    System.out.println(gestion.ordenPorClaveDescendente());
                     break;
                 case 6:
                     String correo = Teclado.leerCadena("Correo: ");
