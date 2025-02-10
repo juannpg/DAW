@@ -26,7 +26,7 @@ public abstract class Usuario {
     }
 
     // TODO: implement
-    private String encrpy(String contraseña) {
+    private String encriptarContraseña(String contraseña) {
         for (int i = 0; i < contraseña.length(); i++) {
             char c = contraseña.charAt(i);
             return contraseña;

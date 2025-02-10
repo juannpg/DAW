@@ -1,8 +1,9 @@
 package colecciones.actividades.RepasoExamen;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import colecciones.actividades.RepasoExamen.exepciones.excepcionProductoFavorito;
+import colecciones.actividades.RepasoExamen.exepciones.excepcionUsuario;
+
+import java.util.*;
 
 public class GestionUsuarios {
     private Map<String, Usuario> mapaUsuarios;
@@ -49,5 +50,64 @@ public class GestionUsuarios {
         u.setApellido1(apellido1);
         u.setApellido2(apellido2);
         u.setContraseña(contraseña);
+    }
+
+    public boolean borrarPorCorreo(String c) {
+        return this.mapaUsuarios.remove(c) != null;
+    }
+
+    /**
+     * devuelve true si es un comprador
+     * @param c
+     * @return
+     */
+    public boolean consultarTipoUsuario(String c) {
+        return this.mapaUsuarios.get(c) instanceof Comprador;
+    }
+
+    public boolean estaUsuario(String c) {
+        return this.mapaUsuarios.containsKey(c);
+    }
+
+    public void añadirProductoFavorito(String correo, Producto p) throws excepcionUsuario, excepcionProductoFavorito {
+        if (!estaUsuario(correo)) {
+            throw new excepcionUsuario(excepcionUsuario.usuarioNoExiste);
+        }
+
+        if (!consultarTipoUsuario(correo)) {
+            throw new excepcionUsuario(excepcionUsuario.noEsComprador);
+        }
+
+        Comprador c = (Comprador) this.mapaUsuarios.get(correo);
+        if (!c.añadirProductoFavorito(p)) {
+            throw new excepcionProductoFavorito(excepcionProductoFavorito.esFavorito);
+        }
+    }
+
+    public void borrarProductoFavorito(String correo, int prod) throws excepcionUsuario, excepcionProductoFavorito {
+        if (!estaUsuario(correo)) {
+            throw new excepcionUsuario(excepcionUsuario.usuarioNoExiste);
+        }
+
+        if (!consultarTipoUsuario(correo)) {
+            throw new excepcionUsuario(excepcionUsuario.noEsComprador);
+        }
+
+        Comprador c = (Comprador) this.mapaUsuarios.get(correo);
+        if (!c.borrarProductoFavorito(prod)) {
+            throw new excepcionProductoFavorito(excepcionProductoFavorito.noEsFavorito);
+        }
+    }
+
+    public LinkedList<String> obtenerCorreosFavoritos(int codProd) {
+        LinkedList<String> hash = new LinkedList<>();
+        for (String correo : this.mapaUsuarios.keySet()) {
+            if (consultarTipoUsuario(correo)) {
+                Comprador c = (Comprador) this.mapaUsuarios.get(correo);
+                if (c.tieneFavorito(codProd)) hash.add(c.getCorreo());
+            }
+        }
+
+        return hash;
     }
 }

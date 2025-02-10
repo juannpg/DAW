@@ -1,6 +1,6 @@
 package colecciones.actividades.RepasoExamen;
 
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.Set;
 
 public class Comprador extends Usuario {
@@ -12,7 +12,7 @@ public class Comprador extends Usuario {
         super(correo, nombre, apellido1, apellido2, contraseña);
         this.tarjetaPago = tarjetaPago;
         this.direccionEnvio = direccionEnvio;
-        this.productosFavs = new LinkedHashSet<>();
+        this.productosFavs = new HashSet<>();
     }
 
     @Override
@@ -22,6 +22,18 @@ public class Comprador extends Usuario {
                 "\tdireccionEnvio='" + direccionEnvio + '\'' + "\n" +
                 "\tproductosFavs=" + productosFavs + "\n" +
                 super.toString();
+    }
+
+    public boolean añadirProductoFavorito(Producto p) {
+        return this.productosFavs.add(p);
+    }
+
+    public boolean borrarProductoFavorito(int prod) {
+        return this.productosFavs.remove(new Producto(prod));
+    }
+
+    public boolean tieneFavorito(int prod) {
+        return this.productosFavs.contains(new Producto(prod));
     }
 
     public String getTarjetaPago() {

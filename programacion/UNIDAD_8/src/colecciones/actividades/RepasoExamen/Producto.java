@@ -1,5 +1,7 @@
 package colecciones.actividades.RepasoExamen;
 
+import java.util.Objects;
+
 public class Producto {
     private int codProducto;
     private String nombre;
@@ -9,6 +11,10 @@ public class Producto {
         this.codProducto = codProducto;
         this.nombre = nombre;
         this.precio = precio;
+    }
+
+    public Producto(int codProducto) {
+        this.codProducto = codProducto;
     }
 
     @Override
@@ -42,5 +48,18 @@ public class Producto {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Producto producto = (Producto) o;
+        return codProducto == producto.codProducto;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(codProducto);
     }
 }

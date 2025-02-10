@@ -1,6 +1,11 @@
 package colecciones.actividades.RepasoExamen;
 
+import colecciones.actividades.RepasoExamen.exepciones.excepcionProductoFavorito;
+import colecciones.actividades.RepasoExamen.exepciones.excepcionUsuario;
 import entrada.Teclado;
+
+import java.util.HashSet;
+import java.util.LinkedList;
 
 public class Principal {
     public static int menu(String mensaje, int numOpciones) {
@@ -37,7 +42,12 @@ public class Principal {
                     "(4) Ver ordenados por clave ascendente\n" +
                     "(5) Ver odenados por clave descendente\n" +
                     "(6) Consultar un usuario por correo\n" +
-                    "(6) Actualizar nombre, apellios y contraseña dado el correo", 7);
+                    "(7) Actualizar nombre, apellios y contraseña dado el correo\n" +
+                    "(8) Borrar usuario por clave\n" +
+                    "(9) Validar a un usuario si su contraseña es correcta\n" +
+                    "(10) Obtener todos los correos de los compradores que tengan un producto determinado en su lista de favoritos\n" +
+                    "(15) Añadir un producto a la lista de favoritos de un comprador\n" +
+                    "(16) Borrar producto favorito", 16);
 
             switch (opcion) {
                 case 1:
@@ -93,6 +103,49 @@ public class Principal {
                     } else {
                         System.out.println("no existe");
                     }
+                    break;
+                case 8:
+                    String correoBorrar = Teclado.leerCadena("Correo: ");
+                    if (!gestion.borrarPorCorreo(correoBorrar)) {
+                        System.out.println("Error: no existe");
+                    } else {
+                        System.out.println("borrado.");
+                    }
+                    break;
+                case 10:
+                    int codigoProductoCorreos = Teclado.leerEntero("Codigo: ");
+                    LinkedList<String> correosFavoritos = gestion.obtenerCorreosFavoritos(codigoProductoCorreos);
+                    if (correosFavoritos.isEmpty()) {
+                        System.out.println("no hay nadie con ese producto favorito");
+                    } else {
+                        System.out.println(correosFavoritos);
+                    }
+                    break;
+                case 15:
+                    String correoProductoAñadir = Teclado.leerCadena("Correo: ");
+                    int codigoProcutoAñadir = Teclado.leerEntero("Codigo: ");
+                    String nombreProductoAñadir = Teclado.leerCadena("Nombre: ");
+                    double precioProductoAñadir = Teclado.leerReal("Precio: ");
+                    try {
+                        Producto p = new Producto(codigoProcutoAñadir, nombreProductoAñadir, precioProductoAñadir);
+                        gestion.añadirProductoFavorito(correoProductoAñadir, p);
+                        System.out.println("añadido");
+                    } catch (excepcionUsuario | excepcionProductoFavorito e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case 16:
+                    String correoProductoBorrar = Teclado.leerCadena("Correo: ");
+                    int codigoProductoBorrar = Teclado.leerEntero("Codigo: ");
+                    try {
+                        gestion.borrarProductoFavorito(correoProductoBorrar, codigoProductoBorrar);
+                        System.out.println("borrado");
+                    } catch (excepcionUsuario | excepcionProductoFavorito e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                default:
+                    System.out.println("otra opcion porfa");
             }
         } while (opcion != 0);
     }
