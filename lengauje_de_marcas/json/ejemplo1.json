@@ -1,0 +1,26 @@
+{
+  "empleados": [
+    {
+      "nombre": "Juan",
+      "edad": 30,
+      "salario": 1000
+    },
+    {
+      "nombre": "Pedro",
+      "edad": 25,
+      "salario": 900
+    }
+  ],
+  "clientes": [
+    {
+      "nombre": "Juan",
+      "edad": 30,
+      "salario": 1000
+    },
+    {
+      "nombre": "Pedro",
+      "edad": 25,
+      "salario": 900
+    }
+  ]
+}
