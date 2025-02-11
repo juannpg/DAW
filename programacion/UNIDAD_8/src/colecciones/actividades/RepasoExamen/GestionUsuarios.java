@@ -100,14 +100,69 @@ public class GestionUsuarios {
     }
 
     public LinkedList<String> obtenerCorreosFavoritos(int codProd) {
-        LinkedList<String> hash = new LinkedList<>();
+        LinkedList<String> list = new LinkedList<>();
         for (String correo : this.mapaUsuarios.keySet()) {
             if (consultarTipoUsuario(correo)) {
                 Comprador c = (Comprador) this.mapaUsuarios.get(correo);
-                if (c.tieneFavorito(codProd)) hash.add(c.getCorreo());
+                if (c.tieneFavorito(codProd)) list.add(c.getCorreo());
             }
         }
 
-        return hash;
+        return list;
+    }
+
+    public LinkedList<Administrador> obtenerAdministradoresCategoria(String cat) {
+        LinkedList<Administrador> list = new LinkedList<>();
+        for (String correo : this.mapaUsuarios.keySet()) {
+            if (!consultarTipoUsuario(correo)) {
+                Administrador a = (Administrador) this.mapaUsuarios.get(correo);
+                if (a.coincideCategoria(cat) && a.isRevisaEscritos())
+                    list.add(a);
+            }
+        }
+
+        return list;
+    }
+
+    public ArrayList<Usuario> ordenarPorNombreYApellidos() {
+        ArrayList<Usuario> arrayList = new ArrayList<>(this.mapaUsuarios.values());
+        arrayList.sort(new OrdenNombreApellido());
+        return arrayList;
+    }
+
+    public HashSet<Producto> obtenerListaFavoritosComprador(String correo) throws  excepcionUsuario {
+        if (!estaUsuario(correo)) {
+            throw new excepcionUsuario(excepcionUsuario.usuarioNoExiste);
+        }
+
+        if (!consultarTipoUsuario(correo)) {
+            throw new excepcionUsuario(excepcionUsuario.noEsComprador);
+        }
+
+        Comprador c = (Comprador) this.mapaUsuarios.get(correo);
+        return c.getProductosFavs();
+    }
+
+    public Producto obtenerProductoMasFavoritos() {
+        TreeMap<Producto, Integer> mapaValores = new TreeMap<>();
+        for (Usuario u : this.mapaUsuarios.values()) {
+            if (u instanceof Comprador c) {
+                for (Producto p : c.getProductosFavs()) {
+                    mapaValores.put(p, mapaValores.getOrDefault(p, 0) + 1);
+                }
+            }
+        }
+
+        Producto productoMasFavorito = null;
+        int maxFavoritos = 0;
+
+        for (Map.Entry<Producto, Integer> entry : mapaValores.entrySet()) {
+            if (entry.getValue() > maxFavoritos) {
+                maxFavoritos = entry.getValue();
+                productoMasFavorito = entry.getKey();
+            }
+        }
+
+        return productoMasFavorito;
     }
 }

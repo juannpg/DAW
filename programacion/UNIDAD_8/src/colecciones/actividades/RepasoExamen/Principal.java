@@ -4,6 +4,7 @@ import colecciones.actividades.RepasoExamen.exepciones.excepcionProductoFavorito
 import colecciones.actividades.RepasoExamen.exepciones.excepcionUsuario;
 import entrada.Teclado;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 
@@ -46,6 +47,10 @@ public class Principal {
                     "(8) Borrar usuario por clave\n" +
                     "(9) Validar a un usuario si su contraseña es correcta\n" +
                     "(10) Obtener todos los correos de los compradores que tengan un producto determinado en su lista de favoritos\n" +
+                    "(11) Administradores por categoria y comentarios\n" +
+                    "(12) Obtener todos los usuarios ordenados por nombre y apellidos\n" +
+                    "(13) Obtener lista de favoritos de un usuario\n" +
+                    "(14) Obtener producto con más favoritos" +
                     "(15) Añadir un producto a la lista de favoritos de un comprador\n" +
                     "(16) Borrar producto favorito", 16);
 
@@ -119,6 +124,44 @@ public class Principal {
                         System.out.println("no hay nadie con ese producto favorito");
                     } else {
                         System.out.println(correosFavoritos);
+                    }
+                    break;
+                case 11:
+                    String categoriaAdministradores = Teclado.leerCadena("Categoria: ");
+                    LinkedList<Administrador> administradoresCategoria = gestion.obtenerAdministradoresCategoria(categoriaAdministradores);
+                    if (administradoresCategoria.isEmpty()) {
+                        System.out.println("no hay");
+                    } else {
+                        System.out.println(administradoresCategoria);
+                    }
+                    break;
+                case 12:
+                    ArrayList<Usuario> listaOrdenadaNombreApellidos = gestion.ordenarPorNombreYApellidos();
+                    if (listaOrdenadaNombreApellidos.isEmpty()) {
+                        System.out.println("no hay");
+                    } else {
+                        System.out.println(listaOrdenadaNombreApellidos);
+                    }
+                    break;
+                case 13:
+                    String correoFavoritos = Teclado.leerCadena("Correo: ");
+                    try {
+                        HashSet<Producto> productosFavoritos = gestion.obtenerListaFavoritosComprador(correoFavoritos);
+                        if (productosFavoritos.isEmpty()) {
+                            System.out.println("no hay");
+                        } else {
+                            System.out.println(productosFavoritos);
+                        }
+                    } catch (excepcionUsuario eu) {
+                        System.out.println(eu.getMessage());
+                    }
+                    break;
+                case 14:
+                    Producto productoMasFavorito = gestion.obtenerProductoMasFavoritos();
+                    if (productoMasFavorito == null) {
+                        System.out.println("no hay");
+                    } else {
+                        System.out.println(productoMasFavorito);
                     }
                     break;
                 case 15:

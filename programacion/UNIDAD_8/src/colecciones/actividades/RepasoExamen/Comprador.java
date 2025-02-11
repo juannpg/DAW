@@ -1,12 +1,11 @@
 package colecciones.actividades.RepasoExamen;
 
 import java.util.HashSet;
-import java.util.Set;
 
 public class Comprador extends Usuario {
     private String tarjetaPago;
     private String direccionEnvio;
-    private Set<Producto> productosFavs;
+    private HashSet<Producto> productosFavs;
 
     public Comprador(String correo, String nombre, String apellido1, String apellido2, String contraseña, String tarjetaPago, String direccionEnvio) {
         super(correo, nombre, apellido1, apellido2, contraseña);
@@ -52,11 +51,11 @@ public class Comprador extends Usuario {
         this.direccionEnvio = direccionEnvio;
     }
 
-    public Set<Producto> getProductosFavs() {
+    public HashSet<Producto> getProductosFavs() {
         return productosFavs;
     }
 
-    public void setProductosFavs(Set<Producto> productosFavs) {
+    public void setProductosFavs(HashSet<Producto> productosFavs) {
         this.productosFavs = productosFavs;
     }
 }

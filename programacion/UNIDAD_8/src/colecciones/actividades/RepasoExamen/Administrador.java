@@ -22,6 +22,10 @@ public class Administrador extends Usuario {
         return categoria;
     }
 
+    public boolean coincideCategoria(String cat) {
+        return this.categoria.equalsIgnoreCase(cat);
+    }
+
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
