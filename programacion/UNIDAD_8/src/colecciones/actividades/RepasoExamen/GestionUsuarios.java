@@ -11,6 +11,10 @@ import colecciones.actividades.RepasoExamen.orden.OrdenNombreApellido;
 
 import java.util.*;
 
+/**
+ * GestionUsuarios es una clase que como atributo tiene un mapa de usuarios, por lo
+ * que su función principal es controlar ese conjunto de usuarios
+ */
 public class GestionUsuarios {
     private Map<String, Usuario> mapaUsuarios;
 
@@ -22,6 +26,12 @@ public class GestionUsuarios {
         this.mapaUsuarios = mapaUsuarios;
     }
 
+    /**
+     * inserta un usuario pasado por parametros en el conjunto, y devuelve si
+     * se ha insertado con un booleano
+     * @param usuario usuario a insertar
+     * @return booleano de si se ha insertado
+     */
     public boolean insertarUsuario(Usuario usuario) {
         return this.mapaUsuarios.putIfAbsent(usuario.getCorreo(), usuario) == null;
     }
@@ -36,17 +46,32 @@ public class GestionUsuarios {
         return str;
     }
 
+    /**
+     * devuelve una gestión de usuarios nueva con los mismos usuarios, pero ordenados
+     * por su clave.
+     * @return gestion nueva ordenada por clave
+     */
     public GestionUsuarios ordenarPorClave() {
         TreeMap<String, Usuario> treeMap = new TreeMap<String, Usuario>(this.mapaUsuarios);
         return new GestionUsuarios(treeMap);
     }
 
+    /**
+     * devuelve una gestión de usuarios nueva con los mismos usuarios, pero
+     * ordenados por su clave de manera descendente.
+     * @return gestión ordenada por clave descendente
+     */
     public GestionUsuarios ordenPorClaveDescendente() {
         TreeMap<String, Usuario> treeMap = new TreeMap<>(new OrdenClaveDescendente());
         treeMap.putAll(this.mapaUsuarios);
         return new GestionUsuarios(treeMap);
     }
 
+    /**
+     * devuelve un usuario iden
+     * @param correo
+     * @return
+     */
     public Usuario consultarPorCorreo(String correo) {
         return this.mapaUsuarios.get(correo);
     }
