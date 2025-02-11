@@ -1,7 +1,13 @@
 package colecciones.actividades.RepasoExamen;
 
+import colecciones.actividades.RepasoExamen.clases.Administrador;
+import colecciones.actividades.RepasoExamen.clases.Comprador;
+import colecciones.actividades.RepasoExamen.clases.Producto;
+import colecciones.actividades.RepasoExamen.clases.Usuario;
 import colecciones.actividades.RepasoExamen.exepciones.excepcionProductoFavorito;
 import colecciones.actividades.RepasoExamen.exepciones.excepcionUsuario;
+import colecciones.actividades.RepasoExamen.orden.OrdenClaveDescendente;
+import colecciones.actividades.RepasoExamen.orden.OrdenNombreApellido;
 
 import java.util.*;
 

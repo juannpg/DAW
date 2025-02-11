@@ -1,4 +1,4 @@
-package colecciones.actividades.RepasoExamen;
+package colecciones.actividades.RepasoExamen.orden;
 
 import java.util.Comparator;
 

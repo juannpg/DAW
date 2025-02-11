@@ -1,4 +1,4 @@
-package colecciones.actividades.RepasoExamen;
+package colecciones.actividades.RepasoExamen.clases;
 
 import java.util.Objects;
 

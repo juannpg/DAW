@@ -1,4 +1,4 @@
-package colecciones.actividades.RepasoExamen;
+package colecciones.actividades.RepasoExamen.clases;
 
 public abstract class Usuario {
     protected String correo;

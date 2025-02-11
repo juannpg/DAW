@@ -1,4 +1,6 @@
-package colecciones.actividades.RepasoExamen;
+package colecciones.actividades.RepasoExamen.orden;
+
+import colecciones.actividades.RepasoExamen.clases.Usuario;
 
 import java.util.Comparator;
 
