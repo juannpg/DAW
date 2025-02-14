@@ -54,7 +54,7 @@ public class Principal {
                     "(11) Administradores por categoria y comentarios\n" +
                     "(12) Obtener todos los usuarios ordenados por nombre y apellidos\n" +
                     "(13) Obtener lista de favoritos de un usuario\n" +
-                    "(14) Obtener producto con más favoritos" +
+                    "(14) Obtener producto/s con más favoritos" +
                     "(15) Añadir un producto a la lista de favoritos de un comprador\n" +
                     "(16) Borrar producto favorito", 16);
 
@@ -150,7 +150,7 @@ public class Principal {
                 case 13:
                     String correoFavoritos = Teclado.leerCadena("Correo: ");
                     try {
-                        HashSet<Producto> productosFavoritos = gestion.obtenerListaFavoritosComprador(correoFavoritos);
+                        ArrayList<Producto> productosFavoritos = gestion.obtenerListaFavoritosComprador(correoFavoritos);
                         if (productosFavoritos.isEmpty()) {
                             System.out.println("no hay");
                         } else {
@@ -161,11 +161,11 @@ public class Principal {
                     }
                     break;
                 case 14:
-                    Producto productoMasFavorito = gestion.obtenerProductoMasFavoritos();
-                    if (productoMasFavorito == null) {
+                    HashSet<Producto> productosMasFavoritos = gestion.obtenerProductoMasFavoritos();
+                    if (productosMasFavoritos.isEmpty()) {
                         System.out.println("no hay");
                     } else {
-                        System.out.println(productoMasFavorito);
+                        System.out.println(productosMasFavoritos);
                     }
                     break;
                 case 15:

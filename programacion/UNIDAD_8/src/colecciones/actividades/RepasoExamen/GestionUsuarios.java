@@ -7,6 +7,7 @@ import colecciones.actividades.RepasoExamen.clases.Usuario;
 import colecciones.actividades.RepasoExamen.exepciones.excepcionProductoFavorito;
 import colecciones.actividades.RepasoExamen.exepciones.excepcionUsuario;
 import colecciones.actividades.RepasoExamen.orden.OrdenClaveDescendente;
+import colecciones.actividades.RepasoExamen.orden.OrdenCodigoProducto;
 import colecciones.actividades.RepasoExamen.orden.OrdenNombreApellido;
 
 import java.util.*;
@@ -161,7 +162,7 @@ public class GestionUsuarios {
         return arrayList;
     }
 
-    public HashSet<Producto> obtenerListaFavoritosComprador(String correo) throws  excepcionUsuario {
+    public ArrayList<Producto> obtenerListaFavoritosComprador(String correo) throws  excepcionUsuario {
         if (!estaUsuario(correo)) {
             throw new excepcionUsuario(excepcionUsuario.usuarioNoExiste);
         }
@@ -171,10 +172,13 @@ public class GestionUsuarios {
         }
 
         Comprador c = (Comprador) this.mapaUsuarios.get(correo);
-        return c.getProductosFavs();
+        HashSet<Producto> hash = c.getProductosFavs();
+        ArrayList<Producto> list = new ArrayList<>(hash);
+        list.sort(new OrdenCodigoProducto());
+        return list;
     }
 
-    public Producto obtenerProductoMasFavoritos() {
+    public HashSet<Producto> obtenerProductoMasFavoritos() {
         TreeMap<Producto, Integer> mapaValores = new TreeMap<>();
         for (Usuario u : this.mapaUsuarios.values()) {
             if (u instanceof Comprador c) {
@@ -184,16 +188,16 @@ public class GestionUsuarios {
             }
         }
 
-        Producto productoMasFavorito = null;
-        int maxFavoritos = 0;
+        TreeSet<Integer> treeMaximo = new TreeSet<>(mapaValores.values());
+        int maxFavoritos = treeMaximo.getLast();
+        HashSet<Producto> productosMasFavoritos = new HashSet<>();
 
-        for (Map.Entry<Producto, Integer> entry : mapaValores.entrySet()) {
-            if (entry.getValue() > maxFavoritos) {
-                maxFavoritos = entry.getValue();
-                productoMasFavorito = entry.getKey();
+        for (Producto p : mapaValores.keySet()) {
+            if (mapaValores.get(p) == maxFavoritos) {
+                productosMasFavoritos.add(p);
             }
         }
 
-        return productoMasFavorito;
+        return productosMasFavoritos;
     }
 }
