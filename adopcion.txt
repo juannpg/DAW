@@ -1,0 +1,2 @@
+1. He encontrado una API REST pública del gobierno de Zaragoza, documentada con Swagger UI, con la que puedo hacer diferentes solicitudes GET a la base de datos de Zaragoza.
+2. Solicitando la lista de animales en adopción al endpoint https://www.zaragoza.es/sede/servicio/proteccion-animal?rf=html&start=0&rows=500, obtengo todos los animales en adopción disponibles, para después tratar esos datos en tableu

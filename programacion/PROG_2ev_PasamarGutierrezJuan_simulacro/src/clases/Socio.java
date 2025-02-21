@@ -23,25 +23,13 @@ public abstract class Socio {
 
     @Override
     public String toString() {
-        return "\tdni='" + dni + '\'' + "\n" +
-                "\tnombre='" + nombre + '\'' + "\n" +
-                "\tedad=" + edad + "\n" +
-                "\tcuentaBancaria=" + cuentaBancaria + "\n" +
-                "\tentrenador=" + entrenador + "\n" +
-                "\tdatosEntrenamiento=" + datosEntrenamiento + "\n";
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Socio socio = (Socio) o;
-        return Objects.equals(dni, socio.dni);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(dni);
+        return "\t\tdni='" + dni + '\'' + "\n" +
+                "\t\tnombre='" + nombre + '\'' + "\n" +
+                "\t\tedad=" + edad + "\n" +
+                "\t\tcuentaBancaria=" + cuentaBancaria + "\n" +
+                "\t\tentrenador=" + entrenador + "\n" +
+                "\t\tdatosEntrenamiento=" + datosEntrenamiento + "\n" +
+                "\t\tcuota" + this.calcularCuotaMensual() + "\n";
     }
 
     public String getDni() {
@@ -90,5 +78,18 @@ public abstract class Socio {
 
     public void setDatosEntrenamiento(DatosEntrenamiento datosEntrenamiento) {
         this.datosEntrenamiento = datosEntrenamiento;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Socio socio = (Socio) o;
+        return Objects.equals(dni, socio.dni);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(dni);
     }
 }

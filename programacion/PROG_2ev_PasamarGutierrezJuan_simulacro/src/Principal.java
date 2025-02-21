@@ -67,7 +67,6 @@ public class Principal {
 
     public static void main(String[] args) {
         ClubDeportivo losEnlaces = new ClubDeportivo("Los Enlaces");
-
         int opcion;
 
         do {
@@ -114,7 +113,11 @@ public class Principal {
                     }
                     break;
                 case 3:
-
+                    if (losEnlaces.estaVacion()) {
+                        System.out.println("no hay socios");
+                    } else {
+                        System.err.println(losEnlaces);
+                    }
                     break;
                 case 4:
 
@@ -126,7 +129,11 @@ public class Principal {
 
                     break;
                 case 7:
-
+                    if (losEnlaces.estaVacion()) {
+                        System.out.println("no hay nadie aqui what");
+                    } else {
+                        System.out.println(losEnlaces.obtenerSociosMaxCuotas());
+                    }
                     break;
                 case 8:
 

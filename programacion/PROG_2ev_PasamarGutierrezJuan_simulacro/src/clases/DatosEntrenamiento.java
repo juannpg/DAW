@@ -1,5 +1,7 @@
 package clases;
 
+import java.util.Arrays;
+
 public class DatosEntrenamiento {
     public static final String[] DIAS = {
             "lunes",
@@ -28,6 +30,13 @@ public class DatosEntrenamiento {
         }
 
         return duracion;
+    }
+
+    @Override
+    public String toString() {
+        return "\n\t\t\tdias=" + Arrays.toString(dias) + "\n" +
+                "\t\t\thoras=" + Arrays.toString(horas) + "\n" +
+                "\t\t\tduraciones=" + Arrays.toString(duraciones);
     }
 
     public String[] getDias() {

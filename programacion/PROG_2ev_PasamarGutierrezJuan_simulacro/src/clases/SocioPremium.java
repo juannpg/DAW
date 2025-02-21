@@ -10,9 +10,9 @@ public class SocioPremium extends Socio {
 
     @Override
     public String toString() {
-        return "clases.SocioPremium{" + "\n" +
-                "\tcarnetDeEstudiante=" + carnetDeEstudiante + "\n" +
-                "} " + super.toString();
+        return " SocioPremium" + "\n" +
+                "\t\tcarnetDeEstudiante=" + carnetDeEstudiante + "\n" +
+                 super.toString();
     }
 
     @Override

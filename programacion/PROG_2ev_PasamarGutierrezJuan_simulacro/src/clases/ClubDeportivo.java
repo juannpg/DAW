@@ -1,22 +1,28 @@
 package clases;
 
-import java.util.HashMap;
+import orden.SocioCuotaDni;
+
+import java.util.*;
 
 public class ClubDeportivo {
     private String nombre;
-    private HashMap<String, Socio> mapaSocios;
+    private TreeMap<String, Socio> mapaSocios;
 
     public ClubDeportivo(String nombre) {
         this.nombre = nombre;
-        this.mapaSocios = new HashMap<>();
+        this.mapaSocios = new TreeMap<>();
     }
 
     @Override
     public String toString() {
-        return "clases.ClubDeportivo{" + "\n" +
+        return "ClubDeportivo{" + "\n" +
                 "\tnombre='" + nombre + '\'' + "\n" +
-                "\tmapaSocios=" + mapaSocios + "\n" +
-                '}';
+                "\tmapaSocios={\n\t\t" + mapaSocios + "\n" +
+                "\t}\n}";
+    }
+
+    public boolean estaVacion() {
+        return this.mapaSocios.isEmpty();
     }
 
     public void insertarSocio(Socio s) {
@@ -25,5 +31,20 @@ public class ClubDeportivo {
 
     public boolean estaSocio(String dni) {
         return this.mapaSocios.containsKey(dni);
+    }
+
+    public LinkedList<Socio> obtenerSociosMaxCuotas() {
+        TreeSet<Socio> setSocios = new TreeSet<>(new SocioCuotaDni());
+        setSocios.addAll(this.mapaSocios.values());
+
+        double cuotaMax = setSocios.getFirst().calcularCuotaMensual();
+        LinkedList<Socio> linked = new LinkedList<>();
+        for (Socio s : setSocios) {
+            if (s.calcularCuotaMensual() == cuotaMax) {
+                linked.add(s);
+            } else break;
+        }
+
+        return linked;
     }
 }

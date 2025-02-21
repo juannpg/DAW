@@ -19,6 +19,12 @@ SELECT nombre_cliente FROM cliente2 WHERE LOWER(pais) = 'spain';
 -- 7
 SELECT DISTINCT estado FROM pedido;
 
+ALTER SESSION set container=XEPDB1;
+CREATE USER zoo IDENTIFIED BY case;
+ALTER USER zoo QUOTA 10M on users;
+GRANT CONNECT TO zoo;
+GRANT RESOURCE TO zoo;
+
 -- 8
 SELECT DISTINCT codigo_cliente, fecha_pago
 FROM pago
