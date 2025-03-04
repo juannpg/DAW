@@ -1,4 +1,3 @@
-Hola
-Amigo
-Amigo
-Amigo
+fin
+medio
+inicio
