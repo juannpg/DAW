@@ -34,7 +34,7 @@ public class Principal {
 			opcion = escribirMenuOpciones();
 			switch (opcion) {
 			case 1:
-				int numAsientos = Teclado.leerEntero("Ingrese n�mero de asientos del vuelo: ");
+				int numAsientos = Teclado.leerEntero( "Ingrese n�mero de asientos del vuelo: ");
 				Vuelo altaVuelo = new Vuelo(numAsientos);
 				if (aereolinea.altaVuelo(altaVuelo)) {
 					System.out.println("Se ha dado de alta un nuevo vuelo");

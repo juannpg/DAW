@@ -13,7 +13,7 @@ public abstract class ReservaAsiento {
 		return this.dni;
 	}
 	
-	public void setDni(String dni) {
+	public void setDni(String dni) { 
 		this.dni = dni;
 	}
 	

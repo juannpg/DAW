@@ -14,7 +14,7 @@ public class ReservaPreferente extends ReservaAsiento {
 		this.tieneComida = tieneComida;
 	}
 
-	@Override
+	@Override    
 	public String toString() {
 		return "\t\t\t\tReserva preferente:"
 				+ "\n" + super.toString()
