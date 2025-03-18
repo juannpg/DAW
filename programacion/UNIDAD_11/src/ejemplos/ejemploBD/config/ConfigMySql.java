@@ -9,14 +9,14 @@ public class ConfigMySql {
 	private static final String URLBD = "jdbc:mysql://localhost:3306/empresa";
 	
 	private static final String usuario = "root";
-	private static final String contraseña = "";
+	private static final String contrasena = "";
 	
 	public static Connection abrirConexion() {
 		Connection conexion = null;
 
 		try {
 			Class.forName(DRIVER);
-			conexion = DriverManager.getConnection(URLBD,usuario,contraseña);
+			conexion = DriverManager.getConnection(URLBD,usuario,contrasena);
 		} catch (ClassNotFoundException e) {
 			System.out.println("Error al cargar driver" + e.getMessage());
 			e.printStackTrace();

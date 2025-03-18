@@ -47,20 +47,120 @@ public class AccesoDepartamento {
 		return listaDepartamentos;
 	}
 
+	// Consultar el departamento por codigo
+	public static Departamento consultarDepartamentoCodigo(int codigo) {
+		Departamento departamentoReturn = null;
+		Connection conexion = null;
+
+		try {
+			conexion = ConfigMySql.abrirConexion();
+
+			String query = "SELECT * FROM departamento WHERE codigo = " + codigo;
+
+			Statement sentencia = conexion.createStatement();
+			ResultSet resultado = sentencia.executeQuery(query);
+
+			String nombre = "", ubicacion = "";
+			if (resultado.next()) {
+				nombre = resultado.getString("nombre");
+				ubicacion = resultado.getString("ubicacion");
+
+				departamentoReturn = new Departamento(codigo, nombre, ubicacion);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Error al ejecutar la consulta consultarDepartamentos");
+			e.printStackTrace();
+		}
+
+		finally {
+			ConfigMySql.cerrarConexion(conexion);
+		}
+		return departamentoReturn;
+	}
+
+	// Modificar la ubicacion de un departamento
+	public static boolean modificarUbicacionDepartamentoCodigo(int codigo, String ubicacion) {
+		int filasAfectadas = 0;
+		Connection conexion = null;
+
+		try {
+			conexion = ConfigMySql.abrirConexion();
+			Statement sentencia = conexion.createStatement();
+
+			String queryUpdate = "UPDATE departamento SET ubicacion = '" + ubicacion +
+					"' WHERE codigo = " + codigo;
+			filasAfectadas = sentencia.executeUpdate(queryUpdate);
+		} catch (SQLException e) {
+			System.out.println("Error al ejecutar la consulta consultarDepartamentos");
+			e.printStackTrace();
+		} finally {
+			ConfigMySql.cerrarConexion(conexion);
+		}
+		return filasAfectadas == 1;
+	}
+	// Borrar un departamento por codigo
+	public static boolean borrarDepartamentoCodigo(int codigo) {
+		int filas = 0;
+		Connection conexion = null;
+
+		try {
+			conexion = ConfigMySql.abrirConexion();
+			Statement sentencia = conexion.createStatement();
+
+			String queryDelete = "DELETE FROM departamento WHERE codigo = " + codigo;
+			filas = sentencia.executeUpdate(queryDelete);
+		} catch (SQLException e) {
+			System.out.println("Error al ejecutar la consulta consultarDepartamentos");
+			e.printStackTrace();
+		} finally {
+			ConfigMySql.cerrarConexion(conexion);
+		}
+		return filas == 1;
+	}
+	// Consultar todos los departamentos ordenados por nombre
+	public static List<Departamento> consultarDepartamentosOrdenNombre() {
+		List<Departamento> listaDepartamentos = new ArrayList<Departamento>();
+		Connection conexion = null;
+
+		try {
+			conexion = ConfigMySql.abrirConexion();
+
+			String query = "SELECT * FROM departamento ORDER BY nombre";
+			Statement sentencia = conexion.createStatement();
+			ResultSet resultado = sentencia.executeQuery(query);
+
+			while (resultado.next()) {
+				Departamento departamento = new Departamento(resultado.getInt("codigo"),
+						resultado.getString("nombre"), resultado.getString("ubicacion"));
+				listaDepartamentos.add(departamento);
+			}
+		} catch (SQLException e) {
+			System.out.println("Error al ejecutar la consulta consultarDepartamentos");
+			e.printStackTrace();
+		}
+
+		finally {
+			ConfigMySql.cerrarConexion(conexion);
+		}
+		return listaDepartamentos;
+	}
 	// Consulta los departamentos de la base de datos con la misma ubicaci�n y
 	// ordenados por nombre de forma ascendente.
 	public static void main(String[] args) {
-		// Realiza la consulta
-		String ubicacion = Teclado.leerCadena("�Ubicaci�n? ");		
-		List<Departamento> departamentos = AccesoDepartamento.consultarDepartamentos(ubicacion);
+		int codigo = Teclado.leerEntero("�codigo�n? ");
+		String ubicacion = Teclado.leerCadena("�Ubicaci�n? ");
 
-		if (departamentos.size() == 0) {
-			System.out.println("No se ha encontrado ning�n departamento con esa ubicaci�n en la base de datos.");
-		} else {
-			for (Departamento departamento : departamentos) {
-				System.out.println(departamento.toString());
-			}
-			System.out.println("Se han consultado " + departamentos.size() + " departamentos de la base de datos.");
+		System.out.println("############### ANTES ###############");
+		System.out.println(consultarDepartamentoCodigo(codigo));
+
+		boolean modificado = modificarUbicacionDepartamentoCodigo(codigo, ubicacion);
+		System.out.println(modificado ? "Departamento modificado" : "Departamento no modificado");
+
+		if (modificado) {
+			System.out.println("############## DESPUES ##############");
+			System.out.println(consultarDepartamentoCodigo(codigo));
+
 		}
 	}
 }
