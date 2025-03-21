@@ -1,5 +1,7 @@
 package ejemplos.ejemploBD.config;
 
+import ejemplos.ejemploBD.excepciones.BDException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -11,22 +13,26 @@ public class ConfigMySql {
 	private static final String usuario = "root";
 	private static final String contrasena = "";
 
-	public static Connection abrirConexion() throws SQLException, ClassNotFoundException {
+	public static Connection abrirConexion() throws BDException {
 		Connection conexion = null;
 
 		try {
 			Class.forName(DRIVER);
 			conexion = DriverManager.getConnection(URLBD,usuario,contrasena);
 		} catch (ClassNotFoundException e) {
-			throw new ClassNotFoundException("Error al cargar driver" + e.getMessage());
+			throw new BDException(BDException.ERROR_CARGAR_DRIVER + e.getMessage());
 		} catch (SQLException e) {
-			throw new SQLException("Error al obtener la conexi�n a la bd" + e.getMessage());
+			throw new BDException(BDException.ERROR_ABRIR_CONEXION + e.getMessage());
 		}
 
 		return conexion;
 	}
 
-	public static void cerrarConexion(Connection conexion) throws SQLException {
-		conexion.close();
+	public static void cerrarConexion(Connection conexion) throws BDException {
+		try {
+			conexion.close();
+		} catch (SQLException e) {
+			throw new BDException(BDException.ERROR_CERRAR_CONEXION + e.getMessage());
+		}
 	}
 }

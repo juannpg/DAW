@@ -1,10 +1,10 @@
 package ejemplos.ejemploBD;
 
 import ejemplos.ejemploBD.dao.AccesoDepartamento;
+import ejemplos.ejemploBD.excepciones.BDException;
 import ejemplos.ejemploBD.modelo.Departamento;
 import entrada.Teclado;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class Principal {
@@ -67,12 +67,8 @@ public class Principal {
                         break;
                 }
             } while (opcion != 0);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Error al ejecutar la consulta consultarDepartamentos");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("Error:" + e.getMessage());
+        } catch (BDException e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
 }
