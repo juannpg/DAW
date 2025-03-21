@@ -8,7 +8,6 @@ import ejemplos.ejemploBD.modelo.Departamento;
 import ejemplos.ejemploBD.modelo.Empleado;
 import entrada.Teclado;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,20 +28,7 @@ public class Principal {
     public static void main(String[] args) {
         int opcion;
         try {
-            JPasswordField passwordField = new JPasswordField();
-            int option = JOptionPane.showConfirmDialog(null, passwordField,
-                    "Contraseña de la BD " + ConfigMySql.NOMBRE_BD + ":",
-                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-
-            if (option == JOptionPane.OK_OPTION) {
-                char[] contrasenaArray = passwordField.getPassword();
-                String contrasena = new String(contrasenaArray);
-
-                ConfigMySql.setContrasena(contrasena);
-            } else {
-                System.out.println("Se canceló la entrada de la contraseña.");
-                return;
-            }
+            ConfigMySql.setContrasena();
 
             do {
                 opcion = menu("\n(0) Salir del programa.\n" +
