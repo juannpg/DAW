@@ -1,8 +1,8 @@
 package ejemplos.ejemploBD.dao;
 
 import ejemplos.ejemploBD.config.ConfigMySql;
-import ejemplos.ejemploBD.modelo.Departamento;
 import ejemplos.ejemploBD.excepciones.BDException;
+import ejemplos.ejemploBD.modelo.Departamento;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,7 +16,7 @@ public class AccesoDepartamento {
     public static Departamento consultarDepartamentoCodigo(int codigo) throws BDException {
         Departamento departamentoReturn = null;
         Connection conexion = null;
-        try  {
+        try {
             conexion = ConfigMySql.abrirConexion();
 
             String query = "SELECT * FROM departamento WHERE codigo = " + codigo;
@@ -111,5 +111,28 @@ public class AccesoDepartamento {
         }
 
         return listaDepartamentos;
+    }
+
+    //añadir un departamento
+    public static boolean anadirDepartamento(String nombre, String ubicacion) throws BDException {
+        Connection conexion = null;
+        int filas = 0;
+        try {
+            conexion = ConfigMySql.abrirConexion();
+
+            String query = "insert into departamento (nombre, ubicacion) values ('" +
+                    nombre + "', '" +
+                    ubicacion + "')";
+            Statement sentencia = conexion.createStatement();
+            filas = sentencia.executeUpdate(query);
+        } catch (SQLException e) {
+            throw new BDException(BDException.ERROR_QUERY + e.getMessage());
+        } finally {
+            if (conexion != null) {
+                ConfigMySql.cerrarConexion(conexion);
+            }
+        }
+
+        return filas == 1;
     }
 }

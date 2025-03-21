@@ -10,8 +10,8 @@ public class ConfigMySql {
 	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 	private static final String URLBD = "jdbc:mysql://localhost:3306/empresa";
 
-	private static final String usuario = "root";
-	private static final String contrasena = "";
+	private static final String usuario = "prompt";
+	private static final String contrasena = "Juanelvapers22";
 
 	public static Connection abrirConexion() throws BDException {
 		Connection conexion = null;

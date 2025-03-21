@@ -1,10 +1,13 @@
 package ejemplos.ejemploBD;
 
 import ejemplos.ejemploBD.dao.AccesoDepartamento;
+import ejemplos.ejemploBD.dao.AccesoEmpleado;
 import ejemplos.ejemploBD.excepciones.BDException;
 import ejemplos.ejemploBD.modelo.Departamento;
+import ejemplos.ejemploBD.modelo.Empleado;
 import entrada.Teclado;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Principal {
@@ -23,16 +26,23 @@ public class Principal {
 
 
     public static void main(String[] args) {
-        try {
-            int opcion;
+        int opcion;
 
-            do {
-                opcion = menu("\n(0) Salir del programa.\n" +
-                        "(1) Consultar departamento por código\n" +
-                        "(2) Modificar la ubicación de un departamento por código\n" +
-                        "(3) Borrar un departamento por código\n" +
-                        "(4) Consultar los departamentos ordenados por nombre", 4);
+        do {
+            opcion = menu("\n(0) Salir del programa.\n" +
+                    "(1) Consultar departamento por código\n" +
+                    "(2) Modificar la ubicación de un departamento por código\n" +
+                    "(3) Borrar un departamento por código\n" +
+                    "(4) Consultar los departamentos ordenados por nombre\n" +
+                    "(5) Añadir departamento\n" +
+                    "(6) Consultar empleado por codigo\n" +
+                    "(7) Consultar empleados con mayor salario a dado\n" +
+                    "(8) Insertar empleado\n" +
+                    "(9) Borrar empleado por codigo\n" +
+                    "(10) Modificar departamento de un empleado\n" +
+                    "(11) Consultar todos los empleados", 11);
 
+            try {
                 switch (opcion) {
                     case 1:
                         int codigo1 = Teclado.leerEntero("codigo? ");
@@ -65,10 +75,103 @@ public class Principal {
                             System.out.println("No existen departamentos");
                         }
                         break;
+                    case 5:
+                        String nombre5 = Teclado.leerCadena("Nombre: ");
+                        String ubicacion5 = Teclado.leerCadena("Ubicacion: ");
+                        boolean anadido = AccesoDepartamento.anadirDepartamento(nombre5, ubicacion5);
+                        System.out.println(anadido ? "departamento añadido" : "departamento no añadido");
+                        break;
+                    case 6:
+                        int codigo6 = Teclado.leerEntero("Codigo: ");
+                        Empleado empleado6 = AccesoEmpleado.consultarEmpleadoCodigo(codigo6);
+                        System.out.println(empleado6 != null ? empleado6 : "no encontrado");
+                        break;
+                    case 7:
+                        float salario7 = (float) Teclado.leerReal("salario: ");
+                        List<Empleado> listaEmpleados = AccesoEmpleado.consultarEmpleadosConMasSalario(salario7);
+                        if (!listaEmpleados.isEmpty()) {
+                            System.out.println("Empleados con mayor salario que " + salario7);
+                            for (Empleado empleado : listaEmpleados) {
+                                System.out.println(empleado);
+                            }
+                        } else {
+                            System.out.println("No existen empleados");
+                        }
+                        break;
+                    case 8:
+                        String nombre8 = Teclado.leerCadena("Nombre : ");
+                        String fechaAlta8 = Teclado.leerCadena("Fecha alta: ");
+                        float salario8 = (float) Teclado.leerReal("salario: ");
+                        System.out.println("Departamentos disponibles:");
+
+                        // muestro los departamentos existentes
+                        List<Departamento> listaDepartamentos8 = AccesoDepartamento.consultarDepartamentosOrdenNombre();
+                        for (Departamento d8 : listaDepartamentos8) {
+                            System.out.println(d8);
+                        }
+
+                        // lista con los codigos de los departamentos
+                        List<Integer> codigosDepartamentos = new ArrayList<>(listaDepartamentos8.size());
+                        for (Departamento departamento : listaDepartamentos8) {
+                            codigosDepartamentos.add(departamento.getCodigo());
+                        }
+
+                        // le hago escoger el departamento existente
+                        int codigoDepartamento8 = Teclado.leerEntero("Codigo del departamento: ");
+                        while (!codigosDepartamentos.contains(codigoDepartamento8)) {
+                            System.out.println("Codigo no valido");
+                            codigoDepartamento8 = Teclado.leerEntero("Codigo del departamento: ");
+                        }
+
+                        boolean anadido8 = AccesoEmpleado.anadirEmpleado(nombre8, fechaAlta8, salario8, codigoDepartamento8);
+                        System.out.println(anadido8 ? "empleado añadido" : "empleado no añadido");
+                        break;
+                    case 9:
+                        int codigo9 = Teclado.leerEntero("codigo? ");
+                        boolean borrado9 = AccesoEmpleado.borrarEmpleadoCodigo(codigo9);
+                        System.out.println(borrado9 ? "Empleado borrado" : "Empleado no borrado");
+                        break;
+                    case 10:
+                        int codigo10 = Teclado.leerEntero("Codigo: ");
+                        System.out.println("Departamentos disponibles:");
+
+                        // muestro los departamentos existentes
+                        List<Departamento> listaDepartamentos10 = AccesoDepartamento.consultarDepartamentosOrdenNombre();
+                        for (Departamento d : listaDepartamentos10) {
+                            System.out.println(d);
+                        }
+
+                        // lista con los codigos de los departamentos
+                        List<Integer> codigosDepartamentos10 = new ArrayList<>(listaDepartamentos10.size());
+                        for (Departamento departamento : listaDepartamentos10) {
+                            codigosDepartamentos10.add(departamento.getCodigo());
+                        }
+
+                        // le hago escoger el departamento existente
+                        int codigoDepartamento10 = Teclado.leerEntero("Codigo del departamento: ");
+                        while (!codigosDepartamentos10.contains(codigoDepartamento10)) {
+                            System.out.println("Codigo no valido");
+                            codigoDepartamento10 = Teclado.leerEntero("Codigo del departamento: ");
+                        }
+
+                        boolean modificado10 = AccesoEmpleado.modificarDepartamentoCodigo(codigo10, codigoDepartamento10);
+                        System.out.println(modificado10 ? "Empelado modificado" : "Empelado no modificado");
+                        break;
+                    case 11:
+                        List<Empleado> listaEmpleados11 = AccesoEmpleado.consultarEmpleados();
+                        if (!listaEmpleados11.isEmpty()) {
+                            System.out.println("Empleados:");
+                            for (Empleado empleado : listaEmpleados11) {
+                                System.out.println(empleado);
+                            }
+                        } else {
+                            System.out.println("No existen empleados");
+                        }
+                        break;
                 }
-            } while (opcion != 0);
-        } catch (BDException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+            } catch (BDException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        } while (opcion != 0);
     }
 }
