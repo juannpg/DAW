@@ -54,8 +54,8 @@ public class Principal {
                     case 1:
                         String nombre5 = Teclado.leerCadena("Nombre: ");
                         String ubicacion5 = Teclado.leerCadena("Ubicacion: ");
-                        boolean anadido = AccesoDepartamento.anadirDepartamento(nombre5, ubicacion5, opcionBD);
-                        System.out.println(anadido ? "departamento añadido" : "departamento no añadido");
+                        AccesoDepartamento.anadirDepartamento(nombre5, ubicacion5, opcionBD);
+                        System.out.println("Departamento añadido");
                         break;
                     case 2:
                         int codigo1 = Teclado.leerEntero("codigo? ");
@@ -176,9 +176,11 @@ public class Principal {
                             System.out.println("\t" + d);
                         }
 
+                        boolean modificado11 = false;
+
                         int codigoDepartamento11 = Teclado.leerEntero("Codigo del departamento: ");
                         try {
-                            AccesoEmpleado.modificarDepartamentoCodigo(codigoEmpleado11, codigoDepartamento11, opcionBD);
+                            modificado11 = AccesoEmpleado.modificarDepartamentoCodigo(codigoEmpleado11, codigoDepartamento11, opcionBD);
                         } catch (BDException bde) {
                             System.out.println("---------------------------------------");
                             System.out.println("No existe ese departamento. Deseas crear uno nuevo? (true | false)");
@@ -188,15 +190,19 @@ public class Principal {
                             if (crearNuevo11) {
                                 System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
                                 System.out.println("Creando nuevo departamento con código: " + codigoDepartamento11);
-                                String nombre10 = Teclado.leerCadena("Nombre nuevo: ");
-                                String ubicacion10 = Teclado.leerCadena("Ubicacion nueva: ");
+                                String nombre11 = Teclado.leerCadena("Nombre nuevo: ");
+                                String ubicacion11 = Teclado.leerCadena("Ubicacion nueva: ");
 
-                                AccesoDepartamento.anadirDepartamento(nombre10, ubicacion10, opcionBD);
-                                AccesoEmpleado.modificarDepartamentoCodigo(codigoEmpleado11, codigoDepartamento11, opcionBD);
+                                AccesoDepartamento.anadirDepartamentoCodigo(codigoDepartamento11, nombre11, ubicacion11, opcionBD);
+                                modificado11 = AccesoEmpleado.modificarDepartamentoCodigo(codigoEmpleado11, codigoDepartamento11, opcionBD);
                             }
                         }
 
-                        System.out.println("Empelado modificado:");
+                        if (modificado11) {
+                            System.out.println("Empleado modificado:");
+                        } else {
+                            System.out.println("Empleado no modificado:");
+                        }
                         break;
                     case 12:
                         int codigo9 = Teclado.leerEntero("codigo? ");

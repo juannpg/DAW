@@ -166,4 +166,34 @@ public class AccesoDepartamento {
 
         return filas == 1;
     }
+
+    //añadir un departamento
+    public static boolean anadirDepartamentoCodigo(int codigo, String nombre, String ubicacion, String opcion) throws BDException {
+        Connection conexion = null;
+        int filas = 0;
+        try {
+            conexion = opcion.equalsIgnoreCase("mysql")
+                    ? ConfigMySql.abrirConexion()
+                    : ConfigSQLite.abrirConexion();
+
+            String query = "insert into departamento (codigo, nombre, ubicacion) values (" +
+                    codigo + ", '" +
+                    nombre + "', '" +
+                    ubicacion + "')";
+            Statement sentencia = conexion.createStatement();
+            filas = sentencia.executeUpdate(query);
+        } catch (SQLException e) {
+            throw new BDException(BDException.ERROR_QUERY + e.getMessage());
+        } finally {
+            if (conexion != null) {
+                if (opcion.equalsIgnoreCase("mysql")) {
+                    ConfigMySql.cerrarConexion(conexion);
+                } else {
+                    ConfigSQLite.cerrarConexion(conexion);
+                }
+            }
+        }
+
+        return filas == 1;
+    }
 }
