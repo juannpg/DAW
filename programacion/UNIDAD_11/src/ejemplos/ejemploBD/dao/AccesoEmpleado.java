@@ -1,10 +1,10 @@
-package ejemplos.ejemploBDMySQL.dao;
+package ejemplos.ejemploBD.dao;
 
-import ejemplos.ejemploBDMySQL.config.ConfigMySql;
-import ejemplos.ejemploBDMySQL.config.ConfigSQLite;
-import ejemplos.ejemploBDMySQL.excepciones.BDException;
-import ejemplos.ejemploBDMySQL.modelo.Departamento;
-import ejemplos.ejemploBDMySQL.modelo.Empleado;
+import ejemplos.ejemploBD.config.ConfigMySql;
+import ejemplos.ejemploBD.config.ConfigSQLite;
+import ejemplos.ejemploBD.excepciones.BDException;
+import ejemplos.ejemploBD.modelo.Departamento;
+import ejemplos.ejemploBD.modelo.Empleado;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,10 +1,10 @@
-package ejemplos.ejemploBDMySQL;
+package ejemplos.ejemploBD;
 
-import ejemplos.ejemploBDMySQL.dao.AccesoDepartamento;
-import ejemplos.ejemploBDMySQL.dao.AccesoEmpleado;
-import ejemplos.ejemploBDMySQL.excepciones.BDException;
-import ejemplos.ejemploBDMySQL.modelo.Departamento;
-import ejemplos.ejemploBDMySQL.modelo.Empleado;
+import ejemplos.ejemploBD.dao.AccesoDepartamento;
+import ejemplos.ejemploBD.dao.AccesoEmpleado;
+import ejemplos.ejemploBD.excepciones.BDException;
+import ejemplos.ejemploBD.modelo.Departamento;
+import ejemplos.ejemploBD.modelo.Empleado;
 import entrada.Teclado;
 
 import java.util.ArrayList;

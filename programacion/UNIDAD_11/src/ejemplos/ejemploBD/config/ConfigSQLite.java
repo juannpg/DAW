@@ -1,6 +1,6 @@
-package ejemplos.ejemploBDMySQL.config;
+package ejemplos.ejemploBD.config;
 
-import ejemplos.ejemploBDMySQL.excepciones.BDException;
+import ejemplos.ejemploBD.excepciones.BDException;
 import org.sqlite.SQLiteConfig;
 
 import java.sql.Connection;

@@ -1,4 +1,4 @@
-package ejemplos.ejemploBDMySQL.excepciones;
+package ejemplos.ejemploBD.excepciones;
 
 public class BDException extends Exception {
 

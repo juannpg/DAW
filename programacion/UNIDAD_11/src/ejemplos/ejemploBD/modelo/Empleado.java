@@ -1,4 +1,4 @@
-package ejemplos.ejemploBDMySQL.modelo;
+package ejemplos.ejemploBD.modelo;
 
 public class Empleado {
     private int codigo;
