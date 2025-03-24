@@ -58,10 +58,13 @@ public class Principal {
                         System.out.println(anadido ? "departamento añadido" : "departamento no añadido");
                         break;
                     case 2:
-                        int codigo2 = Teclado.leerEntero("codigo? ");
-                        String ubicacion2 = Teclado.leerCadena("ubicación? ");
-                        boolean modificado = AccesoDepartamento.modificarUbicacionDepartamentoCodigo(codigo2, ubicacion2, opcionBD);
-                        System.out.println(modificado ? "Departamento modificado" : "Departamento no modificado");
+                        int codigo1 = Teclado.leerEntero("codigo? ");
+                        Departamento departamento1 = AccesoDepartamento.consultarDepartamentoCodigo(codigo1, opcionBD);
+                        if (departamento1 != null) {
+                            System.out.println(departamento1);
+                        } else {
+                            System.out.println("No existe departamento con codigo " + codigo1);
+                        }
                         break;
                     case 3:
                         List<Departamento> listaDepartamentos = AccesoDepartamento.consultarDepartamentosOrdenNombre(opcionBD);
@@ -75,13 +78,10 @@ public class Principal {
                         }
                         break;
                     case 4:
-                        int codigo1 = Teclado.leerEntero("codigo? ");
-                        Departamento departamento1 = AccesoDepartamento.consultarDepartamentoCodigo(codigo1, opcionBD);
-                        if (departamento1 != null) {
-                            System.out.println(departamento1);
-                        } else {
-                            System.out.println("No existe departamento con codigo " + codigo1);
-                        }
+                        int codigo2 = Teclado.leerEntero("codigo? ");
+                        String ubicacion2 = Teclado.leerCadena("ubicación? ");
+                        boolean modificado = AccesoDepartamento.modificarUbicacionDepartamentoCodigo(codigo2, ubicacion2, opcionBD);
+                        System.out.println(modificado ? "Departamento modificado" : "Departamento no modificado");
                         break;
                     case 5:
                         int codigo3 = Teclado.leerEntero("codigo? ");
@@ -156,30 +156,47 @@ public class Principal {
                         }
                         break;
                     case 11:
-                        int codigo10 = Teclado.leerEntero("Codigo: ");
+                        List<Empleado> empleados11 = AccesoEmpleado.consultarEmpleados(opcionBD);
+                        System.out.println("Empleados disponibles:");
+                        for (Empleado empleado11 : empleados11) {
+                            System.out.println("\t" + empleado11);
+                        }
+
+                        int codigoEmpleado11 = Teclado.leerEntero("Codigo de empleadoa  modificar: ");
+                        Empleado empleado11 = AccesoEmpleado.consultarEmpleadoCodigo(codigoEmpleado11, opcionBD);
+                        while (empleado11 == null) {
+                            System.out.println("No existe ese empleado");
+                            codigoEmpleado11 = Teclado.leerEntero("Codigo de empleado a modificar: ");
+                            empleado11 = AccesoEmpleado.consultarEmpleadoCodigo(codigoEmpleado11, opcionBD);
+                        }
+
                         System.out.println("Departamentos disponibles:");
-
-                        // muestro los departamentos existentes
-                        List<Departamento> listaDepartamentos10 = AccesoDepartamento.consultarDepartamentosOrdenNombre(opcionBD);
-                        for (Departamento d : listaDepartamentos10) {
-                            System.out.println(d);
+                        List<Departamento> listaDepartamentos11 = AccesoDepartamento.consultarDepartamentosOrdenNombre(opcionBD);
+                        for (Departamento d : listaDepartamentos11) {
+                            System.out.println("\t" + d);
                         }
 
-                        // lista con los codigos de los departamentos
-                        List<Integer> codigosDepartamentos10 = new ArrayList<>(listaDepartamentos10.size());
-                        for (Departamento departamento : listaDepartamentos10) {
-                            codigosDepartamentos10.add(departamento.getCodigo());
+                        int codigoDepartamento11 = Teclado.leerEntero("Codigo del departamento: ");
+                        try {
+                            AccesoEmpleado.modificarDepartamentoCodigo(codigoEmpleado11, codigoDepartamento11, opcionBD);
+                        } catch (BDException bde) {
+                            System.out.println("---------------------------------------");
+                            System.out.println("No existe ese departamento. Deseas crear uno nuevo? (true | false)");
+                            System.out.println("---------------------------------------");
+                            boolean crearNuevo11 = Teclado.leerBooleano("Opcion: ");
+
+                            if (crearNuevo11) {
+                                System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
+                                System.out.println("Creando nuevo departamento con código: " + codigoDepartamento11);
+                                String nombre10 = Teclado.leerCadena("Nombre nuevo: ");
+                                String ubicacion10 = Teclado.leerCadena("Ubicacion nueva: ");
+
+                                AccesoDepartamento.anadirDepartamento(nombre10, ubicacion10, opcionBD);
+                                AccesoEmpleado.modificarDepartamentoCodigo(codigoEmpleado11, codigoDepartamento11, opcionBD);
+                            }
                         }
 
-                        // le hago escoger el departamento existente
-                        int codigoDepartamento10 = Teclado.leerEntero("Codigo del departamento: ");
-                        while (!codigosDepartamentos10.contains(codigoDepartamento10)) {
-                            System.out.println("Codigo no valido");
-                            codigoDepartamento10 = Teclado.leerEntero("Codigo del departamento: ");
-                        }
-
-                        boolean modificado10 = AccesoEmpleado.modificarDepartamentoCodigo(codigo10, codigoDepartamento10, opcionBD);
-                        System.out.println(modificado10 ? "Empelado modificado" : "Empelado no modificado");
+                        System.out.println("Empelado modificado:");
                         break;
                     case 12:
                         int codigo9 = Teclado.leerEntero("codigo? ");

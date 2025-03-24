@@ -1,4 +1,7 @@
 package ejemplos.ejemploBDMySQL.modelo;
+
+import java.util.Objects;
+
 public class Departamento {
 	private int codigo;
 	private String nombre;
@@ -8,6 +11,10 @@ public class Departamento {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.ubicacion = ubicacion;
+	}
+
+	public Departamento(int codigo) {
+		this.codigo = codigo;
 	}
 
 	@Override
@@ -41,5 +48,18 @@ public class Departamento {
 
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Departamento that = (Departamento) o;
+		return codigo == that.codigo;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(codigo);
 	}
 }
