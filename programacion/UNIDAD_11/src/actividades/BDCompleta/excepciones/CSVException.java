@@ -1,4 +1,4 @@
-package ejemplos.ejemploBD.excepciones;
+package actividades.BDCompleta.excepciones;
 
 public class CSVException extends RuntimeException {
     public static final String ERROR_NO_EXISTE = "El fichero no existe en la ruta especificada";

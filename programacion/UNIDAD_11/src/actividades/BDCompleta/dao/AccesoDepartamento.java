@@ -1,9 +1,9 @@
-package ejemplos.ejemploBD.dao;
+package actividades.BDCompleta.dao;
 
-import ejemplos.ejemploBD.config.ConfigMySql;
-import ejemplos.ejemploBD.config.ConfigSQLite;
-import ejemplos.ejemploBD.excepciones.BDException;
-import ejemplos.ejemploBD.modelo.Departamento;
+import actividades.BDCompleta.config.ConfigMySql;
+import actividades.BDCompleta.config.ConfigSQLite;
+import actividades.BDCompleta.excepciones.BDException;
+import actividades.BDCompleta.modelo.Departamento;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

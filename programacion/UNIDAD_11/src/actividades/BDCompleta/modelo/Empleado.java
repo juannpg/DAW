@@ -1,8 +1,8 @@
-package ejemplos.ejemploBD.modelo;
+package actividades.BDCompleta.modelo;
 
-import ejemplos.ejemploBD.Principal;
-import ejemplos.ejemploBD.dao.AccesoDepartamento;
-import ejemplos.ejemploBD.excepciones.BDException;
+import actividades.BDCompleta.Principal;
+import actividades.BDCompleta.dao.AccesoDepartamento;
+import actividades.BDCompleta.excepciones.BDException;
 
 public class Empleado {
     private static final String SEPARADOR = ";";
@@ -38,10 +38,10 @@ public class Empleado {
     public String toStringWithSeparators() {
         return
                 this.codigo + SEPARADOR +
-                this.nombre + SEPARADOR +
-                this.fechaAlta + SEPARADOR +
-                String.format("%.2f", this.salario).replace(",", ".") + SEPARADOR +
-                this.departamento.getCodigo();
+                        this.nombre + SEPARADOR +
+                        this.fechaAlta + SEPARADOR +
+                        String.format("%.2f", this.salario).replace(",", ".") + SEPARADOR +
+                        this.departamento.getCodigo();
     }
 
     @Override

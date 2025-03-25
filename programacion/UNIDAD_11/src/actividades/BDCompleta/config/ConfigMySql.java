@@ -1,6 +1,6 @@
-package ejemplos.ejemploBD.config;
+package actividades.BDCompleta.config;
 
-import ejemplos.ejemploBD.excepciones.BDException;
+import actividades.BDCompleta.excepciones.BDException;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

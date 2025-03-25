@@ -1,4 +1,4 @@
-package ejemplos.ejemploBD.excepciones;
+package actividades.BDCompleta.excepciones;
 
 public class BDException extends Exception {
 

@@ -1,12 +1,12 @@
-package ejemplos.ejemploBD.dao;
+package actividades.BDCompleta.dao;
 
-import ejemplos.ejemploBD.Principal;
-import ejemplos.ejemploBD.config.ConfigMySql;
-import ejemplos.ejemploBD.config.ConfigSQLite;
-import ejemplos.ejemploBD.excepciones.BDException;
-import ejemplos.ejemploBD.excepciones.CSVException;
-import ejemplos.ejemploBD.modelo.Departamento;
-import ejemplos.ejemploBD.modelo.Empleado;
+import actividades.BDCompleta.Principal;
+import actividades.BDCompleta.config.ConfigMySql;
+import actividades.BDCompleta.config.ConfigSQLite;
+import actividades.BDCompleta.excepciones.BDException;
+import actividades.BDCompleta.excepciones.CSVException;
+import actividades.BDCompleta.modelo.Departamento;
+import actividades.BDCompleta.modelo.Empleado;
 
 import java.io.*;
 import java.sql.Connection;

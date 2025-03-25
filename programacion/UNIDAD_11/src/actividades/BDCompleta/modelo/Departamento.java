@@ -1,4 +1,4 @@
-package ejemplos.ejemploBD.modelo;
+package actividades.BDCompleta.modelo;
 
 import java.util.Objects;
 

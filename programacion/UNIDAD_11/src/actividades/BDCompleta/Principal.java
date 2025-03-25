@@ -1,11 +1,11 @@
-package ejemplos.ejemploBD;
+package actividades.BDCompleta;
 
-import ejemplos.ejemploBD.dao.AccesoDepartamento;
-import ejemplos.ejemploBD.dao.AccesoEmpleado;
-import ejemplos.ejemploBD.excepciones.BDException;
-import ejemplos.ejemploBD.excepciones.CSVException;
-import ejemplos.ejemploBD.modelo.Departamento;
-import ejemplos.ejemploBD.modelo.Empleado;
+import actividades.BDCompleta.dao.AccesoDepartamento;
+import actividades.BDCompleta.dao.AccesoEmpleado;
+import actividades.BDCompleta.excepciones.BDException;
+import actividades.BDCompleta.excepciones.CSVException;
+import actividades.BDCompleta.modelo.Departamento;
+import actividades.BDCompleta.modelo.Empleado;
 import entrada.Teclado;
 
 import java.util.ArrayList;
