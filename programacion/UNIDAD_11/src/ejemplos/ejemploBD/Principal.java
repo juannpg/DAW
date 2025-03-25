@@ -3,6 +3,7 @@ package ejemplos.ejemploBD;
 import ejemplos.ejemploBD.dao.AccesoDepartamento;
 import ejemplos.ejemploBD.dao.AccesoEmpleado;
 import ejemplos.ejemploBD.excepciones.BDException;
+import ejemplos.ejemploBD.excepciones.CSVException;
 import ejemplos.ejemploBD.modelo.Departamento;
 import ejemplos.ejemploBD.modelo.Empleado;
 import entrada.Teclado;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Principal {
+    public static String opcionBD;
+
     private static int menu(String mensaje, int numOpciones) {
         int opcion;
         do {
@@ -25,7 +28,6 @@ public class Principal {
     }
 
     public static void main(String[] args) {
-        String opcionBD;
         do {
             opcionBD = Teclado.leerCadena("Opción (mysql | sqlite): ");
         } while (!opcionBD.equalsIgnoreCase("mysql") && !opcionBD.equalsIgnoreCase("sqlite"));
@@ -47,7 +49,9 @@ public class Principal {
                     "(10) Buscar todos los codigos y nombres de empelados que trabajen en el departamento de informática\n" +
                     "(11) Modificar departamento de un empleado\n" +
                     "(12) Borrar empleado por codigo\n" +
-                    "-----------------------------------------", 12);
+                    "(13) Exportar empleados a CSV\n" +
+                    "(14) Importar empleados de CSV\n" +
+                    "-----------------------------------------", 14);
 
             try {
                 switch (opcion) {
@@ -162,12 +166,11 @@ public class Principal {
                             System.out.println("\t" + empleado11);
                         }
 
-                        int codigoEmpleado11 = Teclado.leerEntero("Codigo de empleadoa  modificar: ");
+                        int codigoEmpleado11 = Teclado.leerEntero("Codigo de empleado a modificar: ");
                         Empleado empleado11 = AccesoEmpleado.consultarEmpleadoCodigo(codigoEmpleado11, opcionBD);
-                        while (empleado11 == null) {
+                        if (empleado11 == null) {
                             System.out.println("No existe ese empleado");
-                            codigoEmpleado11 = Teclado.leerEntero("Codigo de empleado a modificar: ");
-                            empleado11 = AccesoEmpleado.consultarEmpleadoCodigo(codigoEmpleado11, opcionBD);
+                            break;
                         }
 
                         System.out.println("Departamentos disponibles:");
@@ -182,13 +185,9 @@ public class Principal {
                         try {
                             modificado11 = AccesoEmpleado.modificarDepartamentoCodigo(codigoEmpleado11, codigoDepartamento11, opcionBD);
                         } catch (BDException bde) {
-                            System.out.println("---------------------------------------");
-                            System.out.println("No existe ese departamento. Deseas crear uno nuevo? (true | false)");
-                            System.out.println("---------------------------------------");
-                            boolean crearNuevo11 = Teclado.leerBooleano("Opcion: ");
+                            boolean crearNuevo11 = Teclado.leerBooleano("No existe ese departamento. Deseas crear uno nuevo? (true | false): ");
 
                             if (crearNuevo11) {
-                                System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-");
                                 System.out.println("Creando nuevo departamento con código: " + codigoDepartamento11);
                                 String nombre11 = Teclado.leerCadena("Nombre nuevo: ");
                                 String ubicacion11 = Teclado.leerCadena("Ubicacion nueva: ");
@@ -209,9 +208,21 @@ public class Principal {
                         boolean borrado9 = AccesoEmpleado.borrarEmpleadoCodigo(codigo9, opcionBD);
                         System.out.println(borrado9 ? "Empleado borrado" : "Empleado no borrado");
                         break;
+                    case 13:
+                        List<Empleado> empleados12 = AccesoEmpleado.consultarEmpleados(opcionBD);
+                        AccesoEmpleado.exportarEmpleadosCSV(empleados12);
+                        System.out.println("Archivo exportado en csv/empleados.csv");
+                        break;
+                    case 14:
+                        String ruta14 = Teclado.leerCadena("ruta del fichero: ");
+                        AccesoEmpleado.importarEmpleadosCSV(ruta14);
+                        System.out.println("Empleados importados correctamente");
+                        break;
                 }
             } catch (BDException e) {
                 System.out.println("Error: " + e.getMessage());
+            } catch (CSVException csve) {
+                System.out.println(csve.getMessage());
             }
         } while (opcion != 0);
     }

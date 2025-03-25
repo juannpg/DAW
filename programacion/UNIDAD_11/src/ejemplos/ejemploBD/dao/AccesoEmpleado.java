@@ -1,11 +1,14 @@
 package ejemplos.ejemploBD.dao;
 
+import ejemplos.ejemploBD.Principal;
 import ejemplos.ejemploBD.config.ConfigMySql;
 import ejemplos.ejemploBD.config.ConfigSQLite;
 import ejemplos.ejemploBD.excepciones.BDException;
+import ejemplos.ejemploBD.excepciones.CSVException;
 import ejemplos.ejemploBD.modelo.Departamento;
 import ejemplos.ejemploBD.modelo.Empleado;
 
+import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -65,6 +68,37 @@ public class AccesoEmpleado {
             ps.setString(2, fecha_alta);
             ps.setFloat(3, salario);
             ps.setInt(4, codigoDepartamento);
+            filas = ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new BDException(BDException.ERROR_QUERY + e.getMessage());
+        } finally {
+            if (conexion != null) {
+                if (opcion.equalsIgnoreCase("mysql")) {
+                    ConfigMySql.cerrarConexion(conexion);
+                } else {
+                    ConfigSQLite.cerrarConexion(conexion);
+                }
+            }
+        }
+
+        return filas == 1;
+    }
+
+    public static boolean anadirEmpleadoCodigo(int codigo, String nombre, String fecha_alta, float salario, int codigoDepartamento, String opcion) throws BDException {
+        Connection conexion = null;
+        int filas = 0;
+        try {
+            conexion = opcion.equalsIgnoreCase("mysql")
+                    ? ConfigMySql.abrirConexion()
+                    : ConfigSQLite.abrirConexion();
+
+            String query = "insert into empleado (codigo, nombre, fecha_alta, salario, codigo_departamento) values (?, ?, ?, ?, ?)";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setInt(1, codigo);
+            ps.setString(2, nombre);
+            ps.setString(3, fecha_alta);
+            ps.setFloat(4, salario);
+            ps.setInt(5, codigoDepartamento);
             filas = ps.executeUpdate();
         } catch (SQLException e) {
             throw new BDException(BDException.ERROR_QUERY + e.getMessage());
@@ -260,5 +294,73 @@ public class AccesoEmpleado {
         }
 
         return listaEmpleados;
+    }
+
+    public static void exportarEmpleadosCSV(List<Empleado> empleados) {
+        BufferedWriter bw = null;
+        String ruta = "csv/empleados.csv";
+        try {
+            bw = new BufferedWriter(new FileWriter(new File(ruta), false));
+
+            for (Empleado empleado : empleados) {
+                bw.write(empleado.toStringWithSeparators());
+                bw.newLine();
+            }
+
+            bw.close();
+        } catch (IOException ioe) {
+            throw new CSVException(CSVException.ERROR_ESCRITURA);
+        } finally {
+            try {
+                if (bw != null) {
+                    bw.close();
+                }
+            } catch (IOException ioe) {
+                throw new CSVException(CSVException.ERROR_CIERRE);
+            }
+        }
+    }
+
+    public static void importarEmpleadosCSV(String ruta) throws BDException {
+        BufferedReader br = null;
+        File fichero = new File(ruta);
+        if (!fichero.exists()) {
+//            error no existe
+        }
+
+        try {
+            br = new BufferedReader(new FileReader(fichero));
+            String linea = br.readLine();
+
+            while (linea != null) {
+                Empleado empleado = new Empleado(linea);
+                try {
+                    AccesoEmpleado.anadirEmpleadoCodigo(empleado.getCodigo(), empleado.getNombre(), empleado.getFechaAlta(), empleado.getSalario(), empleado.getDepartamento().getCodigo(), Principal.opcionBD);
+                } catch (BDException bde) {
+                    // modificar datos
+                }
+                linea = br.readLine();
+            }
+
+            br.close();
+        } catch (FileNotFoundException fnfe) {
+            System.out.println("Error al abrir el fichero: " + fnfe.getMessage());
+            fnfe.printStackTrace();
+        } catch (IOException ioe) {
+            System.out.println("Error al leer del fichero: " + ioe.getMessage());
+            ioe.printStackTrace();
+        } catch (NumberFormatException nfe) {
+            System.out.println("Error al convertir de cadena a número: " + nfe.getMessage());
+            nfe.printStackTrace();
+        } finally {
+            try {
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException ioe) {
+                System.out.println("Error al cerrar el fichero: " + ioe.getMessage());
+                ioe.printStackTrace();
+            }
+        }
     }
 }
