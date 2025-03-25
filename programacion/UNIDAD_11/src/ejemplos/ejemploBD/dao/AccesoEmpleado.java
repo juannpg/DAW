@@ -229,6 +229,38 @@ public class AccesoEmpleado {
         return listaEmpleados;
     }
 
+    public static boolean modificarEmpleadoEntero(Empleado empleado, String opcion) throws BDException {
+        int filasAfectadas = 0;
+        Connection conexion = null;
+        try {
+            conexion = opcion.equalsIgnoreCase("mysql")
+                    ? ConfigMySql.abrirConexion()
+                    : ConfigSQLite.abrirConexion();
+            String queryUpdate = "update empleado set nombre = ?, fecha_alta = ?, salario = ?, codigo_departamento = ? where codigo = ?";
+            PreparedStatement ps = conexion.prepareStatement(queryUpdate);
+            ps.setString(1, empleado.getNombre());
+            ps.setString(2, empleado.getFechaAlta());
+            ps.setFloat(3, empleado.getSalario());
+            ps.setInt(4, empleado.getDepartamento().getCodigo());
+            ps.setInt(5, empleado.getCodigo());
+
+            filasAfectadas = ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new BDException(BDException.ERROR_QUERY + e.getMessage());
+        } finally {
+            if (conexion != null) {
+                if (opcion.equalsIgnoreCase("mysql")) {
+                    ConfigMySql.cerrarConexion(conexion);
+                } else {
+                    ConfigSQLite.cerrarConexion(conexion);
+                }
+            }
+        }
+
+        return filasAfectadas == 1;
+    }
+
     public static boolean modificarDepartamentoCodigo(int codigo, int codigoDepartamento, String opcion) throws BDException {
         int filasAfectadas = 0;
         Connection conexion = null;
@@ -325,7 +357,7 @@ public class AccesoEmpleado {
         BufferedReader br = null;
         File fichero = new File(ruta);
         if (!fichero.exists()) {
-//            error no existe
+            throw new CSVException(CSVException.ERROR_NO_EXISTE);
         }
 
         try {
@@ -337,29 +369,25 @@ public class AccesoEmpleado {
                 try {
                     AccesoEmpleado.anadirEmpleadoCodigo(empleado.getCodigo(), empleado.getNombre(), empleado.getFechaAlta(), empleado.getSalario(), empleado.getDepartamento().getCodigo(), Principal.opcionBD);
                 } catch (BDException bde) {
-                    // modificar datos
+                    AccesoEmpleado.modificarEmpleadoEntero(empleado, Principal.opcionBD);
                 }
                 linea = br.readLine();
             }
 
             br.close();
         } catch (FileNotFoundException fnfe) {
-            System.out.println("Error al abrir el fichero: " + fnfe.getMessage());
-            fnfe.printStackTrace();
+            throw new CSVException(CSVException.ERROR_APERTURA);
         } catch (IOException ioe) {
-            System.out.println("Error al leer del fichero: " + ioe.getMessage());
-            ioe.printStackTrace();
+            throw new CSVException(CSVException.ERROR_ESCRITURA);
         } catch (NumberFormatException nfe) {
-            System.out.println("Error al convertir de cadena a número: " + nfe.getMessage());
-            nfe.printStackTrace();
+            throw new CSVException(CSVException.ERROR_PARSE);
         } finally {
             try {
                 if (br != null) {
                     br.close();
                 }
             } catch (IOException ioe) {
-                System.out.println("Error al cerrar el fichero: " + ioe.getMessage());
-                ioe.printStackTrace();
+                throw new CSVException(CSVException.ERROR_CIERRE);
             }
         }
     }
