@@ -41,7 +41,9 @@ public class Empleado {
                         this.nombre + SEPARADOR +
                         this.fechaAlta + SEPARADOR +
                         String.format("%.2f", this.salario).replace(",", ".") + SEPARADOR +
-                        this.departamento.getCodigo();
+                        this.departamento.getCodigo() + SEPARADOR +
+                        this.departamento.getNombre() + SEPARADOR +
+                        this.departamento.getUbicacion();
     }
 
     @Override

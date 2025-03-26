@@ -332,7 +332,7 @@ public class AccesoEmpleado {
         BufferedWriter bw = null;
         String ruta = "csv/empleados.csv";
         try {
-            bw = new BufferedWriter(new FileWriter(new File(ruta), false));
+            bw = new BufferedWriter(new FileWriter(ruta, false));
 
             for (Empleado empleado : empleados) {
                 bw.write(empleado.toStringWithSeparators());
