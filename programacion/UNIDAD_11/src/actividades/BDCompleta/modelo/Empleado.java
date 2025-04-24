@@ -1,9 +1,5 @@
 package actividades.BDCompleta.modelo;
 
-import actividades.BDCompleta.Principal;
-import actividades.BDCompleta.dao.AccesoDepartamento;
-import actividades.BDCompleta.excepciones.BDException;
-
 public class Empleado {
     private static final String SEPARADOR = ";";
 
@@ -21,13 +17,13 @@ public class Empleado {
         this.departamento = departamento;
     }
 
-    public Empleado(String linea) throws BDException {
+    public Empleado(String linea) {
         String[] datos = linea.split(SEPARADOR);
         this.codigo = Integer.parseInt(datos[0]);
         this.nombre = datos[1];
         this.fechaAlta = datos[2];
         this.salario = Float.parseFloat(datos[3]);
-        this.departamento = AccesoDepartamento.consultarDepartamentoCodigo(Integer.parseInt(datos[4]), Principal.opcionBD);
+        this.departamento = new Departamento(Integer.parseInt(datos[4]), datos[5], datos[6]);
     }
 
     public Empleado(int codigo, String nombre) {

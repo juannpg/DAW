@@ -1,0 +1,8 @@
+<!ELEMENT clase (profesor, aula, notas)>
+<!ELEMENT profesor (nombre, email, edad)>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT aula (codigo, grado)>
+<!ELEMENT codigo (#PCDATA)>
+<!ELEMENT grado (#PCDATA)>
+<!ELEMENT media (#PCDATA)>

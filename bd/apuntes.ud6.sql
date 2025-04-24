@@ -52,3 +52,26 @@ values (secuencia_id_departamento.nextval, 'chochito');
 
 drop sequence secuencia_id_departamento;
 
+-------------------
+Crear un nuevo contenedor con una nueva base de datos con un usuario admin.
+se realiza todo desde el user sys con permisos pdba;
+create pluggable database PDBZOO
+admin user PDBAdmin identified by case
+default tablespace users
+datafile 'C:\app\juanp\product\21c\oradata\XE\PDBZOO\users.dbf' size 50M
+autoextend on
+path_prefix = 'C:\app\juanp\product\21c\oradata\XE\PDBZOO\'
+file_name_convert = ('C:\app\juanp\product\21c\oradata\XE\pdbseed\','C:\app\juanp\product\21c\oradata\XE\PDBZOO\');
+
+show pdbs;
+
+alter pluggable database pdbzoo open;
+alter pluggable database pdbzoo save state;
+
+alter session set container = pdbzoo;
+create user zooAdmin identified by case
+quota 100M on users;
+grant connect, resource, dba to zooAdmin;
+
+alter pluggable database pdbzoo close;
+alter pluggable database pdbzoo save state;

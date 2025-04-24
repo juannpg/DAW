@@ -33,6 +33,8 @@ public class AccesoDepartamento {
                 ubicacion = resultado.getString("ubicacion");
 
                 departamentoReturn = new Departamento(codigo, nombre, ubicacion);
+            } else {
+                throw new BDException(BDException.ERROR_NO_EXISTE);
             }
         } catch (SQLException e) {
             throw new BDException(BDException.ERROR_QUERY + e.getMessage());

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clase>
+    <profesor>
+        <nombre>Marta Peribáñez</nombre>
+        <email>marta@losenlaces.com</email>
+        <edad>27</edad>
+    </profesor>
+    <aula>
+        <codigo>207</codigo>
+        <grado>DAW</grado>
+    </aula>
+    <media>7</media>
+</clase>

@@ -84,22 +84,27 @@ public class AccesoEmpleado {
         return filas == 1;
     }
 
-    public static boolean anadirEmpleadoCodigo(int codigo, String nombre, String fecha_alta, float salario, int codigoDepartamento, String opcion) throws BDException {
+    public static void anadirEmpleadoEntero(Empleado empleado, String opcion) throws BDException {
         Connection conexion = null;
-        int filas = 0;
         try {
             conexion = opcion.equalsIgnoreCase("mysql")
                     ? ConfigMySql.abrirConexion()
                     : ConfigSQLite.abrirConexion();
 
+            try {
+                AccesoDepartamento.consultarDepartamentoCodigo(empleado.getCodigo(), Principal.opcionBD);
+            } catch (BDException e) {
+                throw new CSVException(CSVException.ERROR_NO_EXISTE_DEP);
+            }
+
             String query = "insert into empleado (codigo, nombre, fecha_alta, salario, codigo_departamento) values (?, ?, ?, ?, ?)";
             PreparedStatement ps = conexion.prepareStatement(query);
-            ps.setInt(1, codigo);
-            ps.setString(2, nombre);
-            ps.setString(3, fecha_alta);
-            ps.setFloat(4, salario);
-            ps.setInt(5, codigoDepartamento);
-            filas = ps.executeUpdate();
+            ps.setInt(1, empleado.getCodigo());
+            ps.setString(2, empleado.getNombre());
+            ps.setString(3, empleado.getFechaAlta());
+            ps.setFloat(4, empleado.getSalario());
+            ps.setInt(5, empleado.getDepartamento().getCodigo());
+            ps.executeUpdate();
         } catch (SQLException e) {
             throw new BDException(BDException.ERROR_QUERY + e.getMessage());
         } finally {
@@ -111,8 +116,6 @@ public class AccesoEmpleado {
                 }
             }
         }
-
-        return filas == 1;
     }
 
     public static boolean borrarEmpleadoCodigo(int codigo, String opcion) throws BDException {
@@ -229,8 +232,7 @@ public class AccesoEmpleado {
         return listaEmpleados;
     }
 
-    public static boolean modificarEmpleadoEntero(Empleado empleado, String opcion) throws BDException {
-        int filasAfectadas = 0;
+    public static void modificarEmpleadoEntero(Empleado empleado, String opcion) throws BDException {
         Connection conexion = null;
         try {
             conexion = opcion.equalsIgnoreCase("mysql")
@@ -244,8 +246,13 @@ public class AccesoEmpleado {
             ps.setInt(4, empleado.getDepartamento().getCodigo());
             ps.setInt(5, empleado.getCodigo());
 
-            filasAfectadas = ps.executeUpdate();
+            try {
+                AccesoDepartamento.consultarDepartamentoCodigo(empleado.getCodigo(), Principal.opcionBD);
+            } catch (BDException e) {
+                throw new CSVException("no existe ese dep");
+            }
 
+            ps.executeUpdate();
         } catch (SQLException e) {
             throw new BDException(BDException.ERROR_QUERY + e.getMessage());
         } finally {
@@ -257,8 +264,6 @@ public class AccesoEmpleado {
                 }
             }
         }
-
-        return filasAfectadas == 1;
     }
 
     public static boolean modificarDepartamentoCodigo(int codigo, int codigoDepartamento, String opcion) throws BDException {
@@ -353,7 +358,9 @@ public class AccesoEmpleado {
         }
     }
 
-    public static void importarEmpleadosCSV(String ruta) throws BDException {
+    public static boolean importarEmpleadosCSV(String ruta) throws BDException {
+        boolean fallaronAlgunas = false;
+
         BufferedReader br = null;
         File fichero = new File(ruta);
         if (!fichero.exists()) {
@@ -367,9 +374,11 @@ public class AccesoEmpleado {
             while (linea != null) {
                 Empleado empleado = new Empleado(linea);
                 try {
-                    AccesoEmpleado.anadirEmpleadoCodigo(empleado.getCodigo(), empleado.getNombre(), empleado.getFechaAlta(), empleado.getSalario(), empleado.getDepartamento().getCodigo(), Principal.opcionBD);
+                    AccesoEmpleado.anadirEmpleadoEntero(empleado, Principal.opcionBD);
                 } catch (BDException bde) {
                     AccesoEmpleado.modificarEmpleadoEntero(empleado, Principal.opcionBD);
+                } catch (CSVException csve) {
+                    fallaronAlgunas = true;
                 }
                 linea = br.readLine();
             }
@@ -390,5 +399,7 @@ public class AccesoEmpleado {
                 throw new CSVException(CSVException.ERROR_CIERRE);
             }
         }
+
+        return fallaronAlgunas;
     }
 }

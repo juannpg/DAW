@@ -215,7 +215,10 @@ public class Principal {
                         break;
                     case 14:
                         String ruta14 = Teclado.leerCadena("ruta del fichero: ");
-                        AccesoEmpleado.importarEmpleadosCSV(ruta14);
+                        boolean fallaronAlgunas14 = AccesoEmpleado.importarEmpleadosCSV(ruta14);
+                        if (fallaronAlgunas14) {
+                            System.out.println("Algunos empleados no se pudieron insertar ya que su departamento no existe en la base de datos.");
+                        }
                         System.out.println("Empleados importados correctamente");
                         break;
                 }

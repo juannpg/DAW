@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tarea consultas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>XML De una Clase</h1>
+    <div style="text-align:center; margin-bottom: 20px; font-family: Arial, sans-serif;">
+      <p style="font-size: 18px; color: #555;">Selecciona un archivo XML y cárgalo para ver las consultas:</p>
+      <div style="display: inline-block; padding: 15px; border: 2px solid #4CAF50; border-radius: 10px; background-color: #f9f9f9;">
+        <input type="file" id="xmlInput" accept=".xml" style="margin-bottom: 10px; padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
+        <br>
+        <button onclick="cargarArchivo()" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">
+          Cargar XML
+        </button>
+        <a href="form.html" class="nav-btn" style="margin-left: 20px; padding: 10px 20px; background-color: #2196F3; color: white; text-decoration: none; border-radius: 5px; font-size: 16px;">
+          Crear XML
+        </a>
+      </div>
+    </div>
+
+    <div id="contenido"></div>
+
+    <script>
+        async function cargarXML(url) {
+            const [xmlResp, xslResp] = await Promise.all([
+                fetch(url),
+                fetch('clase.xsl')
+            ]);
+            const xml = new window.DOMParser().parseFromString(await xmlResp.text(), 'text/xml');
+            const xsl = new window.DOMParser().parseFromString(await xslResp.text(), 'text/xml');
+            const processor = new XSLTProcessor();
+            processor.importStylesheet(xsl);
+            const result = processor.transformToFragment(xml, document);
+            document.getElementById('contenido').innerHTML = "";
+            document.getElementById('contenido').appendChild(result);
+        }
+
+        function cargarArchivo() {
+            const input = document.getElementById('xmlInput');
+            if (input.files.length === 0) return;
+            const file = input.files[0];
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                const parser = new DOMParser();
+                const xml = parser.parseFromString(e.target.result, 'text/xml');
+                const xslResp = await fetch('clase.xsl');
+                const xsl = parser.parseFromString(await xslResp.text(), 'text/xml');
+                const processor = new XSLTProcessor();
+                processor.importStylesheet(xsl);
+                const result = processor.transformToFragment(xml, document);
+                document.getElementById('contenido').innerHTML = "";
+                document.getElementById('contenido').appendChild(result);
+            };
+            reader.readAsText(file);
+        }
+
+        cargarXML('clase.xml');
+    </script>
+</body>
+</html>
