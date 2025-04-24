@@ -44,3 +44,54 @@ BEGIN
    dbms_output.put_line('La calificacion es: ' || nota || ', ' || calificacion);
 END;
 /
+
+DECLARE
+    num1 number := 0;
+BEGIN
+    LOOP
+        num1 := num1 + 1;
+        dbms_output.put_line('Linea: ' || num1);
+        
+        --if num1 = 5 then exit; end if;
+        exit when num1 = 5;
+    END LOOP;
+END;
+/
+
+BEGIN
+    FOR i IN REVERSE 1..5
+    LOOP
+        dbms_output.put_line('Linea: ' || i);
+    END LOOP;
+END;
+/
+
+DECLARE
+    num1 number := 0;
+BEGIN
+    WHILE num1 <= 5 LOOP
+        dbms_output.put_line('Linea: ' || num1);
+        num1 := num1 + 1;
+    END LOOP;
+END;
+/
+
+DECLARE
+    num1 number := 0;
+BEGIN
+    WHILE num1 < 5 LOOP
+        num1 := num1 + 1;
+        dbms_output.put_line('Linea: ' || num1);
+        EXIT WHEN num1 = 3;
+    END LOOP;
+END;
+/
+
+BEGIN
+    FOR i IN 1..10
+    LOOP
+        CONTINUE WHEN MOD(i,2) = 0;   
+        dbms_output.put_line('Numero: ' || i);
+    END LOOP;
+END;
+/
