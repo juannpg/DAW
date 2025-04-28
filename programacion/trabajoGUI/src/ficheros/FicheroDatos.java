@@ -1,0 +1,100 @@
+package ficheros;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import modelo.Trabajador;
+import org.bson.types.ObjectId;
+
+/**
+ * @author alumno
+ *
+ */
+public class FicheroDatos {
+
+	/**
+	 * Escribe un ArrayList en el fichero
+	 * @param ruta
+	 * @param trabajadores
+	 */
+	public static void escribirTrabajadores(String ruta, ArrayList<Trabajador> trabajadores){
+
+		DataOutputStream fichero = null;
+		try {
+			fichero = new DataOutputStream (new FileOutputStream(ruta));
+			for (int i=0; i<trabajadores.size(); i++){
+				fichero.writeUTF(trabajadores.get(i).getDni());
+				fichero.writeUTF(trabajadores.get(i).getNombre());
+				fichero.writeUTF(trabajadores.get(i).getApellidos());
+				fichero.writeUTF(trabajadores.get(i).getDireccion());
+				fichero.writeInt(trabajadores.get(i).getTelefono());
+				fichero.writeUTF(trabajadores.get(i).getPuesto());
+			}
+		}
+		catch (FileNotFoundException e1){
+			System.out.printf("Error al abrir fichero para escritura");
+		}
+		catch (IOException e){
+			System.out.printf("Error al escribir en el fichero%n");
+		}
+		finally{
+			try{
+				fichero.close();
+			}
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * Devuelve un arraylist con los trabajadores del fichero
+	 * @param rutaFichero
+	 * @return
+	 */
+	public static ArrayList<Trabajador> obtenerTrabajadores(String rutaFichero) {
+
+		DataInputStream ficheroDatos=null;
+		ArrayList<Trabajador> trabajadoresLeidos = new ArrayList <Trabajador>();
+		Trabajador t = null;
+		try {
+			ficheroDatos=new DataInputStream(new FileInputStream(rutaFichero));
+			while (true){
+				// debido a que uso mongo suprimo el id
+				// int id = ficheroDatos.readInt();
+				String dni =ficheroDatos.readUTF();
+				String nombre =ficheroDatos.readUTF();
+				String apellidos =ficheroDatos.readUTF();
+				String direccion =ficheroDatos.readUTF();
+				int telefono =ficheroDatos.readInt();
+				String puesto =ficheroDatos.readUTF();
+				t = new Trabajador(dni,nombre,apellidos,direccion,telefono,puesto);
+				trabajadoresLeidos.add(t);
+			}
+		}
+		catch (EOFException e){
+
+		}
+		catch (FileNotFoundException e){
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		finally{
+			try {
+				ficheroDatos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return trabajadoresLeidos;
+	}
+}
