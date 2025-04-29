@@ -19,6 +19,7 @@ import org.bson.types.ObjectId;
 public class AccesoTrabajadores {
     private static MongoDatabase conexion = ConfigMongo.abrirConexion();
     private static MongoCollection<Document> trabajadores = conexion.getCollection("trabajadores");
+    private static MongoCollection<Document> puestos = conexion.getCollection("puestos");
 
     public static boolean esta(Trabajador t) {
         FindIterable<Document> iterable = trabajadores.find(and(eq("dni", t.getDni())));
@@ -34,7 +35,7 @@ public class AccesoTrabajadores {
                 .append("nombre", t.getNombre())
                 .append("apellidos", t.getApellidos())
                 .append("direccion", t.getDireccion())
-                .append("telefono", t.getTelefono())
+                .append("telefono", t.getTelefono() + "")
                 .append("puesto", t.getPuesto());
         InsertOneResult resultado = trabajadores.insertOne(document);
         return resultado.getInsertedId() != null;
@@ -49,7 +50,7 @@ public class AccesoTrabajadores {
         FindIterable<Document> iterable = trabajadores.find(eq("dni", dni));
         for (Document doc : iterable) {
             return new Trabajador(doc.getObjectId("_id"), doc.getString("dni"), doc.getString("nombre"), doc.getString("apellidos"),
-                    doc.getString("direccion"), doc.getInteger("telefono"), doc.getString("puesto"));
+                    doc.getString("direccion"), doc.getString("telefono"), doc.getString("puesto"));
         }
         return null;
     }
@@ -101,10 +102,23 @@ public class AccesoTrabajadores {
             String nombre = doc.getString("nombre");
             String apellidos = doc.getString("apellidos");
             String direccion = doc.getString("direccion");
-            int telefono = doc.getInteger("telefono");
+            String telefono = doc.getString("telefono");
             String puesto = doc.getString("puesto");
             Trabajador t = new Trabajador(id, dni, nombre, apellidos, direccion, telefono, puesto);
             lista.add(t);
+        }
+
+        return lista;
+    }
+
+    public static ArrayList<String> obtenerPuestos() {
+        ArrayList<String> lista = new ArrayList<>();
+
+        FindIterable<Document> resultados = puestos.find();
+
+        for (Document doc : resultados) {
+            String puesto = doc.getString("puesto");
+            lista.add(puesto);
         }
 
         return lista;

@@ -29,11 +29,12 @@ public class FicheroDatos {
 		try {
 			fichero = new DataOutputStream (new FileOutputStream(ruta));
 			for (int i=0; i<trabajadores.size(); i++){
+				fichero.writeInt(0);
 				fichero.writeUTF(trabajadores.get(i).getDni());
 				fichero.writeUTF(trabajadores.get(i).getNombre());
 				fichero.writeUTF(trabajadores.get(i).getApellidos());
 				fichero.writeUTF(trabajadores.get(i).getDireccion());
-				fichero.writeInt(trabajadores.get(i).getTelefono());
+				fichero.writeUTF(trabajadores.get(i).getTelefono());
 				fichero.writeUTF(trabajadores.get(i).getPuesto());
 			}
 		}
@@ -43,8 +44,8 @@ public class FicheroDatos {
 		catch (IOException e){
 			System.out.printf("Error al escribir en el fichero%n");
 		}
-		finally{
-			try{
+		finally {
+			try {
 				fichero.close();
 			}
 			catch (IOException e) {
@@ -67,12 +68,12 @@ public class FicheroDatos {
 			ficheroDatos=new DataInputStream(new FileInputStream(rutaFichero));
 			while (true){
 				// debido a que uso mongo suprimo el id
-				// int id = ficheroDatos.readInt();
+				int identificador =ficheroDatos.readInt();
 				String dni =ficheroDatos.readUTF();
 				String nombre =ficheroDatos.readUTF();
 				String apellidos =ficheroDatos.readUTF();
 				String direccion =ficheroDatos.readUTF();
-				int telefono =ficheroDatos.readInt();
+				String telefono =ficheroDatos.readUTF();
 				String puesto =ficheroDatos.readUTF();
 				t = new Trabajador(dni,nombre,apellidos,direccion,telefono,puesto);
 				trabajadoresLeidos.add(t);

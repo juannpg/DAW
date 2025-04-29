@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -55,7 +56,7 @@ public class AltaDialog extends JDialog implements ActionListener, ItemListener 
 	String nombre = "";
 	String apellidos = "";
 	String direccion = "";
-	int telefono = 0;
+	String telefono = "";
 	String puesto = "";
 
 	JPanel pDni;
@@ -127,11 +128,10 @@ public class AltaDialog extends JDialog implements ActionListener, ItemListener 
 		pPuesto.add(etiquetaPuesto);
 		// lista desplegable
 		comboPuesto = new JComboBox();
-		comboPuesto.addItem("Elija Puesto");
-		comboPuesto.addItem("Programador");
-		comboPuesto.addItem("Analista");
-		comboPuesto.addItem("Arquitecto");
-		comboPuesto.addItem("Jefe de Proyecto");
+		ArrayList<String> puestos = AccesoTrabajadores.obtenerPuestos();
+		for (String p : puestos) {
+			comboPuesto.addItem(p);
+		}
 		comboPuesto.addItemListener(this);
 		pPuesto.add(comboPuesto);
 
@@ -173,7 +173,7 @@ public class AltaDialog extends JDialog implements ActionListener, ItemListener 
 				nombre = areaNombre.getText();
 				apellidos = areaApellidos.getText();
 				direccion = areaDireccion.getText();
-				telefono = Integer.parseInt(areaTelefono.getText());
+				telefono = areaTelefono.getText();
 				if (comprobarErrores()) {
 					Trabajador t = new Trabajador(dni, nombre, apellidos, direccion, telefono, puesto);
 					if (AccesoTrabajadores.altaTrabajador(t)) {
@@ -205,6 +205,9 @@ public class AltaDialog extends JDialog implements ActionListener, ItemListener 
 		if (dni.equals("") || dni.length() != 9) {
 			JOptionPane.showMessageDialog(null, "El DNI debe tener longitud 9", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
+		} else if (!dni.matches("\\\\d{8}[A-HJ-NP-TV-Z]")) {
+			JOptionPane.showMessageDialog(null, "El DNI debe ser válido", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
 		} else if (nombre.equals("")) {
 			JOptionPane.showMessageDialog(null, "Debe introducir el nombre del trabajador", "Error",
 					JOptionPane.ERROR_MESSAGE);
@@ -217,11 +220,15 @@ public class AltaDialog extends JDialog implements ActionListener, ItemListener 
 			JOptionPane.showMessageDialog(null, "Debe introducir la direcci�n del trabajador", "Error",
 					JOptionPane.ERROR_MESSAGE);
 			return false;
-		} else if (telefono < 100000000 || telefono > 999999999) {
+		} else if (telefono.length() != 9) {
 			JOptionPane.showMessageDialog(null, "El tel�fono debe tener longitud 9", "Error",
 					JOptionPane.ERROR_MESSAGE);
 			return false;
-		} else if (puesto.equals("")) {
+		} else if (!telefono.matches("^[6789]\\\\d{8}$")) {
+			JOptionPane.showMessageDialog(null, "El tel�fono debe ser válido", "Error",
+					JOptionPane.ERROR_MESSAGE);
+			return false;
+		}else if (puesto.equals("")) {
 			JOptionPane.showMessageDialog(null, "Debe introducir el puesto del trabajador", "Error",
 					JOptionPane.ERROR_MESSAGE);
 			return false;

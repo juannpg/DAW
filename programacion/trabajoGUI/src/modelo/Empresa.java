@@ -87,7 +87,7 @@ public class Empresa {
 	 * Permite modificar el valor de los atributos de un objeto Trabajador
 	 * @return
 	 */
-	public void modificarTrabajador(String identificador, String dni, String nombre, String apellidos, String direccion, int telefono, String puesto){
+	public void modificarTrabajador(String identificador, String dni, String nombre, String apellidos, String direccion, String telefono, String puesto){
 		int posicion = devolverPosicion(identificador);
 		trabajadores.get(posicion).setDni(dni);
 		trabajadores.get(posicion).setNombre(nombre);

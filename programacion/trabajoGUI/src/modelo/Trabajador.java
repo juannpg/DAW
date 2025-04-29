@@ -16,7 +16,7 @@ public class Trabajador {
 	private String nombre;
 	private String apellidos;
 	private String direccion;
-	private int telefono;
+	private String telefono;
 	private String puesto;
 	/**
 	 * @param identificador
@@ -28,7 +28,7 @@ public class Trabajador {
 	 * @param puesto
 	 */
 	public Trabajador(ObjectId identificador, String dni, String nombre,
-					  String apellidos, String direccion, int telefono, String puesto) {
+					  String apellidos, String direccion, String telefono, String puesto) {
 		this.identificador = identificador;
 		this.dni = dni;
 		this.nombre = nombre;
@@ -39,7 +39,7 @@ public class Trabajador {
 	}
 
 	public Trabajador(String dni, String nombre,
-					  String apellidos, String direccion, int telefono, String puesto) {
+					  String apellidos, String direccion, String telefono, String puesto) {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
@@ -110,13 +110,13 @@ public class Trabajador {
 	/**
 	 * @return the telefono
 	 */
-	public int getTelefono() {
+	public String getTelefono() {
 		return telefono;
 	}
 	/**
 	 * @param telefono the telefono to set
 	 */
-	public void setTelefono(int telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 	/**

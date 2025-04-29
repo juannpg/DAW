@@ -41,9 +41,6 @@ public class EmpresaGUI extends JFrame implements ActionListener {
 
 		// Carga los trabajadores leidos de un fichero a memoria
 		ArrayList<Trabajador> trabaj = FicheroDatos.obtenerTrabajadores("ficheroDatos\\empresa.dat");
-		for (Trabajador t : trabaj) {
-			System.out.println(t.toString());
-		}
 		AccesoTrabajadores.insertarTrabajadoresAlCargarElFichero(trabaj);
 
 		// Tamaño JFrame
