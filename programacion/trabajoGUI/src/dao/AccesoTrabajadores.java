@@ -55,9 +55,9 @@ public class AccesoTrabajadores {
         return null;
     }
 
-    public static void modificarTrabajador(Trabajador t) throws Exception {
+    public static boolean modificarTrabajador(Trabajador t)  {
         if (!esta(t)) {
-            throw new Exception("El trabajador no existe");
+            return false;
         }
 
         Document doc = new Document();
@@ -68,6 +68,7 @@ public class AccesoTrabajadores {
         doc.append("telefono", t.getTelefono());
         doc.append("puesto", t.getPuesto());
         trabajadores.replaceOne(eq("dni", t.getDni()), doc);
+        return true;
     }
 
     public static void insertarTrabajadoresAlCargarElFichero(ArrayList<Trabajador> trabajadoresList) {

@@ -14,7 +14,7 @@ import dao.AccesoTrabajadores;
 import dialogs.AltaDialog;
 import dialogs.BajaDialog;
 import dialogs.ListarDialog;
-//import dialogs.ModificaDialog;
+import dialogs.ModificaDialog;
 //import dialogs.VerDialog;
 import ficheros.FicheroDatos;
 import modelo.Empresa;
@@ -95,7 +95,7 @@ public class EmpresaGUI extends JFrame implements ActionListener {
 		} else if (e.getSource() == bajaTrabajador) {
 			new BajaDialog(empresa);
 		} else if (e.getSource() == modificaTrabajador) {
-			//new ModificaDialog(empresa);
+			new ModificaDialog(empresa);
 		} else if (e.getSource() == buscaTrabajador) {
 			//new VerDialog(empresa);
 		} else if (e.getSource() == listarTrabajadores) {
