@@ -3,17 +3,11 @@
  */
 package dialogs;
 
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import modelo.Empresa;
 import dao.AccesoTrabajadores;
@@ -25,83 +19,66 @@ import dao.AccesoTrabajadores;
  */
 public class BajaDialog extends JDialog implements ActionListener {
 
-	JButton aceptar;
-	JButton cancelar;
-	JLabel dni;
-	JTextField areaDni;
-	JPanel panel;
-	JPanel panelBotones;
-	JLabel texto;
-
 	Empresa empresa;
+	JTable tabla;
+	JButton cerrar, borrar;
 
 	public BajaDialog(Empresa empresa) {
 		this.empresa = empresa;
 
 		setResizable(false);
-		// t�tulo del di�log
-		setTitle("Baja Trabajador");
-		setSize(300, 200);
+		setTitle("Listado Trabajadores");
+		setSize(750, 700);
 		setLayout(new FlowLayout());
 		setLocationRelativeTo(null);
 
-		texto = new JLabel("<html>Introduzca el ID del trabajador<br> que desea dar de baja<br><br></html>");
-		add(texto);
+		String[] columnas = { "Identificador", "DNI", "Nombre", "Apellidos", "Dirección", "Teléfono", "Puesto" };
+		String[][] datos = AccesoTrabajadores.listarTrabajadores();
+		tabla = new JTable(datos, columnas);
+		JScrollPane jsp = new JScrollPane(tabla);
+		jsp.setPreferredSize(new Dimension(700, 600));
+		add(jsp);
 
-		panel = new JPanel();
-		panelBotones = new JPanel();
-		add(panel);
-		add(panelBotones);
+		borrar = new JButton("Borrar");
+		borrar.addActionListener(this);
+		add(borrar);
 
-		dni = new JLabel("DNI");
-		panel.add(dni);
-		areaDni = new JTextField(15);
-		panel.add(areaDni);
+		cerrar = new JButton("Cerrar");
+		cerrar.addActionListener(this);
+		add(cerrar);
 
-		aceptar = new JButton("Aceptar");
-		aceptar.addActionListener(this);
-		panelBotones.add(aceptar);
-
-		cancelar = new JButton("Cancelar");
-		cancelar.addActionListener(this);
-		panelBotones.add(cancelar);
-		// Visible
 		setVisible(true);
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if (e.getSource() == borrar) {
+			int filaSeleccionada = tabla.getSelectedRow();
+			if (filaSeleccionada != -1) {
+				String dni = tabla.getValueAt(filaSeleccionada, 1).toString();
+				int confirmacion = JOptionPane.showConfirmDialog(
+						this,
+						"¿Estás seguro de que deseas borrar al trabajador con DNI: " + dni + "?",
+						"Confirmar borrado",
+						JOptionPane.OK_CANCEL_OPTION
+				);
 
-		if (e.getSource() == aceptar) {
-			int respuesta = JOptionPane.showConfirmDialog(null, "�Desea dar de baja el trabajador?", "Borrar",
-					JOptionPane.YES_NO_OPTION);
-			switch (respuesta) {
-			case JOptionPane.YES_OPTION:
-				try {
-					// Operaciones en caso afirmativo
-					if (AccesoTrabajadores.bajaTrabajador(areaDni.getText())) {
-						JOptionPane.showMessageDialog(this, "El trabajador se ha eliminado correctamente");
+				if (confirmacion == JOptionPane.OK_OPTION) {
+					boolean borrado = AccesoTrabajadores.bajaTrabajador(dni);
+					if (borrado) {
+						JOptionPane.showMessageDialog(this, "Trabajador borrado correctamente.");
+						dispose();
 					} else {
-						JOptionPane.showMessageDialog(null, "El trabajador no se encuentra en la lista", "Error",
-								JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(this, "El trabajador no existe.");
 					}
-
-					break;
-				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(null, "El ID debe ser un n�mero entero", "Error",
-							JOptionPane.ERROR_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(this, "Borrado cancelado.");
 				}
-
-			case JOptionPane.NO_OPTION:
-				// Operaciones en caso negativo
-				break;
+			} else {
+				JOptionPane.showMessageDialog(this, "Por favor selecciona un trabajador.");
 			}
-		} else if (e.getSource() == cancelar) {
+		} else if (e.getSource() == cerrar) {
 			dispose();
 		}
-
 	}
-
 }

@@ -23,6 +23,7 @@ import modelo.Empresa;
 import modelo.Trabajador;
 import org.bson.types.ObjectId;
 import dao.AccesoTrabajadores;
+import regex.RegEx;
 
 /**
  *
@@ -129,6 +130,7 @@ public class AltaDialog extends JDialog implements ActionListener, ItemListener 
 		// lista desplegable
 		comboPuesto = new JComboBox();
 		ArrayList<String> puestos = AccesoTrabajadores.obtenerPuestos();
+		comboPuesto.addItem("Seleccione");
 		for (String p : puestos) {
 			comboPuesto.addItem(p);
 		}
@@ -168,25 +170,20 @@ public class AltaDialog extends JDialog implements ActionListener, ItemListener 
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource() == aceptar) {
-			try {
-				dni = areaDni.getText();
-				nombre = areaNombre.getText();
-				apellidos = areaApellidos.getText();
-				direccion = areaDireccion.getText();
-				telefono = areaTelefono.getText();
-				if (comprobarErrores()) {
-					Trabajador t = new Trabajador(dni, nombre, apellidos, direccion, telefono, puesto);
-					if (AccesoTrabajadores.altaTrabajador(t)) {
-						JOptionPane.showMessageDialog(null, "Datos introducidos correctamente");
-					} else {
-						JOptionPane.showMessageDialog(null, "El ID del trabajador que quiere introducir ya existe",
-								"Error", JOptionPane.ERROR_MESSAGE);
-					}
+			dni = areaDni.getText();
+			nombre = areaNombre.getText();
+			apellidos = areaApellidos.getText();
+			direccion = areaDireccion.getText();
+			telefono = areaTelefono.getText();
+			if (comprobarErrores()) {
+				Trabajador t = new Trabajador(dni, nombre, apellidos, direccion, telefono, puesto);
+				if (AccesoTrabajadores.altaTrabajador(t)) {
+					JOptionPane.showMessageDialog(null, "Datos introducidos correctamente");
+					dispose();
+				} else {
+					JOptionPane.showMessageDialog(null, "El DNI del trabajador que quiere introducir ya existe",
+							"Error", JOptionPane.ERROR_MESSAGE);
 				}
-
-			} catch (Exception e1) {
-				JOptionPane.showMessageDialog(null, "El ID debe ser un n�mero entero", "Error",
-						JOptionPane.ERROR_MESSAGE);
 			}
 
 		} else if (e.getSource() == cancelar) {
@@ -205,7 +202,7 @@ public class AltaDialog extends JDialog implements ActionListener, ItemListener 
 		if (dni.equals("") || dni.length() != 9) {
 			JOptionPane.showMessageDialog(null, "El DNI debe tener longitud 9", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
-		} else if (!dni.matches("\\\\d{8}[A-HJ-NP-TV-Z]")) {
+		} else if (!RegEx.dniBien(dni)) {
 			JOptionPane.showMessageDialog(null, "El DNI debe ser válido", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
 		} else if (nombre.equals("")) {
@@ -224,11 +221,11 @@ public class AltaDialog extends JDialog implements ActionListener, ItemListener 
 			JOptionPane.showMessageDialog(null, "El tel�fono debe tener longitud 9", "Error",
 					JOptionPane.ERROR_MESSAGE);
 			return false;
-		} else if (!telefono.matches("^[6789]\\\\d{8}$")) {
+		} else if (!RegEx.telefonoBien(telefono)) {
 			JOptionPane.showMessageDialog(null, "El tel�fono debe ser válido", "Error",
 					JOptionPane.ERROR_MESSAGE);
 			return false;
-		}else if (puesto.equals("")) {
+		}else if (puesto.equals("") || puesto.equalsIgnoreCase("seleccione")) {
 			JOptionPane.showMessageDialog(null, "Debe introducir el puesto del trabajador", "Error",
 					JOptionPane.ERROR_MESSAGE);
 			return false;

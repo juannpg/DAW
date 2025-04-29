@@ -111,6 +111,25 @@ public class AccesoTrabajadores {
         return lista;
     }
 
+    public static String[][] listarTrabajadores() {
+        ArrayList<Trabajador> lista = obtenerTrabajadores();
+        String[][] datos = new String[lista.size()][7];
+        for (int i = 0; i < lista.size(); i++) {
+            Trabajador t = lista.get(i);
+            String[] fila = new String[7];
+            fila[0] = t.getIdentificador().toString();
+            fila[1] = t.getDni();
+            fila[2] = t.getNombre();
+            fila[3] = t.getApellidos();
+            fila[4] = t.getDireccion();
+            fila[5] = t.getTelefono();
+            fila[6] = t.getPuesto();
+
+            datos[i] = fila;
+        }
+        return datos;
+    }
+
     public static ArrayList<String> obtenerPuestos() {
         ArrayList<String> lista = new ArrayList<>();
 
