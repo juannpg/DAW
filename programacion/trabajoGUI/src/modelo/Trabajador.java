@@ -47,6 +47,33 @@ public class Trabajador {
 		this.telefono = telefono;
 		this.puesto = puesto;
 	}
+
+	private static final String SEPARADOR = ";";
+
+	public String toStringWithSeparators() {
+		return
+			this.identificador.toString() + SEPARADOR +
+			this.dni + SEPARADOR +
+			this.nombre + SEPARADOR +
+			this.apellidos + SEPARADOR +
+			this.direccion + SEPARADOR +
+			this.telefono + SEPARADOR +
+			this.puesto + SEPARADOR;
+	}
+
+	public String toStringJson() {
+		return
+			"\t\t{\n" +
+				"\t\t\t\"identificador\":\"" + this.identificador.toString() + "\"," + "\n" +
+				"\t\t\t\"dni\":\"" + this.dni + "\"," + "\n" +
+				"\t\t\t\"nombre\":\"" + this.nombre + "\"," + "\n" +
+				"\t\t\t\"apellidos\":\"" + this.apellidos + "\"," + "\n" +
+				"\t\t\t\"direccion\":\"" + this.direccion + "\"," + "\n" +
+				"\t\t\t\"telefono\":\"" + this.telefono + "\"," + "\n" +
+				"\t\t\t\"puesto\":\"" + this.puesto + "\"" + "\n" +
+			"\t\t}";
+	}
+
 	/**
 	 * @return the identificador
 	 */

@@ -95,3 +95,43 @@ BEGIN
     END LOOP;
 END;
 /
+
+
+--CURSOR IMPLICITO
+--devuelve una fila y una columna. si no da error el cursor
+DECLARE
+                                        -- tipo de la columna
+    variableNombre animales.nombre_pila%type;
+    variableId animales.id_animal%type;
+BEGIN
+    select nombre_pila, id_animal into variableNombre, variableId from animales where id_animal = 3;
+    dbms_output.put_line(variableId || ' ' || variableNombre);
+END;
+/
+
+--CURSOR EXPLICITO
+declare
+    tupla animales%rowtype;
+    cursor cursorAnimales is select * from animales;
+begin
+    for tupla in cursorAnimales loop
+        dbms_output.put_line(tupla.id_animal || ' ' || tupla.nombre_pila);
+    end loop;
+end;
+/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

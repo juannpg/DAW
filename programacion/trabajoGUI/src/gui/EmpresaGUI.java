@@ -15,7 +15,7 @@ import dialogs.AltaDialog;
 import dialogs.BajaDialog;
 import dialogs.ListarDialog;
 import dialogs.ModificaDialog;
-//import dialogs.VerDialog;
+import dialogs.VerDialog;
 import ficheros.FicheroDatos;
 import modelo.Empresa;
 import modelo.Trabajador;
@@ -97,7 +97,7 @@ public class EmpresaGUI extends JFrame implements ActionListener {
 		} else if (e.getSource() == modificaTrabajador) {
 			new ModificaDialog(empresa);
 		} else if (e.getSource() == buscaTrabajador) {
-			//new VerDialog(empresa);
+			new VerDialog(empresa);
 		} else if (e.getSource() == listarTrabajadores) {
 			new ListarDialog(empresa);
 		}

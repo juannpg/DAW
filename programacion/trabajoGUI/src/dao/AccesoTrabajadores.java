@@ -3,12 +3,18 @@ package dao;
 import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.InsertOneResult;
 import config.ConfigMongo;
+import excepciones.ExcepcionCSV;
+import excepciones.ExcepcionJSON;
 import org.bson.Document;
 
 import modelo.Trabajador;
@@ -46,7 +52,7 @@ public class AccesoTrabajadores {
         return resultado.getDeletedCount() == 1;
     }
 
-    public Trabajador buscarTrabajador(String dni) {
+    public static Trabajador buscarTrabajador(String dni) {
         FindIterable<Document> iterable = trabajadores.find(eq("dni", dni));
         for (Document doc : iterable) {
             return new Trabajador(doc.getObjectId("_id"), doc.getString("dni"), doc.getString("nombre"), doc.getString("apellidos"),
@@ -142,5 +148,62 @@ public class AccesoTrabajadores {
         }
 
         return lista;
+    }
+
+    public static void exportarCsv(String ruta) throws ExcepcionCSV {
+        ArrayList<Trabajador> lista = obtenerTrabajadores();
+        BufferedWriter bw = null;
+        try {
+            bw = new BufferedWriter(new FileWriter(new File(ruta), false));
+
+            for (Trabajador t : lista) {
+                bw.write(t.toStringWithSeparators());
+                bw.newLine();
+            }
+        } catch (IOException ioe) {
+            throw new ExcepcionCSV(ExcepcionCSV.errorAbrir);
+        } finally {
+            try {
+                if (bw != null) {
+                    bw.close();
+                }
+            } catch (IOException ioe) {
+                throw new ExcepcionCSV(ExcepcionCSV.errorCerrar);
+            }
+        }
+    }
+
+    public static void exportarJson(String ruta) throws ExcepcionJSON {
+        ArrayList<Trabajador> lista = obtenerTrabajadores();
+        BufferedWriter bw = null;
+        try {
+            bw = new BufferedWriter(new FileWriter(new File(ruta), false));
+            bw.write("{");
+            bw.newLine();
+            bw.write("\t\"trabajadores\": [");
+            bw.newLine();
+            for (int i = 0; i < lista.size(); i++) {
+                Trabajador t = lista.get(i);
+                bw.write(t.toStringJson());
+                if (i != lista.size() - 1) {
+                    bw.write(",");
+                }
+                bw.newLine();
+            }
+            bw.write("\t]");
+            bw.newLine();
+            bw.write("}");
+            bw.newLine();
+        } catch (IOException ioe) {
+            throw new ExcepcionJSON(ExcepcionJSON.errorAbrir);
+        } finally {
+            try {
+                if (bw != null) {
+                    bw.close();
+                }
+            } catch (IOException ioe) {
+                throw new ExcepcionJSON(ExcepcionJSON.errorCerrar);
+            }
+        }
     }
 }
