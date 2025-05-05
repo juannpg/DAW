@@ -9,8 +9,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import dao.AccesoTrabajadores;
 import modelo.Trabajador;
-import org.bson.types.ObjectId;
+import org.bson.Document;
 
 /**
  * @author alumno
@@ -59,10 +60,9 @@ public class FicheroDatos {
 	 * @param rutaFichero
 	 * @return
 	 */
-	public static ArrayList<Trabajador> obtenerTrabajadores(String rutaFichero) {
+	public static void insertarTrabajadoresAlIniciar(String rutaFichero) {
 
 		DataInputStream ficheroDatos=null;
-		ArrayList<Trabajador> trabajadoresLeidos = new ArrayList <Trabajador>();
 		Trabajador t = null;
 		try {
 			ficheroDatos=new DataInputStream(new FileInputStream(rutaFichero));
@@ -76,7 +76,21 @@ public class FicheroDatos {
 				String telefono =ficheroDatos.readUTF();
 				String puesto =ficheroDatos.readUTF();
 				t = new Trabajador(dni,nombre,apellidos,direccion,telefono,puesto);
-				trabajadoresLeidos.add(t);
+				Document d = new Document("dni", t.getDni())
+						.append("nombre", t.getNombre())
+						.append("apellidos", t.getApellidos())
+						.append("direccion", t.getDireccion())
+						.append("telefono", t.getTelefono())
+						.append("puesto", t.getPuesto());
+
+				boolean alta = AccesoTrabajadores.altaTrabajador(t);
+				if (!alta) {
+					try {
+						AccesoTrabajadores.modificarTrabajador(t);
+					} catch (Exception e) {
+						continue;
+					}
+				}
 			}
 		}
 		catch (EOFException e){
@@ -95,7 +109,5 @@ public class FicheroDatos {
 				e.printStackTrace();
 			}
 		}
-
-		return trabajadoresLeidos;
 	}
 }

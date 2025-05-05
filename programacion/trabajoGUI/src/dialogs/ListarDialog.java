@@ -8,6 +8,8 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.*;
 
@@ -17,6 +19,8 @@ import dao.AccesoTrabajadores;
 import excepciones.ExcepcionCSV;
 import excepciones.ExcepcionJSON;
 import modelo.Empresa;
+import modelo.Trabajador;
+import orden.*;
 
 /**
  * 
@@ -31,6 +35,8 @@ public class ListarDialog extends JDialog implements ActionListener {
 	JButton exportarCsv;
 	JButton exportarJson;
 	JFileChooser fc;
+	ArrayList<Trabajador> lista;
+	String[][] datos;
 
 	public ListarDialog(Empresa empresa) {
 		this.empresa = empresa;
@@ -45,9 +51,18 @@ public class ListarDialog extends JDialog implements ActionListener {
 		setLocationRelativeTo(null);
 
 		// Crea un JTable, cada fila será un trabajador
-		String[] columnas = { "Identificador", "DNI", "Nombre", "Apellidos", "Direcci�n", "Tel�fono", "Puesto" };
-		String[][] datos = AccesoTrabajadores.listarTrabajadores();
+		String[] columnas = { "Identificador", "DNI", "Nombre", "Apellidos", "Direccion", "Telefono", "Puesto" };
+		lista = AccesoTrabajadores.obtenerTrabajadores();
+		datos = AccesoTrabajadores.listarTrabajadores(lista);
 		tabla = new JTable(datos, columnas);
+		tabla.getTableHeader().addMouseListener(new java.awt.event.MouseAdapter() {
+			@Override
+			public void mouseClicked(java.awt.event.MouseEvent evt) {
+				int col = tabla.columnAtPoint(evt.getPoint());
+				String nombreColumna = tabla.getColumnName(col).toLowerCase();
+				ordenarLista(nombreColumna);
+			}
+		});
 		// Mete la tabla en un JCrollPane
 		JScrollPane jsp = new JScrollPane(tabla);
 		jsp.setPreferredSize(new Dimension(700, 600));
@@ -97,6 +112,58 @@ public class ListarDialog extends JDialog implements ActionListener {
 					JOptionPane.showMessageDialog(null, "Error al exportar a CSV: " + ejson.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
+		}
+	}
+
+	public void recargarLista(String[][] datos, String[] columnas) {
+		tabla.setModel(new javax.swing.table.DefaultTableModel(datos, columnas));
+	}
+
+	public void ordenarLista(String columna) {
+		lista = AccesoTrabajadores.obtenerTrabajadores();
+		switch (columna) {
+		case "identificador":
+			String[] columnas = { "Identificador ▼", "DNI", "Nombre", "Apellidos", "Direccion", "Telefono", "Puesto" };
+			lista.sort(new TrabajadoresPorOid());
+			datos = AccesoTrabajadores.listarTrabajadores(lista);
+			recargarLista(datos, columnas);
+			break;
+		case "dni":
+			String[] columnas2 = { "Identificador", "DNI ▼", "Nombre", "Apellidos", "Direccion", "Telefono", "Puesto" };
+			lista.sort(new TrabajadoresPorDni());
+			datos = AccesoTrabajadores.listarTrabajadores(lista);
+			recargarLista(datos, columnas2);
+			break;
+		case "nombre":
+			String[] columnas3 = { "Identificador", "DNI", "Nombre ▼", "Apellidos", "Direccion", "Telefono", "Puesto" };
+			lista.sort(new TrabajadoresPorNombre());
+			datos = AccesoTrabajadores.listarTrabajadores(lista);
+			recargarLista(datos, columnas3);
+			break;
+		case "apellidos":
+			String[] columnas4 = { "Identificador", "DNI", "Nombre", "Apellidos ▼", "Direccion", "Telefono", "Puesto" };
+			lista.sort(new TrabajadoresPorApellidos());
+			datos = AccesoTrabajadores.listarTrabajadores(lista);
+			recargarLista(datos, columnas4);
+			break;
+		case "direccion":
+			String[] columnas5 = { "Identificador", "DNI", "Nombre", "Apellidos", "Direccion ▼", "Telefono", "Puesto" };
+			lista.sort(new TrabajadoresPorDireccion());
+			datos = AccesoTrabajadores.listarTrabajadores(lista);
+			recargarLista(datos, columnas5);
+			break;
+		case "telefono":
+			String[] columnas6 = { "Identificador", "DNI", "Nombre", "Apellidos", "Direccion", "Telefono ▼", "Puesto" };
+			lista.sort(new TrabajadoresPorTelefono());
+			datos = AccesoTrabajadores.listarTrabajadores(lista);
+			recargarLista(datos, columnas6);
+			break;
+		case "puesto":
+			String[] columnas7 = { "Identificador", "DNI", "Nombre", "Apellidos", "Direccion", "Telefono", "Puesto ▼" };
+			lista.sort(new TrabajadoresPorPuesto());
+			datos = AccesoTrabajadores.listarTrabajadores(lista);
+			recargarLista(datos, columnas7);
+			break;
 		}
 	}
 }

@@ -6,11 +6,13 @@ package dialogs;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
 import modelo.Empresa;
 import dao.AccesoTrabajadores;
+import modelo.Trabajador;
 
 /**
  * 
@@ -33,7 +35,8 @@ public class BajaDialog extends JDialog implements ActionListener {
 		setLocationRelativeTo(null);
 
 		String[] columnas = { "Identificador", "DNI", "Nombre", "Apellidos", "Dirección", "Teléfono", "Puesto" };
-		String[][] datos = AccesoTrabajadores.listarTrabajadores();
+		ArrayList<Trabajador> lista = AccesoTrabajadores.obtenerTrabajadores();
+		String[][] datos = AccesoTrabajadores.listarTrabajadores(lista);
 		tabla = new JTable(datos, columnas);
 		JScrollPane jsp = new JScrollPane(tabla);
 		jsp.setPreferredSize(new Dimension(700, 600));
@@ -67,7 +70,7 @@ public class BajaDialog extends JDialog implements ActionListener {
 					boolean borrado = AccesoTrabajadores.bajaTrabajador(dni);
 					if (borrado) {
 						JOptionPane.showMessageDialog(this, "Trabajador borrado correctamente.");
-						dispose();
+						recargarLista();
 					} else {
 						JOptionPane.showMessageDialog(this, "El trabajador no existe.");
 					}
@@ -80,5 +83,13 @@ public class BajaDialog extends JDialog implements ActionListener {
 		} else if (e.getSource() == cerrar) {
 			dispose();
 		}
+	}
+
+	public void recargarLista() {
+		String[] columnas = { "Identificador", "DNI", "Nombre", "Apellidos", "Dirección", "Teléfono", "Puesto" };
+		ArrayList<Trabajador> lista = AccesoTrabajadores.obtenerTrabajadores();
+		String[][] datos = AccesoTrabajadores.listarTrabajadores(lista);
+
+		tabla.setModel(new javax.swing.table.DefaultTableModel(datos, columnas));
 	}
 }

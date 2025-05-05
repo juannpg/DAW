@@ -15,12 +15,16 @@ import com.mongodb.client.result.InsertOneResult;
 import config.ConfigMongo;
 import excepciones.ExcepcionCSV;
 import excepciones.ExcepcionJSON;
+import excepciones.ExcepcionModificar;
 import org.bson.Document;
 
 import modelo.Trabajador;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import org.bson.types.ObjectId;
+import regex.RegEx;
+
+import javax.swing.*;
 
 public class AccesoTrabajadores {
     private static MongoDatabase conexion = ConfigMongo.abrirConexion();
@@ -30,6 +34,15 @@ public class AccesoTrabajadores {
     public static boolean esta(Trabajador t) {
         FindIterable<Document> iterable = trabajadores.find(and(eq("dni", t.getDni())));
         return iterable.first() != null;
+    }
+
+    public static Trabajador buscarTrabajadorOid(String oid) {
+        FindIterable<Document> iterable = trabajadores.find(eq("_id", new ObjectId(oid)));
+        for (Document doc : iterable) {
+            return new Trabajador(doc.getObjectId("_id"), doc.getString("dni"), doc.getString("nombre"), doc.getString("apellidos"),
+                    doc.getString("direccion"), doc.getString("telefono"), doc.getString("puesto"));
+        }
+        return null;
     }
 
     public static boolean altaTrabajador(Trabajador t) {
@@ -61,9 +74,14 @@ public class AccesoTrabajadores {
         return null;
     }
 
-    public static boolean modificarTrabajador(Trabajador t)  {
+    /**
+     * usada solo para insertar datos del fichero, ya que así es compatible con un fichero
+     * generado por mysql
+     * @param t
+     */
+    public static void modificarTrabajador(Trabajador t)  {
         if (!esta(t)) {
-            return false;
+            return;
         }
 
         Document doc = new Document();
@@ -74,28 +92,41 @@ public class AccesoTrabajadores {
         doc.append("telefono", t.getTelefono());
         doc.append("puesto", t.getPuesto());
         trabajadores.replaceOne(eq("dni", t.getDni()), doc);
-        return true;
     }
 
-    public static void insertarTrabajadoresAlCargarElFichero(ArrayList<Trabajador> trabajadoresList) {
-        for (Trabajador t : trabajadoresList) {
-            Document d = new Document("dni", t.getDni())
-                    .append("nombre", t.getNombre())
-                    .append("apellidos", t.getApellidos())
-                    .append("direccion", t.getDireccion())
-                    .append("telefono", t.getTelefono())
-                    .append("puesto", t.getPuesto());
+    /**
+     * usado de normal al querer modificar un trabajador desde gui
+     * @param t
+     * @param oid
+     */
+    public static void modificarTrabajador(Trabajador t, String oid) {
+        Document doc = new Document();
+        doc.append("dni", t.getDni());
+        doc.append("nombre", t.getNombre());
+        doc.append("apellidos", t.getApellidos());
+        doc.append("direccion", t.getDireccion());
+        doc.append("telefono", t.getTelefono());
+        doc.append("puesto", t.getPuesto());
 
-            if (!esta(t)) {
-                trabajadores.insertOne(d);
-            } else {
-                try {
-                    modificarTrabajador(t);
-                } catch (Exception e) {
-                    continue;
-                }
-            }
+        if (t.getDni().equals("") || t.getDni().length() != 9) {
+            throw new ExcepcionModificar(ExcepcionModificar.dniNueve);
+        } else if (!RegEx.dniBien(t.getDni())) {
+            throw new ExcepcionModificar(ExcepcionModificar.dniValido);
+        } else if (t.getNombre().equals("")) {
+            throw new ExcepcionModificar(ExcepcionModificar.nombreVacio);
+        } else if (t.getApellidos().equals("")) {
+            throw new ExcepcionModificar(ExcepcionModificar.apellidosVacio);
+        } else if (t.getDireccion().equals("")) {
+            throw new ExcepcionModificar(ExcepcionModificar.direccionVacio);
+        } else if (t.getTelefono().length() != 9) {
+            throw new ExcepcionModificar(ExcepcionModificar.telefonoNueve);
+        } else if (!RegEx.telefonoBien(t.getTelefono())) {
+            throw new ExcepcionModificar(ExcepcionModificar.telefonoValido);
+        } else if (t.getPuesto().equals("") || t.getPuesto().equalsIgnoreCase("seleccione")) {
+            throw new ExcepcionModificar(ExcepcionModificar.puestoVacio);
         }
+
+        trabajadores.replaceOne(eq("_id", new ObjectId(oid)), doc);
     }
 
     public static ArrayList<Trabajador> obtenerTrabajadores() {
@@ -118,8 +149,7 @@ public class AccesoTrabajadores {
         return lista;
     }
 
-    public static String[][] listarTrabajadores() {
-        ArrayList<Trabajador> lista = obtenerTrabajadores();
+    public static String[][] listarTrabajadores(ArrayList<Trabajador> lista) {
         String[][] datos = new String[lista.size()][7];
         for (int i = 0; i < lista.size(); i++) {
             Trabajador t = lista.get(i);

@@ -1,7 +1,7 @@
 
 package gui;
 
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -39,25 +39,19 @@ public class EmpresaGUI extends JFrame implements ActionListener {
 	public EmpresaGUI() {
 		super("Gestión de personal");
 
-		// Carga los trabajadores leidos de un fichero a memoria
-		ArrayList<Trabajador> trabaj = FicheroDatos.obtenerTrabajadores("ficheroDatos\\empresa.dat");
-		AccesoTrabajadores.insertarTrabajadoresAlCargarElFichero(trabaj);
+		FicheroDatos.insertarTrabajadoresAlIniciar("ficheroDatos\\empresa.dat");
 
-		// Tamaño JFrame
 		setSize(800, 750);
-		// Cerrar al salir
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new GridLayout(3, 2));
 		setLocationRelativeTo(null);
-		// Creación de los botones y se añaden al JFrame
-		// Se añade una imagen para cada botón
 		altaTrabajador = new JButton("Añadir Trabajador");
 		altaTrabajador.addActionListener(this);
 		altaTrabajador.setIcon(new ImageIcon("images/addUser.png"));
 		add(altaTrabajador);
 
 		bajaTrabajador = new JButton("Borrar Trabajador");
-		bajaTrabajador.addActionListener(this);
+		bajaTrabajador.addActionListener(this);		
 		bajaTrabajador.setIcon(new ImageIcon("images/removeUser.png"));
 		add(bajaTrabajador);
 
@@ -73,23 +67,19 @@ public class EmpresaGUI extends JFrame implements ActionListener {
 
 		listarTrabajadores = new JButton("Listar Trabajadores");
 		listarTrabajadores.addActionListener(this);
-		listarTrabajadores.setIcon(new ImageIcon("images/list.png"));
+		Image image = new ImageIcon("images/list.png").getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+		listarTrabajadores.setIcon(new ImageIcon(image));
 		add(listarTrabajadores);
 
 		salir = new JButton("Salir");
 		salir.addActionListener(this);
 		salir.setIcon(new ImageIcon("images/exit.png"));
 		add(salir);
-		// Visible
 		setVisible(true);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// Para responder a los clicks del usuario en cada botón (ActionEvent)
-		// nuestra clase hace de oyente de eventos por eso implementa ActionListener
-		// e implementa el método actionPerformed() pasando como parámetro un
-		// ActionEvent.
 		if (e.getSource() == altaTrabajador) {
 			new AltaDialog(empresa);
 		} else if (e.getSource() == bajaTrabajador) {
@@ -101,7 +91,6 @@ public class EmpresaGUI extends JFrame implements ActionListener {
 		} else if (e.getSource() == listarTrabajadores) {
 			new ListarDialog(empresa);
 		}
-		// Cuando se sale se vuelca a fichero.
 		else if (e.getSource() == salir) {
 			FicheroDatos.escribirTrabajadores("ficheroDatos\\empresa.dat", AccesoTrabajadores.obtenerTrabajadores());
 			System.exit(0);
@@ -112,8 +101,6 @@ public class EmpresaGUI extends JFrame implements ActionListener {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		new EmpresaGUI();
 	}
-
 }
