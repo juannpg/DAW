@@ -120,11 +120,23 @@ begin
 end;
 /
 
+--excepciones
+declare 
+    valor volumen.isbn%type;
+    vest volumen.estado%type;
+begin
+    select isbn, estado into valor, vest from volumen where cod_vol = 201;
 
-
-
-
-
+    -- codigo, mensaje, si se almacena en el stack trace
+    raise_application_error(299, 'excepcion personalizada', true);    
+exception
+    when too_many_rows then
+        dbms_output.put_line(' muchas filas');
+    when others then
+        if sqlcode = 299 then
+            dbms_output.put_line('asdasd');
+        end if;
+end;    
 
 
 

@@ -51,7 +51,7 @@ public class EmpresaGUI extends JFrame implements ActionListener {
 		add(altaTrabajador);
 
 		bajaTrabajador = new JButton("Borrar Trabajador");
-		bajaTrabajador.addActionListener(this);		
+		bajaTrabajador.addActionListener(this);
 		bajaTrabajador.setIcon(new ImageIcon("images/removeUser.png"));
 		add(bajaTrabajador);
 

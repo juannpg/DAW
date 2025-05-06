@@ -9,6 +9,7 @@ public class ExcepcionModificar extends RuntimeException {
   public static String telefonoValido = "El teléfono debe ser válido";
   public static String telefonoNueve = "El teléfono debe tener longitud 9";
   public static String puestoVacio = "Debe introducir el puesto del trabajador";
+  public static String yaExiste = "Ese DNI ya existe";
 
   public ExcepcionModificar(String message) {
     super(message);

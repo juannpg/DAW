@@ -1,13 +1,11 @@
 package dao;
 
-import static com.mongodb.client.model.Filters.and;
-import static com.mongodb.client.model.Filters.eq;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.result.DeleteResult;
@@ -26,6 +24,8 @@ import regex.RegEx;
 
 import javax.swing.*;
 
+import static com.mongodb.client.model.Filters.*;
+
 public class AccesoTrabajadores {
     private static MongoDatabase conexion = ConfigMongo.abrirConexion();
     private static MongoCollection<Document> trabajadores = conexion.getCollection("trabajadores");
@@ -36,6 +36,14 @@ public class AccesoTrabajadores {
         return iterable.first() != null;
     }
 
+    public static boolean esta(Trabajador t, String oid) {
+        FindIterable<Document> iterable = trabajadores.find(and(eq("_id", new ObjectId(oid))));
+        if (iterable.first() == null) {
+            return false;
+        }
+        return !iterable.first().getString("dni").equals(t.getDni());
+    }
+
     public static Trabajador buscarTrabajadorOid(String oid) {
         FindIterable<Document> iterable = trabajadores.find(eq("_id", new ObjectId(oid)));
         for (Document doc : iterable) {
@@ -43,6 +51,32 @@ public class AccesoTrabajadores {
                     doc.getString("direccion"), doc.getString("telefono"), doc.getString("puesto"));
         }
         return null;
+    }
+
+    /**
+     * encuentra  trabajadores en base a varios campos. si un campo no se ha
+     * porporcionado, se busca cualquier coincidencia en ese campo
+     * @param t
+     * @return
+     */
+    public static ArrayList<Trabajador> buscarTrabajadaroesPorVariosCampos(Trabajador t) {
+        ArrayList<Trabajador> lista = new ArrayList<>();
+
+        FindIterable<Document> iterable = trabajadores.find(and(
+                t.getDni().isEmpty() ? regex("dni", ".+", "i") : eq("dni", t.getDni()),
+                t.getNombre().isEmpty() ? regex("nombre", ".+", "i") : regex("nombre", "^" + Pattern.quote(t.getNombre()) + "$", "i"),
+                t.getApellidos().isEmpty() ? regex("apellidos", ".+", "i") : regex("apellidos", "^" + Pattern.quote(t.getApellidos()) + "$", "i"),
+                t.getDireccion().isEmpty() ? regex("direccion", ".+", "i") : regex("direccion", "^" + Pattern.quote(t.getDireccion()) + "$", "i"),
+                t.getTelefono().isEmpty() ? regex("telefono", ".+", "i") : regex("telefono", "^" + Pattern.quote(t.getTelefono()) + "$", "i"),
+                t.getPuesto().isEmpty() ? regex("puesto", ".+", "i") : regex("puesto", "^" + Pattern.quote(t.getPuesto()) + "$", "i")
+        ));
+
+        for (Document doc : iterable) {
+            lista.add(new Trabajador(doc.getObjectId("_id"), doc.getString("dni"), doc.getString("nombre"), doc.getString("apellidos"),
+                    doc.getString("direccion"), doc.getString("telefono"), doc.getString("puesto")));
+        }
+
+        return lista;
     }
 
     public static boolean altaTrabajador(Trabajador t) {
@@ -99,7 +133,50 @@ public class AccesoTrabajadores {
      * @param t
      * @param oid
      */
-    public static void modificarTrabajador(Trabajador t, String oid) {
+    public static boolean[] modificarTrabajador(Trabajador t, String oid) {
+        boolean[] resultado = {true, false, false, false, false, false, false};
+
+        if (t.getDni().equals("") || t.getDni().length() != 9) {
+            resultado[1] = true;
+            resultado[0] = false;
+        }
+        if (!RegEx.dniBien(t.getDni())) {
+            resultado[1] = true;
+            resultado[0] = false;
+        }
+        if (esta(t, oid)) {
+            resultado[1] = true;
+            resultado[0] = false;
+        }
+        if (t.getNombre().equals("")) {
+            resultado[2] = true;
+            resultado[0] = false;
+        }
+        if (t.getApellidos().equals("")) {
+            resultado[3] = true;
+            resultado[0] = false;
+        }
+        if (t.getDireccion().equals("")) {
+            resultado[4] = true;
+            resultado[0] = false;
+        }
+        if (t.getTelefono().length() != 9) {
+            resultado[5] = true;
+            resultado[0] = false;
+        }
+        if (!RegEx.telefonoBien(t.getTelefono())) {
+            resultado[5] = true;
+            resultado[0] = false;
+        }
+        if (t.getPuesto().equals("") || t.getPuesto().equalsIgnoreCase("seleccione")) {
+            resultado[6] = true;
+            resultado[0] = false;
+        }
+
+        if (!resultado[0]) {
+            return resultado;
+        }
+
         Document doc = new Document();
         doc.append("dni", t.getDni());
         doc.append("nombre", t.getNombre());
@@ -107,26 +184,8 @@ public class AccesoTrabajadores {
         doc.append("direccion", t.getDireccion());
         doc.append("telefono", t.getTelefono());
         doc.append("puesto", t.getPuesto());
-
-        if (t.getDni().equals("") || t.getDni().length() != 9) {
-            throw new ExcepcionModificar(ExcepcionModificar.dniNueve);
-        } else if (!RegEx.dniBien(t.getDni())) {
-            throw new ExcepcionModificar(ExcepcionModificar.dniValido);
-        } else if (t.getNombre().equals("")) {
-            throw new ExcepcionModificar(ExcepcionModificar.nombreVacio);
-        } else if (t.getApellidos().equals("")) {
-            throw new ExcepcionModificar(ExcepcionModificar.apellidosVacio);
-        } else if (t.getDireccion().equals("")) {
-            throw new ExcepcionModificar(ExcepcionModificar.direccionVacio);
-        } else if (t.getTelefono().length() != 9) {
-            throw new ExcepcionModificar(ExcepcionModificar.telefonoNueve);
-        } else if (!RegEx.telefonoBien(t.getTelefono())) {
-            throw new ExcepcionModificar(ExcepcionModificar.telefonoValido);
-        } else if (t.getPuesto().equals("") || t.getPuesto().equalsIgnoreCase("seleccione")) {
-            throw new ExcepcionModificar(ExcepcionModificar.puestoVacio);
-        }
-
         trabajadores.replaceOne(eq("_id", new ObjectId(oid)), doc);
+        return resultado;
     }
 
     public static ArrayList<Trabajador> obtenerTrabajadores() {

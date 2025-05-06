@@ -5,24 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6f854f1e-70ac-49f0-824e-139b05e7d4be" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../trabajoGUI/src/excepciones/ExcepcionModificar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../trabajoGUI/src/orden/TrabajadoresPorApellidos.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../trabajoGUI/src/orden/TrabajadoresPorDireccion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../trabajoGUI/src/orden/TrabajadoresPorDni.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../trabajoGUI/src/orden/TrabajadoresPorNombre.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../trabajoGUI/src/orden/TrabajadoresPorOid.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../trabajoGUI/src/orden/TrabajadoresPorPuesto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../trabajoGUI/src/orden/TrabajadoresPorTelefono.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../trabajoGUI/ficheroDatos/empresa.dat" beforeDir="false" afterPath="$PROJECT_DIR$/../trabajoGUI/ficheroDatos/empresa.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../trabajoGUI/src/dao/AccesoTrabajadores.java" beforeDir="false" afterPath="$PROJECT_DIR$/../trabajoGUI/src/dao/AccesoTrabajadores.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../trabajoGUI/src/dialogs/BajaDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/../trabajoGUI/src/dialogs/BajaDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../trabajoGUI/src/dialogs/ListarDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/../trabajoGUI/src/dialogs/ListarDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../trabajoGUI/src/dialogs/ModificaDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/../trabajoGUI/src/dialogs/ModificaDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../trabajoGUI/src/dialogs/ModificaSubDialog.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../trabajoGUI/src/ficheros/FicheroDatos.java" beforeDir="false" afterPath="$PROJECT_DIR$/../trabajoGUI/src/ficheros/FicheroDatos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../trabajoGUI/src/gui/EmpresaGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/../trabajoGUI/src/gui/EmpresaGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../trabajoGUI/src/modelo/Trabajador.java" beforeDir="false" afterPath="$PROJECT_DIR$/../trabajoGUI/src/modelo/Trabajador.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

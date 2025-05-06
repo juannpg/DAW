@@ -4,16 +4,20 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 
-import excepciones.ExcepcionModificar;
 import modelo.Empresa;
 import dao.AccesoTrabajadores;
 import modelo.Trabajador;
 import orden.*;
 
 public class ModificaDialog extends JDialog implements ActionListener {
+	private Set<Point> celdasColoreadas = new HashSet<>();
 
 	Empresa empresa;
 	JTable tabla;
@@ -40,6 +44,29 @@ public class ModificaDialog extends JDialog implements ActionListener {
 				return column != 0;
 			}
 		});
+
+		// Renderer personalizado para colorear una celda específica
+		for (int i = 0; i < tabla.getColumnCount(); i++) {
+			tabla.getColumnModel().getColumn(i).setCellRenderer(new DefaultTableCellRenderer() {
+				@Override
+				public Component getTableCellRendererComponent(JTable table, Object value,
+															   boolean isSelected, boolean hasFocus, int row, int column) {
+
+					Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+					// Si la celda está en el conjunto de coloreadas
+					if (celdasColoreadas.contains(new Point(row, column))) {
+						c.setBackground(Color.RED);
+					} else {
+						c.setBackground(isSelected ? table.getSelectionBackground() : table.getBackground());
+					}
+
+					return c;
+				}
+			});
+		}
+
+
 
 		ArrayList<String> puestosLista = AccesoTrabajadores.obtenerPuestos();
 		JComboBox<String> comboPuestos = new JComboBox<>(puestosLista.toArray(new String[0]));
@@ -196,12 +223,19 @@ public class ModificaDialog extends JDialog implements ActionListener {
 						nuevoPuesto
 				);
 
-				try {
-					AccesoTrabajadores.modificarTrabajador(tModificado, oid);
+				boolean[] resultado = AccesoTrabajadores.modificarTrabajador(tModificado, oid);
+				System.out.println(Arrays.toString(resultado));
+				if (resultado[0]) {
 					JOptionPane.showMessageDialog(this, "Cambios aplicados correctamente.");
 					recargarLista();
-				} catch (ExcepcionModificar e) {
-					JOptionPane.showMessageDialog(this, "En la fila " + i + 1 + ", " + e.getMessage());
+				} else {
+					JOptionPane.showMessageDialog(this, "Existen errores en los campos marcados.");
+					for (int j = 0; j < resultado.length; j++) {
+						if (resultado[j]) {
+							celdasColoreadas.add(new Point(i, j));
+							tabla.repaint();
+						}
+					}
 				}
 			}
 		}
