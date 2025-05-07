@@ -9,21 +9,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import config.ConfigMongo;
 import dao.AccesoTrabajadores;
 import modelo.Trabajador;
 import org.bson.Document;
 
-/**
- * @author alumno
- *
- */
-public class FicheroDatos {
+import static com.mongodb.client.model.Filters.eq;
 
-	/**
-	 * Escribe un ArrayList en el fichero
-	 * @param ruta
-	 * @param trabajadores
-	 */
+public class FicheroDatos {
+	private static MongoDatabase conexion = ConfigMongo.abrirConexion();
+	private static MongoCollection<Document> trabajadores = conexion.getCollection("trabajadores");
 	public static void escribirTrabajadores(String ruta, ArrayList<Trabajador> trabajadores){
 
 		DataOutputStream fichero = null;
@@ -55,11 +52,6 @@ public class FicheroDatos {
 		}
 	}
 
-	/**
-	 * Devuelve un arraylist con los trabajadores del fichero
-	 * @param rutaFichero
-	 * @return
-	 */
 	public static void insertarTrabajadoresAlIniciar(String rutaFichero) {
 
 		DataInputStream ficheroDatos=null;
@@ -68,7 +60,7 @@ public class FicheroDatos {
 			ficheroDatos=new DataInputStream(new FileInputStream(rutaFichero));
 			while (true){
 				// debido a que uso mongo suprimo el id
-				int identificador =ficheroDatos.readInt();
+				int identificador = ficheroDatos.readInt();
 				String dni =ficheroDatos.readUTF();
 				String nombre =ficheroDatos.readUTF();
 				String apellidos =ficheroDatos.readUTF();
@@ -76,17 +68,17 @@ public class FicheroDatos {
 				String telefono =ficheroDatos.readUTF();
 				String puesto =ficheroDatos.readUTF();
 				t = new Trabajador(dni,nombre,apellidos,direccion,telefono,puesto);
-				Document d = new Document("dni", t.getDni())
-						.append("nombre", t.getNombre())
-						.append("apellidos", t.getApellidos())
-						.append("direccion", t.getDireccion())
-						.append("telefono", t.getTelefono())
-						.append("puesto", t.getPuesto());
-
 				boolean alta = AccesoTrabajadores.altaTrabajador(t);
 				if (!alta) {
 					try {
-						AccesoTrabajadores.modificarTrabajador(t);
+						Document doc = new Document()
+							.append("dni", t.getDni())
+							.append("nombre", t.getNombre())
+							.append("apellidos", t.getApellidos())
+							.append("direccion", t.getDireccion())
+							.append("telefono", t.getTelefono())
+							.append("puesto", t.getPuesto());
+						trabajadores.replaceOne(eq("dni", t.getDni()), doc);
 					} catch (Exception e) {
 						continue;
 					}

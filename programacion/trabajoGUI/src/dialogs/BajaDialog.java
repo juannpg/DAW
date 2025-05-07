@@ -1,6 +1,3 @@
-/**
- * 
- */
 package dialogs;
 
 import java.awt.*;
@@ -10,23 +7,18 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-import modelo.Empresa;
 import dao.AccesoTrabajadores;
 import modelo.Trabajador;
 
-/**
- * 
- * @author usuario
- *
- */
 public class BajaDialog extends JDialog implements ActionListener {
 
-	Empresa empresa;
 	JTable tabla;
 	JButton cerrar, borrar;
+	String[] columnas = { "Identificador", "DNI", "Nombre", "Apellidos", "Dirección", "Teléfono", "Puesto" };
+	ArrayList<Trabajador> lista = AccesoTrabajadores.obtenerTrabajadores();
+	String[][] datos = AccesoTrabajadores.listarTrabajadores(lista);
 
-	public BajaDialog(Empresa empresa) {
-		this.empresa = empresa;
+	public BajaDialog() {
 
 		setResizable(false);
 		setTitle("Listado Trabajadores");
@@ -34,10 +26,7 @@ public class BajaDialog extends JDialog implements ActionListener {
 		setLayout(new FlowLayout());
 		setLocationRelativeTo(null);
 
-		String[] columnas = { "Identificador", "DNI", "Nombre", "Apellidos", "Dirección", "Teléfono", "Puesto" };
-		ArrayList<Trabajador> lista = AccesoTrabajadores.obtenerTrabajadores();
-		String[][] datos = AccesoTrabajadores.listarTrabajadores(lista);
-		tabla = new JTable(datos, columnas);
+		tabla = new JTable(this.datos, this.columnas);
 		JScrollPane jsp = new JScrollPane(tabla);
 		jsp.setPreferredSize(new Dimension(700, 600));
 		add(jsp);
@@ -86,10 +75,9 @@ public class BajaDialog extends JDialog implements ActionListener {
 	}
 
 	public void recargarLista() {
-		String[] columnas = { "Identificador", "DNI", "Nombre", "Apellidos", "Dirección", "Teléfono", "Puesto" };
-		ArrayList<Trabajador> lista = AccesoTrabajadores.obtenerTrabajadores();
-		String[][] datos = AccesoTrabajadores.listarTrabajadores(lista);
+		this.lista = AccesoTrabajadores.obtenerTrabajadores();
+		this.datos = AccesoTrabajadores.listarTrabajadores(this.lista);
 
-		tabla.setModel(new javax.swing.table.DefaultTableModel(datos, columnas));
+		tabla.setModel(new javax.swing.table.DefaultTableModel(this.datos, this.columnas));
 	}
 }

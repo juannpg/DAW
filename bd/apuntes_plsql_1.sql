@@ -135,11 +135,29 @@ exception
     when others then
         if sqlcode = 299 then
             dbms_output.put_line('asdasd');
+        else
+            dbms_output.put_line('asdasdadadadasd');
         end if;
 end;    
+/
 
+--procedimientos
+create or replace procedure actualiza_det(pVol volumen.cod_vol%type) as
+begin
+    update volumen
+    set deteriorado = 1
+    where cod_vol = pVol;
+end;
+/
 
-
+--funcion
+create or replace function getTitulo(pIsbn libro.isbn%type) return libro.titulo%type as
+    rTitulo libro.titulo%type;
+begin
+    select titulo into rTitulo from libro where isbn = pIsbn;
+    return titulo;
+end;
+/
 
 
 

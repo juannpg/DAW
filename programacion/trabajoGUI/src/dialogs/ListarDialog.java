@@ -1,60 +1,39 @@
-/**
- * 
- */
 package dialogs;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import javax.swing.*;
-
-import javax.swing.plaf.FileChooserUI;
 
 import dao.AccesoTrabajadores;
 import excepciones.ExcepcionCSV;
 import excepciones.ExcepcionJSON;
-import modelo.Empresa;
 import modelo.Trabajador;
 import orden.*;
 
-/**
- * 
- * @author usuario
- *
- */
 public class ListarDialog extends JDialog implements ActionListener {
 
-	Empresa empresa;
 	JTable tabla;
 	JButton cerrar;
 	JButton exportarCsv;
 	JButton exportarJson;
 	JFileChooser fc;
-	ArrayList<Trabajador> lista;
-	String[][] datos;
 
-	public ListarDialog(Empresa empresa) {
-		this.empresa = empresa;
+	String[] columnas = { "Identificador", "DNI", "Nombre", "Apellidos", "Dirección", "Teléfono", "Puesto" };
+	ArrayList<Trabajador> lista = AccesoTrabajadores.obtenerTrabajadores();
+	String[][] datos = AccesoTrabajadores.listarTrabajadores(lista);
 
+	public ListarDialog() {
 		setResizable(false);
-		// t�tulo del di�log
 		setTitle("Listado Trabajadores");
-		// tama�o
 		setSize(750, 700);
 		setLayout(new FlowLayout());
-		// colocaci�n en el centro de la pantalla
 		setLocationRelativeTo(null);
 
-		// Crea un JTable, cada fila será un trabajador
-		String[] columnas = { "Identificador", "DNI", "Nombre", "Apellidos", "Direccion", "Telefono", "Puesto" };
-		lista = AccesoTrabajadores.obtenerTrabajadores();
-		datos = AccesoTrabajadores.listarTrabajadores(lista);
-		tabla = new JTable(datos, columnas);
+		tabla = new JTable(this.datos, this.columnas);
 		tabla.getTableHeader().addMouseListener(new java.awt.event.MouseAdapter() {
 			@Override
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -63,7 +42,6 @@ public class ListarDialog extends JDialog implements ActionListener {
 				ordenarLista(nombreColumna);
 			}
 		});
-		// Mete la tabla en un JCrollPane
 		JScrollPane jsp = new JScrollPane(tabla);
 		jsp.setPreferredSize(new Dimension(700, 600));
 		add(jsp);
@@ -85,7 +63,6 @@ public class ListarDialog extends JDialog implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		if (e.getSource() == cerrar) {
 			dispose();
 		} if (e.getSource() == exportarCsv) {
@@ -115,55 +92,72 @@ public class ListarDialog extends JDialog implements ActionListener {
 		}
 	}
 
-	public void recargarLista(String[][] datos, String[] columnas) {
-		tabla.setModel(new javax.swing.table.DefaultTableModel(datos, columnas));
+	public void recargarLista() {
+		this.lista = AccesoTrabajadores.obtenerTrabajadores();
+		this.datos = AccesoTrabajadores.listarTrabajadores(this.lista);
+
+		tabla.setModel(new javax.swing.table.DefaultTableModel(this.datos, this.columnas));
 	}
 
 	public void ordenarLista(String columna) {
 		lista = AccesoTrabajadores.obtenerTrabajadores();
 		switch (columna) {
 		case "identificador":
-			String[] columnas = { "Identificador ▼", "DNI", "Nombre", "Apellidos", "Direccion", "Telefono", "Puesto" };
-			lista.sort(new TrabajadoresPorOid());
-			datos = AccesoTrabajadores.listarTrabajadores(lista);
-			recargarLista(datos, columnas);
-			break;
+			this.columnas = new String[] {
+					"Identificador ▼", "DNI", "Nombre", "Apellidos", "Direccion", "Telefono", "Puesto"
+			};
+			this.lista.sort(new TrabajadoresPorOid());
+			this.datos = AccesoTrabajadores.listarTrabajadores(this.lista);
+			recargarLista();
+		break;
 		case "dni":
-			String[] columnas2 = { "Identificador", "DNI ▼", "Nombre", "Apellidos", "Direccion", "Telefono", "Puesto" };
-			lista.sort(new TrabajadoresPorDni());
-			datos = AccesoTrabajadores.listarTrabajadores(lista);
-			recargarLista(datos, columnas2);
-			break;
+			this.columnas = new String[] {
+					"Identificador", "DNI ▼", "Nombre", "Apellidos", "Direccion", "Telefono", "Puesto"
+			};
+			this.lista.sort(new TrabajadoresPorDni());
+			this.datos = AccesoTrabajadores.listarTrabajadores(this.lista);
+			recargarLista();
+		break;
 		case "nombre":
-			String[] columnas3 = { "Identificador", "DNI", "Nombre ▼", "Apellidos", "Direccion", "Telefono", "Puesto" };
-			lista.sort(new TrabajadoresPorNombre());
-			datos = AccesoTrabajadores.listarTrabajadores(lista);
-			recargarLista(datos, columnas3);
-			break;
+			this.columnas = new String[] {
+					"Identificador", "DNI", "Nombre ▼", "Apellidos", "Direccion", "Telefono", "Puesto"
+			};
+			this.lista.sort(new TrabajadoresPorNombre());
+			this.datos = AccesoTrabajadores.listarTrabajadores(this.lista);
+			recargarLista();
+		break;
 		case "apellidos":
-			String[] columnas4 = { "Identificador", "DNI", "Nombre", "Apellidos ▼", "Direccion", "Telefono", "Puesto" };
-			lista.sort(new TrabajadoresPorApellidos());
-			datos = AccesoTrabajadores.listarTrabajadores(lista);
-			recargarLista(datos, columnas4);
-			break;
+			this.columnas = new String[] {
+					"Identificador", "DNI", "Nombre", "Apellidos ▼", "Direccion", "Telefono", "Puesto"
+			};
+			this.lista.sort(new TrabajadoresPorApellidos());
+			this.datos = AccesoTrabajadores.listarTrabajadores(this.lista);
+			recargarLista();
+		break;
 		case "direccion":
-			String[] columnas5 = { "Identificador", "DNI", "Nombre", "Apellidos", "Direccion ▼", "Telefono", "Puesto" };
-			lista.sort(new TrabajadoresPorDireccion());
-			datos = AccesoTrabajadores.listarTrabajadores(lista);
-			recargarLista(datos, columnas5);
-			break;
+			this.columnas = new String[] {
+					"Identificador", "DNI", "Nombre", "Apellidos", "Direccion ▼", "Telefono", "Puesto"
+			};
+			this.lista.sort(new TrabajadoresPorDireccion());
+			this.datos = AccesoTrabajadores.listarTrabajadores(this.lista);
+			recargarLista();
+		break;
 		case "telefono":
-			String[] columnas6 = { "Identificador", "DNI", "Nombre", "Apellidos", "Direccion", "Telefono ▼", "Puesto" };
-			lista.sort(new TrabajadoresPorTelefono());
-			datos = AccesoTrabajadores.listarTrabajadores(lista);
-			recargarLista(datos, columnas6);
-			break;
+			this.columnas = new String[] {
+					"Identificador", "DNI", "Nombre", "Apellidos", "Direccion", "Telefono ▼", "Puesto"
+			};
+			this.lista.sort(new TrabajadoresPorTelefono());
+			this.datos = AccesoTrabajadores.listarTrabajadores(this.lista);
+			recargarLista();
+		break;
 		case "puesto":
-			String[] columnas7 = { "Identificador", "DNI", "Nombre", "Apellidos", "Direccion", "Telefono", "Puesto ▼" };
-			lista.sort(new TrabajadoresPorPuesto());
-			datos = AccesoTrabajadores.listarTrabajadores(lista);
-			recargarLista(datos, columnas7);
-			break;
+			this.columnas = new String[] {
+					"Identificador", "DNI", "Nombre", "Apellidos", "Direccion", "Telefono", "Puesto ▼"
+			};
+			this.lista.sort(new TrabajadoresPorPuesto());
+			this.datos = AccesoTrabajadores.listarTrabajadores(this.lista);
+			recargarLista();
+		break;
 		}
 	}
 }

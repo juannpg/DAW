@@ -13,7 +13,6 @@ import com.mongodb.client.result.InsertOneResult;
 import config.ConfigMongo;
 import excepciones.ExcepcionCSV;
 import excepciones.ExcepcionJSON;
-import excepciones.ExcepcionModificar;
 import org.bson.Document;
 
 import modelo.Trabajador;
@@ -22,8 +21,6 @@ import com.mongodb.client.MongoCollection;
 import org.bson.types.ObjectId;
 import regex.RegEx;
 
-import javax.swing.*;
-
 import static com.mongodb.client.model.Filters.*;
 
 public class AccesoTrabajadores {
@@ -31,13 +28,11 @@ public class AccesoTrabajadores {
     private static MongoCollection<Document> trabajadores = conexion.getCollection("trabajadores");
     private static MongoCollection<Document> puestos = conexion.getCollection("puestos");
 
-    public static boolean esta(Trabajador t) {
-        FindIterable<Document> iterable = trabajadores.find(and(eq("dni", t.getDni())));
-        return iterable.first() != null;
-    }
-
     public static boolean esta(Trabajador t, String oid) {
-        FindIterable<Document> iterable = trabajadores.find(and(eq("_id", new ObjectId(oid))));
+        FindIterable<Document> iterable = oid != null
+            ? trabajadores.find(and(eq("_id", new ObjectId(oid))))
+            : trabajadores.find(and(eq("dni", t.getDni())));
+
         if (iterable.first() == null) {
             return false;
         }
@@ -80,7 +75,7 @@ public class AccesoTrabajadores {
     }
 
     public static boolean altaTrabajador(Trabajador t) {
-        if (esta(t)) {
+        if (esta(t, null)) {
             return false;
         }
 
@@ -97,35 +92,6 @@ public class AccesoTrabajadores {
     public static boolean bajaTrabajador(String dni) {
         DeleteResult resultado = trabajadores.deleteMany(eq("dni", dni));
         return resultado.getDeletedCount() == 1;
-    }
-
-    public static Trabajador buscarTrabajador(String dni) {
-        FindIterable<Document> iterable = trabajadores.find(eq("dni", dni));
-        for (Document doc : iterable) {
-            return new Trabajador(doc.getObjectId("_id"), doc.getString("dni"), doc.getString("nombre"), doc.getString("apellidos"),
-                    doc.getString("direccion"), doc.getString("telefono"), doc.getString("puesto"));
-        }
-        return null;
-    }
-
-    /**
-     * usada solo para insertar datos del fichero, ya que así es compatible con un fichero
-     * generado por mysql
-     * @param t
-     */
-    public static void modificarTrabajador(Trabajador t)  {
-        if (!esta(t)) {
-            return;
-        }
-
-        Document doc = new Document();
-        doc.append("dni", t.getDni());
-        doc.append("nombre", t.getNombre());
-        doc.append("apellidos", t.getApellidos());
-        doc.append("direccion", t.getDireccion());
-        doc.append("telefono", t.getTelefono());
-        doc.append("puesto", t.getPuesto());
-        trabajadores.replaceOne(eq("dni", t.getDni()), doc);
     }
 
     /**

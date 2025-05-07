@@ -11,7 +11,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 
-import modelo.Empresa;
 import dao.AccesoTrabajadores;
 import modelo.Trabajador;
 import orden.*;
@@ -19,14 +18,14 @@ import orden.*;
 public class ModificaDialog extends JDialog implements ActionListener {
 	private Set<Point> celdasColoreadas = new HashSet<>();
 
-	Empresa empresa;
 	JTable tabla;
 	JButton cerrar, guardarCambios;
-	ArrayList<Trabajador> lista;
-	String[][] datos;
 
-	public ModificaDialog(Empresa empresa) {
-		this.empresa = empresa;
+	String[] columnas = { "Identificador", "DNI", "Nombre", "Apellidos", "Dirección", "Teléfono", "Puesto" };
+	ArrayList<Trabajador> lista = AccesoTrabajadores.obtenerTrabajadores();
+	String[][] datos = AccesoTrabajadores.listarTrabajadores(lista);
+
+	public ModificaDialog() {
 
 		setResizable(false);
 		setTitle("Listado Trabajadores");
@@ -34,18 +33,13 @@ public class ModificaDialog extends JDialog implements ActionListener {
 		setLayout(new FlowLayout());
 		setLocationRelativeTo(null);
 
-		String[] columnas = { "Identificador", "DNI", "Nombre", "Apellidos", "Direccion", "Telefono", "Puesto" };
-		lista = AccesoTrabajadores.obtenerTrabajadores();
-		datos = AccesoTrabajadores.listarTrabajadores(lista);
-
-		tabla = new JTable(new javax.swing.table.DefaultTableModel(datos, columnas) {
+		tabla = new JTable(new javax.swing.table.DefaultTableModel(this.datos, this.columnas) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return column != 0;
 			}
 		});
 
-		// Renderer personalizado para colorear una celda específica
 		for (int i = 0; i < tabla.getColumnCount(); i++) {
 			tabla.getColumnModel().getColumn(i).setCellRenderer(new DefaultTableCellRenderer() {
 				@Override
@@ -54,7 +48,6 @@ public class ModificaDialog extends JDialog implements ActionListener {
 
 					Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
-					// Si la celda está en el conjunto de coloreadas
 					if (celdasColoreadas.contains(new Point(row, column))) {
 						c.setBackground(Color.RED);
 					} else {
@@ -65,8 +58,6 @@ public class ModificaDialog extends JDialog implements ActionListener {
 				}
 			});
 		}
-
-
 
 		ArrayList<String> puestosLista = AccesoTrabajadores.obtenerPuestos();
 		JComboBox<String> comboPuestos = new JComboBox<>(puestosLista.toArray(new String[0]));
@@ -114,25 +105,10 @@ public class ModificaDialog extends JDialog implements ActionListener {
 	}
 
 	public void recargarLista() {
-		String[] columnas = { "Identificador", "DNI", "Nombre", "Apellidos", "Dirección", "Teléfono", "Puesto" };
-		ArrayList<Trabajador> lista = AccesoTrabajadores.obtenerTrabajadores();
-		String[][] datos = AccesoTrabajadores.listarTrabajadores(lista);
+		this.lista = AccesoTrabajadores.obtenerTrabajadores();
+		this.datos = AccesoTrabajadores.listarTrabajadores(this.lista);
 
-		tabla.setModel(new javax.swing.table.DefaultTableModel(datos, columnas) {
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return column != 0;
-			}
-		});
-
-		ArrayList<String> puestosLista = AccesoTrabajadores.obtenerPuestos();
-		JComboBox<String> comboPuestos = new JComboBox<>(puestosLista.toArray(new String[0]));
-		TableColumn puestoColumn = tabla.getColumnModel().getColumn(6);
-		puestoColumn.setCellEditor(new DefaultCellEditor(comboPuestos));
-	}
-
-	private void recargarLista(String[][] datos, String[] columnas) {
-		tabla.setModel(new javax.swing.table.DefaultTableModel(datos, columnas) {
+		tabla.setModel(new javax.swing.table.DefaultTableModel(this.datos, this.columnas) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return column != 0;
@@ -149,47 +125,61 @@ public class ModificaDialog extends JDialog implements ActionListener {
 		lista = AccesoTrabajadores.obtenerTrabajadores();
 		switch (columna) {
 			case "identificador":
-				String[] columnas = { "Identificador ▼", "DNI", "Nombre", "Apellidos", "Direccion", "Telefono", "Puesto" };
-				lista.sort(new TrabajadoresPorOid());
-				datos = AccesoTrabajadores.listarTrabajadores(lista);
-				recargarLista(datos, columnas);
-				break;
+				this.columnas = new String[]{
+						"Identificador ▼", "DNI", "Nombre", "Apellidos", "Direccion", "Telefono", "Puesto"
+				};
+				this.lista.sort(new TrabajadoresPorOid());
+				this.datos = AccesoTrabajadores.listarTrabajadores(this.lista);
+				recargarLista();
+			break;
 			case "dni":
-				String[] columnas2 = { "Identificador", "DNI ▼", "Nombre", "Apellidos", "Direccion", "Telefono", "Puesto" };
-				lista.sort(new TrabajadoresPorDni());
-				datos = AccesoTrabajadores.listarTrabajadores(lista);
-				recargarLista(datos, columnas2);
-				break;
+				this.columnas = new String[]{
+						"Identificador", "DNI ▼", "Nombre", "Apellidos", "Direccion", "Telefono", "Puesto"
+				};
+				this.lista.sort(new TrabajadoresPorDni());
+				this.datos = AccesoTrabajadores.listarTrabajadores(this.lista);
+				recargarLista();
+			break;
 			case "nombre":
-				String[] columnas3 = { "Identificador", "DNI", "Nombre ▼", "Apellidos", "Direccion", "Telefono", "Puesto" };
-				lista.sort(new TrabajadoresPorNombre());
-				datos = AccesoTrabajadores.listarTrabajadores(lista);
-				recargarLista(datos, columnas3);
-				break;
+				this.columnas = new String[]{
+						"Identificador", "DNI", "Nombre ▼", "Apellidos", "Direccion", "Telefono", "Puesto"
+				};
+				this.lista.sort(new TrabajadoresPorNombre());
+				this.datos = AccesoTrabajadores.listarTrabajadores(this.lista);
+				recargarLista();
+			break;
 			case "apellidos":
-				String[] columnas4 = { "Identificador", "DNI", "Nombre", "Apellidos ▼", "Direccion", "Telefono", "Puesto" };
-				lista.sort(new TrabajadoresPorApellidos());
-				datos = AccesoTrabajadores.listarTrabajadores(lista);
-				recargarLista(datos, columnas4);
-				break;
+				this.columnas = new String[]{
+						"Identificador", "DNI", "Nombre", "Apellidos ▼", "Direccion", "Telefono", "Puesto"
+				};
+				this.lista.sort(new TrabajadoresPorApellidos());
+				this.datos = AccesoTrabajadores.listarTrabajadores(this.lista);
+				recargarLista();
+			break;
 			case "direccion":
-				String[] columnas5 = { "Identificador", "DNI", "Nombre", "Apellidos", "Direccion ▼", "Telefono", "Puesto" };
-				lista.sort(new TrabajadoresPorDireccion());
-				datos = AccesoTrabajadores.listarTrabajadores(lista);
-				recargarLista(datos, columnas5);
-				break;
+				this.columnas = new String[]{
+						"Identificador", "DNI", "Nombre", "Apellidos", "Direccion ▼", "Telefono", "Puesto"
+				};
+				this.lista.sort(new TrabajadoresPorDireccion());
+				this.datos = AccesoTrabajadores.listarTrabajadores(this.lista);
+				recargarLista();
+			break;
 			case "telefono":
-				String[] columnas6 = { "Identificador", "DNI", "Nombre", "Apellidos", "Direccion", "Telefono ▼", "Puesto" };
-				lista.sort(new TrabajadoresPorTelefono());
-				datos = AccesoTrabajadores.listarTrabajadores(lista);
-				recargarLista(datos, columnas6);
-				break;
+				this.columnas = new String[]{
+						"Identificador", "DNI", "Nombre", "Apellidos", "Direccion", "Telefono ▼", "Puesto"
+				};
+				this.lista.sort(new TrabajadoresPorTelefono());
+				this.datos = AccesoTrabajadores.listarTrabajadores(this.lista);
+				recargarLista();
+			break;
 			case "puesto":
-				String[] columnas7 = { "Identificador", "DNI", "Nombre", "Apellidos", "Direccion", "Telefono", "Puesto ▼" };
-				lista.sort(new TrabajadoresPorPuesto());
-				datos = AccesoTrabajadores.listarTrabajadores(lista);
-				recargarLista(datos, columnas7);
-				break;
+				this.columnas = new String[]{
+						"Identificador", "DNI", "Nombre", "Apellidos", "Direccion", "Telefono", "Puesto ▼"
+				};
+				this.lista.sort(new TrabajadoresPorPuesto());
+				this.datos = AccesoTrabajadores.listarTrabajadores(this.lista);
+				recargarLista();
+			break;
 		}
 	}
 
