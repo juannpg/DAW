@@ -75,9 +75,6 @@ public class BajaDialog extends JDialog implements ActionListener {
 	}
 
 	public void recargarLista() {
-		this.lista = AccesoTrabajadores.obtenerTrabajadores();
-		this.datos = AccesoTrabajadores.listarTrabajadores(this.lista);
-
 		tabla.setModel(new javax.swing.table.DefaultTableModel(this.datos, this.columnas));
 	}
 }

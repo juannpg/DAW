@@ -29,14 +29,11 @@ public class AccesoTrabajadores {
     private static MongoCollection<Document> puestos = conexion.getCollection("puestos");
 
     public static boolean esta(Trabajador t, String oid) {
-        FindIterable<Document> iterable = oid != null
+        FindIterable<Document> iterable = (oid != null)
             ? trabajadores.find(and(eq("_id", new ObjectId(oid))))
             : trabajadores.find(and(eq("dni", t.getDni())));
 
-        if (iterable.first() == null) {
-            return false;
-        }
-        return !iterable.first().getString("dni").equals(t.getDni());
+        return iterable.first() != null;
     }
 
     public static Trabajador buscarTrabajadorOid(String oid) {

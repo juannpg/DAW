@@ -1,10 +1,8 @@
-
 package gui;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,18 +15,9 @@ import dialogs.ListarDialog;
 import dialogs.ModificaDialog;
 import dialogs.VerDialog;
 import ficheros.FicheroDatos;
-import modelo.Empresa;
-import modelo.Trabajador;
 
-/**
- * 
- * @author usuario
- *
- */
 public class EmpresaGUI extends JFrame implements ActionListener {
 
-	Empresa empresa;
-	
 	JButton altaTrabajador;
 	JButton bajaTrabajador;
 	JButton modificaTrabajador;
@@ -81,15 +70,15 @@ public class EmpresaGUI extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == altaTrabajador) {
-			new AltaDialog(empresa);
+			new AltaDialog();
 		} else if (e.getSource() == bajaTrabajador) {
-			new BajaDialog(empresa);
+			new BajaDialog();
 		} else if (e.getSource() == modificaTrabajador) {
-			new ModificaDialog(empresa);
+			new ModificaDialog();
 		} else if (e.getSource() == buscaTrabajador) {
-			new VerDialog(empresa);
+			new VerDialog();
 		} else if (e.getSource() == listarTrabajadores) {
-			new ListarDialog(empresa);
+			new ListarDialog();
 		}
 		else if (e.getSource() == salir) {
 			FicheroDatos.escribirTrabajadores("ficheroDatos\\empresa.dat", AccesoTrabajadores.obtenerTrabajadores());
