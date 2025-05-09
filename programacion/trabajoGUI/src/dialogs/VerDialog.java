@@ -173,6 +173,8 @@ public class VerDialog extends JDialog implements ActionListener, ItemListener {
                 recargarLista();
             } else {
                 JOptionPane.showMessageDialog(null, "No se han encontrado trabajadores con esos datos", "Error", JOptionPane.ERROR_MESSAGE);
+                this.datos = null;
+                recargarLista();
             }
         } else if (e.getSource() == cancelar) {
             dispose();

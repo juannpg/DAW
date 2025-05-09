@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.*;
@@ -211,9 +210,10 @@ public class ModificaDialog extends JDialog implements ActionListener {
 				);
 
 				boolean[] resultado = AccesoTrabajadores.modificarTrabajador(tModificado, oid);
-				System.out.println(Arrays.toString(resultado));
 				if (resultado[0]) {
-					JOptionPane.showMessageDialog(this, "Cambios aplicados correctamente.");
+					JOptionPane.showMessageDialog(this, "Cambios aplicados correctamente en el trabajador con dni " + tModificado.getDni());
+					this.lista = AccesoTrabajadores.obtenerTrabajadores();
+					this.datos = AccesoTrabajadores.listarTrabajadores(this.lista);
 					recargarLista();
 				} else {
 					JOptionPane.showMessageDialog(this, "Existen errores en los campos marcados.");
