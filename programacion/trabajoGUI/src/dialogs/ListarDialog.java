@@ -42,7 +42,9 @@ public class ListarDialog extends JDialog implements ActionListener {
 				ordenarLista(nombreColumna);
 			}
 		});
+		tabla.setRowHeight(50);
 		tabla.setEnabled(false);
+
 		JScrollPane jsp = new JScrollPane(tabla);
 		jsp.setPreferredSize(new Dimension(700, 600));
 		add(jsp);
