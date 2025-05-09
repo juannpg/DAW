@@ -187,7 +187,6 @@ public class VerDialog extends JDialog implements ActionListener, ItemListener {
     }
 
     public void ordenarLista(String columna) {
-        lista = AccesoTrabajadores.obtenerTrabajadores();
         switch (columna) {
             case "identificador":
                 this.columnas = new String[] {
